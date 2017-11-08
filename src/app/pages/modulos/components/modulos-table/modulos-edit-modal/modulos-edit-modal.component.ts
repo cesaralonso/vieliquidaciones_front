@@ -16,7 +16,7 @@ import { ToastrService } from 'ngx-toastr';
 
 export class ModulosEditModalComponent extends DialogComponent<ModulosInterface, any> implements OnInit, ModulosInterface {
 
-  idModulo: number;
+  idmodulo: number;
   nombre: string;
 
   modalHeader: string;
@@ -26,11 +26,11 @@ export class ModulosEditModalComponent extends DialogComponent<ModulosInterface,
   submitted: boolean = false;
 
   modulo: ModulosInterface = {
-    idModulo: 0,
+    idmodulo: 0,
     nombre: '',
   };
 
-  idModuloAC: AbstractControl;
+  idmoduloAC: AbstractControl;
   nombreAC: AbstractControl;
 
   constructor(
@@ -44,12 +44,12 @@ export class ModulosEditModalComponent extends DialogComponent<ModulosInterface,
 
     this.form = fb.group({
 
-      'idModuloAC' : this.id,
+      'idmoduloAC' : this.id,
       'nombreAC' : ['', Validators.compose([Validators.required, Validators.minLength(1)])],
 
     });
 
-    this.idModuloAC = this.form.controls['idModuloAC'];
+    this.idmoduloAC = this.form.controls['idmoduloAC'];
     this.nombreAC = this.form.controls['nombreAC'];
 
   }
@@ -69,7 +69,7 @@ export class ModulosEditModalComponent extends DialogComponent<ModulosInterface,
       this.service
         .editModulos({
 
-          idModulo: this.idModulo,
+          idmodulo: this.idmodulo,
           nombre: this.nombre,
 
         })

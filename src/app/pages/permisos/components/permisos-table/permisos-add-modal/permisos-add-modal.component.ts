@@ -23,8 +23,8 @@ export class PermisosAddModalComponent extends DialogComponent<PermisosInterface
 
 
   accesoAC: AbstractControl;
-  Rol_idRolAC: AbstractControl;
-  Modulo_idModuloAC: AbstractControl;
+  rol_idrolAC: AbstractControl;
+  modulo_idmoduloAC: AbstractControl;
 
   constructor(
     private service: PermisosService,
@@ -38,15 +38,15 @@ export class PermisosAddModalComponent extends DialogComponent<PermisosInterface
     this.form = fb.group({
 
       'accesoAC' : ['', Validators.compose([Validators.required, Validators.minLength(1)])],
-      'Rol_idRolAC' : ['', Validators.compose([Validators.required, Validators.minLength(1)])],
-      'Modulo_idModuloAC' : ['', Validators.compose([Validators.required, Validators.minLength(1)])],
+      'rol_idrolAC' : ['', Validators.compose([Validators.required, Validators.minLength(1)])],
+      'modulo_idmoduloAC' : ['', Validators.compose([Validators.required, Validators.minLength(1)])],
 
     });
 
     this.idPermisoAC = this.form.controls['idPermisoAC'];
     this.accesoAC = this.form.controls['accesoAC'];
-    this.Rol_idRolAC = this.form.controls['Rol_idRolAC'];
-    this.Modulo_idModuloAC = this.form.controls['Modulo_idModuloAC'];
+    this.rol_idrolAC = this.form.controls['rol_idrolAC'];
+    this.modulo_idmoduloAC = this.form.controls['modulo_idmoduloAC'];
   }
 
 

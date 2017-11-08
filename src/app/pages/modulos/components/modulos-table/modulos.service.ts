@@ -44,14 +44,14 @@ export class ModulosService {
             .catch(this.handleError);
     }
 
-    getModulos = (idModulo: number): Observable<ModulosInterface> => {
-        this.actionUrl = `${this._configuration.ServerWithApiUrl}obtenerModulosPorIDModulo`;
+    getModulos = (idmodulo: number): Observable<ModulosInterface> => {
+        this.actionUrl = `${this._configuration.ServerWithApiUrl}obtenerModulosPoridmodulo`;
         const credenciales = this.authLocalstorage.getCredentials();
         const toAdd = JSON.stringify({
             nicknameauth: credenciales.nicknameauth,
             usuarioauth: credenciales.usuarioauth,
             claveauth: credenciales.claveauth,
-            idmodulo: idModulo,
+            idmodulo: idmodulo,
         });
 
         return this._http.post(this.actionUrl, toAdd, { headers: this.headers })
@@ -85,70 +85,70 @@ export class ModulosService {
             .catch(this.handleError);
     }
 
-    autorizarModulo = (idModulo: number): Observable<ModulosResponseInterface[]> => {
+    autorizarModulo = (idmodulo: number): Observable<ModulosResponseInterface[]> => {
         this.actionUrl = `${this._configuration.ServerWithApiUrl}autorizarModulo`;
         const credenciales = this.authLocalstorage.getCredentials();
         const toAdd = JSON.stringify({
             nicknameauth: credenciales.nicknameauth,
             usuarioauth: credenciales.usuarioauth,
             claveauth: credenciales.claveauth,
-            idmodulo: idModulo,
+            idmodulo: idmodulo,
         });
         return this._http.post(this.actionUrl, toAdd, { headers: this.headers })
             .map((response: Response) => <ModulosResponseInterface[]>response.json())
             .catch(this.handleError);
     }
 
-    bloquearModulo = (idModulo: number): Observable<ModulosResponseInterface[]> => {
+    bloquearModulo = (idmodulo: number): Observable<ModulosResponseInterface[]> => {
         this.actionUrl = `${this._configuration.ServerWithApiUrl}bloquearModulo`;
         const credenciales = this.authLocalstorage.getCredentials();
         const toAdd = JSON.stringify({
             nicknameauth: credenciales.nicknameauth,
             usuarioauth: credenciales.usuarioauth,
             claveauth: credenciales.claveauth,
-            idmodulo: idModulo,
+            idmodulo: idmodulo,
         });
         return this._http.post(this.actionUrl, toAdd, { headers: this.headers })
             .map((response: Response) => <ModulosResponseInterface[]>response.json())
             .catch(this.handleError);
     }
 
-    cancelarModulo = (idModulo: number): Observable<ModulosResponseInterface[]> => {
+    cancelarModulo = (idmodulo: number): Observable<ModulosResponseInterface[]> => {
         this.actionUrl = `${this._configuration.ServerWithApiUrl}cancelarModulo`;
         const credenciales = this.authLocalstorage.getCredentials();
         const toAdd = JSON.stringify({
             nicknameauth: credenciales.nicknameauth,
             usuarioauth: credenciales.usuarioauth,
             claveauth: credenciales.claveauth,
-            idmodulo: idModulo,
+            idmodulo: idmodulo,
         });
         return this._http.post(this.actionUrl, toAdd, { headers: this.headers })
             .map((response: Response) => <ModulosResponseInterface[]>response.json())
             .catch(this.handleError);
     }
 
-    finalizarModulo = (idModulo: number): Observable<ModulosResponseInterface[]> => {
+    finalizarModulo = (idmodulo: number): Observable<ModulosResponseInterface[]> => {
         this.actionUrl = `${this._configuration.ServerWithApiUrl}FinalizarModulo`;
         const credenciales = this.authLocalstorage.getCredentials();
         const toAdd = JSON.stringify({
             nicknameauth: credenciales.nicknameauth,
             usuarioauth: credenciales.usuarioauth,
             claveauth: credenciales.claveauth,
-            idmodulo: idModulo,
+            idmodulo: idmodulo,
         });
         return this._http.post(this.actionUrl, toAdd, { headers: this.headers })
             .map((response: Response) => <ModulosResponseInterface[]>response.json())
             .catch(this.handleError);
     }
 
-    cambiarEstatusPorIdModulo = (idModulo: number, idEstatusModulo: number): Observable<ModulosResponseInterface[]> => {
-        this.actionUrl = `${this._configuration.ServerWithApiUrl}cambiarEstatusPorIDModulo`;
+    cambiarEstatusPoridmodulo = (idmodulo: number, idEstatusModulo: number): Observable<ModulosResponseInterface[]> => {
+        this.actionUrl = `${this._configuration.ServerWithApiUrl}cambiarEstatusPoridmodulo`;
         const credenciales = this.authLocalstorage.getCredentials();
         const toAdd = JSON.stringify({
             nicknameauth: credenciales.nicknameauth,
             usuarioauth: credenciales.usuarioauth,
             claveauth: credenciales.claveauth,
-            idmodulo: idModulo,
+            idmodulo: idmodulo,
             idestatusmodulo: idEstatusModulo,
         });
         return this._http.post(this.actionUrl, toAdd, { headers: this.headers })

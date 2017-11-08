@@ -18,8 +18,8 @@ export class PermisosEditModalComponent extends DialogComponent<PermisosInterfac
 
   idPermiso: number;
   acceso: boolean;
-  Rol_idRol: number;
-  Modulo_idModulo: number;
+  rol_idrol: number;
+  modulo_idmodulo: number;
 
   modalHeader: string;
   id: number;
@@ -30,14 +30,14 @@ export class PermisosEditModalComponent extends DialogComponent<PermisosInterfac
   permiso: PermisosInterface = {
     idPermiso: 0,
     acceso: false,
-    Rol_idRol: 0,
-    Modulo_idModulo: 0,
+    rol_idrol: 0,
+    modulo_idmodulo: 0,
   };
 
   idPermisoAC: AbstractControl;
   accesoAC: AbstractControl;
-  Rol_idRolAC: AbstractControl;
-  Modulo_idModuloAC: AbstractControl;
+  rol_idrolAC: AbstractControl;
+  modulo_idmoduloAC: AbstractControl;
 
   constructor(
     private service: PermisosService,
@@ -52,14 +52,14 @@ export class PermisosEditModalComponent extends DialogComponent<PermisosInterfac
 
       'idPermisoAC' : this.id,
       'accesoAC' : ['', Validators.compose([Validators.required, Validators.minLength(1)])],
-      'Rol_idRolAC' : ['', Validators.compose([Validators.required, Validators.minLength(1)])],
-      'Modulo_idModuloAC' : ['', Validators.compose([Validators.required, Validators.minLength(1)])],
+      'rol_idrolAC' : ['', Validators.compose([Validators.required, Validators.minLength(1)])],
+      'modulo_idmoduloAC' : ['', Validators.compose([Validators.required, Validators.minLength(1)])],
     });
 
     this.idPermisoAC = this.form.controls['idPermisoAC'];
     this.accesoAC = this.form.controls['accesoAC'];
-    this.Rol_idRolAC = this.form.controls['Rol_idRolAC'];
-    this.Modulo_idModuloAC = this.form.controls['Modulo_idModuloAC'];
+    this.rol_idrolAC = this.form.controls['rol_idrolAC'];
+    this.modulo_idmoduloAC = this.form.controls['modulo_idmoduloAC'];
   }
 
   ngOnInit() {
@@ -78,8 +78,8 @@ export class PermisosEditModalComponent extends DialogComponent<PermisosInterfac
 
           idPermiso: this.idPermiso,
           acceso: this.acceso,
-          Rol_idRol: this.Rol_idRol,
-          Modulo_idModulo: this.Modulo_idModulo,
+          rol_idrol: this.rol_idrol,
+          modulo_idmodulo: this.modulo_idmodulo,
           
         })
         .subscribe(

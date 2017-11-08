@@ -27,6 +27,7 @@ export class PersonasAddModalComponent extends DialogComponent<PersonasInterface
   domicilioAC: AbstractControl;
   telefonoAC: AbstractControl;
   edadAC: AbstractControl;
+  coordenada_idcoordenadaAC: AbstractControl;
 
   constructor(
     private service: PersonasService,
@@ -48,6 +49,7 @@ export class PersonasAddModalComponent extends DialogComponent<PersonasInterface
       'fechafinAC' : ['', Validators.compose([Validators.required, Validators.minLength(1)])],
       'telefonoAC' : ['', Validators.compose([Validators.required, Validators.minLength(1)])],
       'edadAC' : ['', Validators.compose([Validators.required, Validators.minLength(1)])],
+      'coordenada_idcoordenadaAC' : ['', Validators.compose([Validators.required, Validators.minLength(1)])],
 
     });
 
@@ -59,6 +61,7 @@ export class PersonasAddModalComponent extends DialogComponent<PersonasInterface
     this.fechafinAC = this.form.controls['fechafinAC'];
     this.telefonoAC = this.form.controls['telefonoAC'];
     this.edadAC = this.form.controls['edadAC'];
+    this.coordenada_idcoordenadaAC = this.form.controls['coordenada_idcoordenadaAC'];
   }
 
 

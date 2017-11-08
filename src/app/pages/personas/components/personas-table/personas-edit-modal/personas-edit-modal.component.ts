@@ -24,6 +24,7 @@ export class PersonasEditModalComponent extends DialogComponent<PersonasInterfac
   domicilio: string;
   telefono: number;
   edad: number;
+  coordenada_idcoordenada: number;
 
   modalHeader: string;
   id: number;
@@ -39,6 +40,7 @@ export class PersonasEditModalComponent extends DialogComponent<PersonasInterfac
     domicilio: '',
     telefono: 0,
     edad: 0,
+    coordenada_idcoordenada: 0,
   };
 
   idPersonaAC: AbstractControl;
@@ -48,6 +50,7 @@ export class PersonasEditModalComponent extends DialogComponent<PersonasInterfac
   domicilioAC: AbstractControl;
   telefonoAC: AbstractControl;
   edadAC: AbstractControl;
+  coordenada_idcoordenadaAC: AbstractControl;
 
 
   constructor(
@@ -70,6 +73,7 @@ export class PersonasEditModalComponent extends DialogComponent<PersonasInterfac
       'fechafinAC' : ['', Validators.compose([Validators.required, Validators.minLength(1)])],
       'telefonoAC' : ['', Validators.compose([Validators.required, Validators.minLength(1)])],
       'edadAC' : ['', Validators.compose([Validators.required, Validators.minLength(1)])],
+      'coordenada_idcoordenadaAC' : ['', Validators.compose([Validators.required, Validators.minLength(1)])],
 
     });
 
@@ -82,6 +86,7 @@ export class PersonasEditModalComponent extends DialogComponent<PersonasInterfac
     this.fechafinAC = this.form.controls['fechafinAC'];
     this.telefonoAC = this.form.controls['telefonoAC'];
     this.edadAC = this.form.controls['edadAC'];
+    this.coordenada_idcoordenadaAC = this.form.controls['coordenada_idcoordenadaAC'];
 
   }
 
@@ -111,6 +116,8 @@ export class PersonasEditModalComponent extends DialogComponent<PersonasInterfac
           fechafin: this.fechafin,
           telefono: this.telefono,
           edad: this.edad,
+          coordenada_idcoordenada: this.coordenada_idcoordenada,
+
 
         })
         .subscribe(
