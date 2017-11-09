@@ -1,4 +1,4 @@
-export interface VehiculosResponseInterface {
+export interface VehiculoreparandosResponseInterface {
     idRespuesta: number;
     mensajeRespuesta: string;
     valorRespuesta: string;

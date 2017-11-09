@@ -2,30 +2,30 @@ import { UploadModalComponent } from './../../../../shared/components/upload-mod
 import { FilesUploadModalComponent } from './../../../../shared/components/files-upload-modal/files-upload-modal.component';
 import { DialogService } from 'ng2-bootstrap-modal';
 import { ToastrService } from 'ngx-toastr';
-import { VehiculosInterface } from './vehiculos.interface';
-import { VehiculosResponseInterface } from './vehiculos-response.interface';
+import { VehiculoreparandosInterface } from './vehiculoreparandos.interface';
+import { VehiculoreparandosResponseInterface } from './vehiculoreparandos-response.interface';
 import { Component, OnInit } from '@angular/core';
-import { VehiculosService } from './vehiculos.service';
+import { VehiculoreparandosService } from './vehiculoreparandos.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { VehiculosAddModalComponent } from './vehiculos-add-modal/vehiculos-add-modal.component';
-import { VehiculosEditModalComponent } from './vehiculos-edit-modal/vehiculos-edit-modal.component';
+import { VehiculoreparandosAddModalComponent } from './vehiculoreparandos-add-modal/vehiculoreparandos-add-modal.component';
+import { VehiculoreparandosEditModalComponent } from './vehiculoreparandos-edit-modal/vehiculoreparandos-edit-modal.component';
 
 
 @Component({
-  selector: 'vehiculos-table',
-  templateUrl: './vehiculos-table.html',
-  styleUrls: ['./vehiculos-table.scss'],
+  selector: 'vehiculoreparandos-table',
+  templateUrl: './vehiculoreparandos-table.html',
+  styleUrls: ['./vehiculoreparandos-table.scss'],
 })
-export class VehiculosTableComponent implements OnInit {
+export class VehiculoreparandosTableComponent implements OnInit {
 
     data;
     filterQuery = '';
     rowsOnPage = 10;
-    sortBy = 'idvehiculo';
+    sortBy = 'idvehiculoreparando';
     sortOrder = 'asc';
 
     constructor(
-      private service: VehiculosService, 
+      private service: VehiculoreparandosService, 
       private modalService: NgbModal, 
       private toastrService: ToastrService, 
       private dialogService: DialogService) {
@@ -35,8 +35,8 @@ export class VehiculosTableComponent implements OnInit {
         return +num;
     }
 
-    addVehiculosModalShow() {
-      const disposable = this.dialogService.addDialog(VehiculosAddModalComponent)
+    addVehiculoreparandosModalShow() {
+      const disposable = this.dialogService.addDialog(VehiculoreparandosAddModalComponent)
       .subscribe( data => {
         if (data) {
           this.showToast(data);
@@ -44,8 +44,8 @@ export class VehiculosTableComponent implements OnInit {
       })
     }
 
-    editVehiculosModalShow(vehiculos: VehiculosInterface) {
-      const disposable = this.dialogService.addDialog(VehiculosEditModalComponent, vehiculos)
+    editVehiculoreparandosModalShow(vehiculoreparandos: VehiculoreparandosInterface) {
+      const disposable = this.dialogService.addDialog(VehiculoreparandosEditModalComponent, vehiculoreparandos)
       .subscribe( data => {
         if (data) {
           this.showToast(data);
@@ -57,22 +57,22 @@ export class VehiculosTableComponent implements OnInit {
 
     uploadModalShow(id: number, descripcion: string) {
       const activeModal = this.modalService.open(UploadModalComponent, { size: 'lg' });
-      activeModal.componentInstance.modalHeader = 'Agregar Archivo a Vehiculo';
+      activeModal.componentInstance.modalHeader = 'Agregar Archivo a Vehiculoreparando';
       activeModal.componentInstance.id = id;
       activeModal.componentInstance.descripcion = descripcion;
-      activeModal.componentInstance.referencia = 'Vehiculo';
+      activeModal.componentInstance.referencia = 'Vehiculoreparando';
     }
 
     filesModalShow(id: number) {
       const activeModal = this.modalService.open(FilesUploadModalComponent, { size: 'lg' });
-      activeModal.componentInstance.modalHeader = 'Ver Archivos de Vehiculo';
+      activeModal.componentInstance.modalHeader = 'Ver Archivos de Vehiculoreparando';
       activeModal.componentInstance.id = id;
-      activeModal.componentInstance.referencia = 'Vehiculo';
+      activeModal.componentInstance.referencia = 'Vehiculoreparando';
     }
 
     onDeleteConfirm(event, id): void {
       if (window.confirm('¿Estas seguro de querer eliminar este registro?')) {
-        this.service.cancelarVehiculo(id)
+        this.service.cancelarVehiculoreparando(id)
           .subscribe(
             (data) => this.showToast(data),
             error => console.log(error),
@@ -86,21 +86,21 @@ export class VehiculosTableComponent implements OnInit {
     showToast(data) {
       if (data.idRespuesta === 0) {
         this.toastrService.success(data.mensajeRespuesta);
-        this.getAllVehiculos();
+        this.getAllVehiculoreparandos();
       } else {
         this.toastrService.error(data.mensajeRespuesta);
       }
     }
 
     ngOnInit() {
-        this.getAllVehiculos();
+        this.getAllVehiculoreparandos();
     }
     
-    private getAllVehiculos(): void {
+    private getAllVehiculoreparandos(): void {
       this.service
-          .getAllVehiculos()
+          .getAllVehiculoreparandos()
           .subscribe(
-              (data: VehiculosInterface[]) =>  {
+              (data: VehiculoreparandosInterface[]) =>  {
                 this.data = data;
               },
               error => console.log(error),

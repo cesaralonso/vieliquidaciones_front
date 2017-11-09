@@ -1,0 +1,103 @@
+<div class="row mt-3">
+  <div class="col-md-2"></div>
+  <div class="col-md-8">
+    <div class="modal-content" style="overflow-y: initial !important">
+      <form [formGroup]="form" class="form-horizontal">
+        <div class="modal-header">
+          <h4 class="modal-title">Modificar Vehiculoreparando</h4>
+          <button class="close" aria-label="Close" (click)="close()">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body" style="height: 65vh; overflow-y: auto;">
+          <ba-card cardTitle="Información de la Vehiculoreparando">
+
+            <div class="form-group row" [ngClass]="{'has-error': (!fechaIngresaAC.valid && fechaIngresaAC.touched), 'has-success': (fechaIngresaAC.valid && fechaIngresaAC.touched)}">
+              <label for="inputfechaIngresaAC" class="col-sm-2 form-control-label">Fecha Ingresa</label>
+              <div class="col-sm-10">
+                <input [(ngModel)]="fechaIngresa" [formControl]="fechaIngresaAC" type="text" class="form-control" id="inputfechaIngresaAC" placeholder="Fecha Ingresa" >
+              </div>
+            </div>
+
+            <div class="form-group row" [ngClass]="{'has-error': (!fechaSalidaAC.valid && fechaSalidaAC.touched), 'has-success': (fechaSalidaAC.valid && fechaSalidaAC.touched)}">
+              <label for="inputfechaSalidaAC" class="col-sm-2 form-control-label">Fecha Salida</label>
+              <div class="col-sm-10">
+                <input [(ngModel)]="fechaSalida" [formControl]="fechaSalidaAC" type="text" class="form-control" id="inputfechaSalidaAC" placeholder="Fecha Salida" >
+              </div>
+            </div>
+
+            <div class="form-group row" [ngClass]="{'has-error': (!fechaEstimadaAC.valid && fechaEstimadaAC.touched), 'has-success': (fechaEstimadaAC.valid && fechaEstimadaAC.touched)}">
+              <label for="inputfechaEstimadaAC" class="col-sm-2 form-control-label">Fecha Estimada</label>
+              <div class="col-sm-10">
+                <input [(ngModel)]="fechaEstimada" [formControl]="fechaEstimadaAC" type="text" class="form-control" id="inputfechaEstimadaAC" placeholder="Fecha Estimada" >
+              </div>
+            </div>
+
+            <div class="form-group row" [ngClass]="{'has-error': (!inventarioAC.valid && inventarioAC.touched), 'has-success': (inventarioAC.valid && inventarioAC.touched)}">
+              <label for="inputinventarioAC" class="col-sm-2 form-control-label">inventario</label>
+              <div class="col-sm-10">
+                <input [(ngModel)]="inventario" [formControl]="inventarioAC" type="text" class="form-control" id="inputinventarioAC" placeholder="inventario" >
+              </div>
+            </div>
+
+            <div class="form-group row" [ngClass]="{'has-error': (!motivo.valid && motivo.touched), 'has-success': (motivo.valid && motivo.touched)}">
+              <label for="inputmotivo" class="col-sm-2 form-control-label">Motivo</label>
+              <div class="col-sm-10">
+                <input [(ngModel)]="motivo" [formControl]="motivo" type="text" class="form-control" id="inputmotivo" placeholder="Motivo" >
+              </div>
+            </div>
+
+            <div class="form-group row" [ngClass]="{'has-error': (!statusAC.valid && statusAC.touched), 'has-success': (statusAC.valid && statusAC.touched)}">
+              <label for="inputstatusAC" class="col-sm-2 form-control-label">Status</label>
+              <div class="col-sm-10">
+                <input [(ngModel)]="status" [formControl]="statusAC" type="text" class="form-control" id="inputstatusAC" placeholder="Status" >
+              </div>
+            </div>
+
+            <div class="form-group row" [ngClass]="{'has-error': (!ordenAC.valid && ordenAC.touched), 'has-success': (ordenAC.valid && ordenAC.touched)}">
+              <label for="inputordenAC" class="col-sm-2 form-control-label">Orden</label>
+              <div class="col-sm-10">
+                <input [(ngModel)]="orden" [formControl]="ordenAC" type="text" class="form-control" id="inputordenAC" placeholder="Orden" >
+              </div>
+            </div>
+
+            <div class="form-group row" [ngClass]="{'has-error': (!enviotaller_idenviotallerAC.valid && enviotaller_idenviotallerAC.touched), 'has-success': (enviotaller_idenviotallerAC.valid && enviotaller_idenviotallerAC.touched)}">
+              <label for="inputenviotaller_idenviotallerAC" class="col-sm-2 form-control-label">Envio Taller</label>
+              <div class="col-sm-10">
+                <input [(ngModel)]="enviotaller_idenviotaller" [formControl]="enviotaller_idenviotallerAC" type="text" class="form-control" id="inputenviotaller_idenviotallerAC" placeholder="Envio Taller" >
+              </div>
+            </div>
+
+            <div class="form-group row" [ngClass]="{'has-error': (!taller_idtallerAC.valid && taller_idtallerAC.touched), 'has-success': (taller_idtallerAC.valid && taller_idtallerAC.touched)}">
+              <label for="inputtaller_idtallerAC" class="col-sm-2 form-control-label">Taller</label>
+              <div class="col-sm-10">
+                <input [(ngModel)]="taller_idtaller" [formControl]="taller_idtallerAC" type="text" class="form-control" id="inputtaller_idtallerAC" placeholder="Taller" >
+              </div>
+            </div>
+
+            <div class="form-group row" [ngClass]="{'has-error': (!mecanico_idmecanicoAC.valid && mecanico_idmecanicoAC.touched), 'has-success': (mecanico_idmecanicoAC.valid && mecanico_idmecanicoAC.touched)}">
+              <label for="inputmecanico_idmecanicoAC" class="col-sm-2 form-control-label">Mecanico</label>
+              <div class="col-sm-10">
+                <input [(ngModel)]="mecanico_idmecanico" [formControl]="mecanico_idmecanicoAC" type="text" class="form-control" id="inputmecanico_idmecanicoAC" placeholder="Mecanico" >
+              </div>
+            </div>
+
+            <div class="form-group row" [ngClass]="{'has-error': (!permisotaxiasignado_idpermisotaxiasignadoAC.valid && permisotaxiasignado_idpermisotaxiasignadoAC.touched), 'has-success': (permisotaxiasignado_idpermisotaxiasignadoAC.valid && permisotaxiasignado_idpermisotaxiasignadoAC.touched)}">
+              <label for="inputpermisotaxiasignado_idpermisotaxiasignadoAC" class="col-sm-2 form-control-label">Permiso Taxi Asignado</label>
+              <div class="col-sm-10">
+                <input [(ngModel)]="permisotaxiasignado_idpermisotaxiasignado" [formControl]="permisotaxiasignado_idpermisotaxiasignadoAC" type="text" class="form-control" id="inputpermisotaxiasignado_idpermisotaxiasignadoAC" placeholder="Permiso Taxi Asignado" >
+              </div>
+            </div>
+
+
+          </ba-card>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-danger cancel-btn" (click)="close()">Cancelar</button>
+          <button [disabled]="!form.valid" class="btn btn-primary confirm-btn" (click)="onSubmit(form.value)">Aceptar</button>
+        </div>
+      </form>
+    </div>
+
+  </div>
+</div>

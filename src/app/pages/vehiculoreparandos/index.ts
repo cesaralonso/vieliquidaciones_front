@@ -1,1 +1,1 @@
-export * from './vehiculos.component';
+export * from './vehiculoreparandos.component';

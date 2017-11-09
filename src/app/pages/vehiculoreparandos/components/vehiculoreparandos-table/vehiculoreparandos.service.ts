@@ -1,8 +1,8 @@
 import { AuthLocalstorage } from './../../../../shared/auth-localstorage.service';
-import { VehiculosResponseInterface } from './vehiculos-response.interface';
+import { VehiculoreparandosResponseInterface } from './vehiculoreparandos-response.interface';
 import { LocalStorageService } from 'angular-2-local-storage';
 import { Observable } from 'rxjs/Observable';
-import { VehiculosInterface } from './vehiculos.interface';
+import { VehiculoreparandosInterface } from './vehiculoreparandos.interface';
 import { Injectable } from '@angular/core';
 import { Http, Response, Headers } from '@angular/http';
 import { Configuration } from '../../../../app.constants';
@@ -12,7 +12,7 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 
 @Injectable()
-export class VehiculosService {
+export class VehiculoreparandosService {
 
     private actionUrl: string;
     private headers: Headers;
@@ -27,49 +27,49 @@ export class VehiculosService {
         this.headers.append('Content-Type', 'application/json; charset=UTF-8');
     }
 
-    addVehiculos = (vehiculos: VehiculosInterface): Observable<VehiculosResponseInterface> =>  {
-        this.actionUrl = `${this._configuration.ServerWithApiUrl}agregarVehiculo`;
-        const toAdd = JSON.stringify(vehiculos);
+    addVehiculoreparandos = (vehiculoreparandos: VehiculoreparandosInterface): Observable<VehiculoreparandosResponseInterface> =>  {
+        this.actionUrl = `${this._configuration.ServerWithApiUrl}agregarVehiculoreparando`;
+        const toAdd = JSON.stringify(vehiculoreparandos);
         return this._http.post(this.actionUrl, toAdd, { headers: this.headers })
-            .map((response: Response) => <VehiculosResponseInterface>response.json())
+            .map((response: Response) => <VehiculoreparandosResponseInterface>response.json())
             .catch(this.handleError);
     }
 
-    editVehiculos = (vehiculos: VehiculosInterface): Observable<VehiculosResponseInterface> =>  {
-        this.actionUrl = `${this._configuration.ServerWithApiUrl}modificarVehiculo`;
-        const toAdd = JSON.stringify(vehiculos);
+    editVehiculoreparandos = (vehiculoreparandos: VehiculoreparandosInterface): Observable<VehiculoreparandosResponseInterface> =>  {
+        this.actionUrl = `${this._configuration.ServerWithApiUrl}modificarVehiculoreparando`;
+        const toAdd = JSON.stringify(vehiculoreparandos);
         return this._http.post(this.actionUrl, toAdd, { headers: this.headers })
-            .map((response: Response) => <VehiculosResponseInterface>response.json())
+            .map((response: Response) => <VehiculoreparandosResponseInterface>response.json())
             .catch(this.handleError);
     }
 
-    getVehiculos = (idVehiculo: number): Observable<VehiculosInterface> => {
-        this.actionUrl = `${this._configuration.ServerWithApiUrl}obtenerVehiculosPorIDVehiculo`;
+    getVehiculoreparandos = (idVehiculoreparando: number): Observable<VehiculoreparandosInterface> => {
+        this.actionUrl = `${this._configuration.ServerWithApiUrl}obtenerVehiculoreparandosPorIDVehiculoreparando`;
         const credenciales = this.authLocalstorage.getCredentials();
         const toAdd = JSON.stringify({
             nicknameauth: credenciales.nicknameauth,
             usuarioauth: credenciales.usuarioauth,
             claveauth: credenciales.claveauth,
-            idvehiculo: idVehiculo,
+            idvehiculoreparando: idVehiculoreparando,
         });
 
         return this._http.post(this.actionUrl, toAdd, { headers: this.headers })
-            .map((response: Response) => <VehiculosInterface>response.json())
+            .map((response: Response) => <VehiculoreparandosInterface>response.json())
             .catch(this.handleError);
     }
 
-    getAllVehiculos = (): Observable<VehiculosInterface[]> => {
-        this.actionUrl = `${this._configuration.ServerWithApiUrl}obtenerVehiculos`;
+    getAllVehiculoreparandos = (): Observable<VehiculoreparandosInterface[]> => {
+        this.actionUrl = `${this._configuration.ServerWithApiUrl}obtenerVehiculoreparandos`;
        
         const credenciales = JSON.stringify(this.authLocalstorage.getCredentials());
 
         return this._http.post(this.actionUrl, credenciales, { headers: this.headers })
-            .map((response: Response) => <VehiculosInterface[]>response.json())
+            .map((response: Response) => <VehiculoreparandosInterface[]>response.json())
             .catch(this.handleError);
     }
 
-    deleteVehiculos = (id: string): Observable<VehiculosResponseInterface[]> => {
-        this.actionUrl = `${this._configuration.ServerWithApiUrl}bajaVehiculos`;
+    deleteVehiculoreparandos = (id: string): Observable<VehiculoreparandosResponseInterface[]> => {
+        this.actionUrl = `${this._configuration.ServerWithApiUrl}bajaVehiculoreparandos`;
        
         const credenciales = this.authLocalstorage.getCredentials();
         const toSend = JSON.stringify({
@@ -84,79 +84,79 @@ export class VehiculosService {
             .catch(this.handleError);
     }
 
-    autorizarVehiculo = (idVehiculo: number): Observable<VehiculosResponseInterface[]> => {
-        this.actionUrl = `${this._configuration.ServerWithApiUrl}autorizarVehiculo`;
+    autorizarVehiculoreparando = (idVehiculoreparando: number): Observable<VehiculoreparandosResponseInterface[]> => {
+        this.actionUrl = `${this._configuration.ServerWithApiUrl}autorizarVehiculoreparando`;
         const credenciales = this.authLocalstorage.getCredentials();
         const toAdd = JSON.stringify({
             nicknameauth: credenciales.nicknameauth,
             usuarioauth: credenciales.usuarioauth,
             claveauth: credenciales.claveauth,
-            idvehiculo: idVehiculo,
+            idvehiculoreparando: idVehiculoreparando,
         });
         return this._http.post(this.actionUrl, toAdd, { headers: this.headers })
-            .map((response: Response) => <VehiculosResponseInterface[]>response.json())
+            .map((response: Response) => <VehiculoreparandosResponseInterface[]>response.json())
             .catch(this.handleError);
     }
 
-    bloquearVehiculo = (idVehiculo: number): Observable<VehiculosResponseInterface[]> => {
-        this.actionUrl = `${this._configuration.ServerWithApiUrl}bloquearVehiculo`;
+    bloquearVehiculoreparando = (idVehiculoreparando: number): Observable<VehiculoreparandosResponseInterface[]> => {
+        this.actionUrl = `${this._configuration.ServerWithApiUrl}bloquearVehiculoreparando`;
         const credenciales = this.authLocalstorage.getCredentials();
         const toAdd = JSON.stringify({
             nicknameauth: credenciales.nicknameauth,
             usuarioauth: credenciales.usuarioauth,
             claveauth: credenciales.claveauth,
-            idvehiculo: idVehiculo,
+            idvehiculoreparando: idVehiculoreparando,
         });
         return this._http.post(this.actionUrl, toAdd, { headers: this.headers })
-            .map((response: Response) => <VehiculosResponseInterface[]>response.json())
+            .map((response: Response) => <VehiculoreparandosResponseInterface[]>response.json())
             .catch(this.handleError);
     }
 
-    cancelarVehiculo = (idVehiculo: number): Observable<VehiculosResponseInterface[]> => {
-        this.actionUrl = `${this._configuration.ServerWithApiUrl}cancelarVehiculo`;
+    cancelarVehiculoreparando = (idVehiculoreparando: number): Observable<VehiculoreparandosResponseInterface[]> => {
+        this.actionUrl = `${this._configuration.ServerWithApiUrl}cancelarVehiculoreparando`;
         const credenciales = this.authLocalstorage.getCredentials();
         const toAdd = JSON.stringify({
             nicknameauth: credenciales.nicknameauth,
             usuarioauth: credenciales.usuarioauth,
             claveauth: credenciales.claveauth,
-            idvehiculo: idVehiculo,
+            idvehiculoreparando: idVehiculoreparando,
         });
         return this._http.post(this.actionUrl, toAdd, { headers: this.headers })
-            .map((response: Response) => <VehiculosResponseInterface[]>response.json())
+            .map((response: Response) => <VehiculoreparandosResponseInterface[]>response.json())
             .catch(this.handleError);
     }
 
-    finalizarVehiculo = (idVehiculo: number): Observable<VehiculosResponseInterface[]> => {
-        this.actionUrl = `${this._configuration.ServerWithApiUrl}FinalizarVehiculo`;
+    finalizarVehiculoreparando = (idVehiculoreparando: number): Observable<VehiculoreparandosResponseInterface[]> => {
+        this.actionUrl = `${this._configuration.ServerWithApiUrl}FinalizarVehiculoreparando`;
         const credenciales = this.authLocalstorage.getCredentials();
         const toAdd = JSON.stringify({
             nicknameauth: credenciales.nicknameauth,
             usuarioauth: credenciales.usuarioauth,
             claveauth: credenciales.claveauth,
-            idvehiculo: idVehiculo,
+            idvehiculoreparando: idVehiculoreparando,
         });
         return this._http.post(this.actionUrl, toAdd, { headers: this.headers })
-            .map((response: Response) => <VehiculosResponseInterface[]>response.json())
+            .map((response: Response) => <VehiculoreparandosResponseInterface[]>response.json())
             .catch(this.handleError);
     }
 
-    cambiarEstatusPorIdVehiculo = (idVehiculo: number, idEstatusVehiculo: number): Observable<VehiculosResponseInterface[]> => {
-        this.actionUrl = `${this._configuration.ServerWithApiUrl}cambiarEstatusPorIDVehiculo`;
+    cambiarEstatusPorIdVehiculoreparando = (idVehiculoreparando: number, idEstatusVehiculoreparando: number): Observable<VehiculoreparandosResponseInterface[]> => {
+        this.actionUrl = `${this._configuration.ServerWithApiUrl}cambiarEstatusPorIDVehiculoreparando`;
         const credenciales = this.authLocalstorage.getCredentials();
         const toAdd = JSON.stringify({
             nicknameauth: credenciales.nicknameauth,
             usuarioauth: credenciales.usuarioauth,
             claveauth: credenciales.claveauth,
-            idvehiculo: idVehiculo,
-            idestatusvehiculo: idEstatusVehiculo,
+            idvehiculoreparando: idVehiculoreparando,
+            idestatusvehiculoreparando: idEstatusVehiculoreparando,
         });
         return this._http.post(this.actionUrl, toAdd, { headers: this.headers })
-            .map((response: Response) => <VehiculosResponseInterface[]>response.json())
+            .map((response: Response) => <VehiculoreparandosResponseInterface[]>response.json())
             .catch(this.handleError);
     }
 
-    obtenerVehiculosPorIdRazonSocialCliente = (idRazonSocialCliente: number): Observable<VehiculosInterface[]> => {
-        this.actionUrl = `${this._configuration.ServerWithApiUrl}obtenerVehiculosPorIDRazonSocialCliente`;
+    obtenerVehiculoreparandosPorIdRazonSocialCliente = (idRazonSocialCliente: number): Observable<VehiculoreparandosInterface[]> => {
+        this.actionUrl = `${this._configuration.ServerWithApiUrl}obtenerVehiculoreparandosPorIDRazonSocialCliente`;
         const credenciales = this.authLocalstorage.getCredentials();
         const toAdd = JSON.stringify({
             nicknameauth: credenciales.nicknameauth,
@@ -165,12 +165,12 @@ export class VehiculosService {
             idrazonsocialcliente: idRazonSocialCliente,
         });
         return this._http.post(this.actionUrl, toAdd, { headers: this.headers })
-            .map((response: Response) => <VehiculosInterface[]>response.json())
+            .map((response: Response) => <VehiculoreparandosInterface[]>response.json())
             .catch(this.handleError);
     }
 
-    obtenerVehiculosPorIdRazonSocialContratista = (idRazonSocialContratista: number): Observable<VehiculosInterface[]> => {
-        this.actionUrl = `${this._configuration.ServerWithApiUrl}obtenerVehiculosPorIDRazonSocialContratista`;
+    obtenerVehiculoreparandosPorIdRazonSocialContratista = (idRazonSocialContratista: number): Observable<VehiculoreparandosInterface[]> => {
+        this.actionUrl = `${this._configuration.ServerWithApiUrl}obtenerVehiculoreparandosPorIDRazonSocialContratista`;
         const credenciales = this.authLocalstorage.getCredentials();
         const toAdd = JSON.stringify({
             nicknameauth: credenciales.nicknameauth,
@@ -179,12 +179,12 @@ export class VehiculosService {
             idrazonsocialcontratista: idRazonSocialContratista,
         });
         return this._http.post(this.actionUrl, toAdd, { headers: this.headers })
-            .map((response: Response) => <VehiculosInterface[]>response.json())
+            .map((response: Response) => <VehiculoreparandosInterface[]>response.json())
             .catch(this.handleError);
     }
 
-    obtenerVehiculosPorIdRazonSocialConstructor = (idRazonSocialConstructor: number): Observable<VehiculosInterface[]> => {
-        this.actionUrl = `${this._configuration.ServerWithApiUrl}obtenerVehiculosPorIDRazonSocialConstructor`;
+    obtenerVehiculoreparandosPorIdRazonSocialConstructor = (idRazonSocialConstructor: number): Observable<VehiculoreparandosInterface[]> => {
+        this.actionUrl = `${this._configuration.ServerWithApiUrl}obtenerVehiculoreparandosPorIDRazonSocialConstructor`;
         const credenciales = this.authLocalstorage.getCredentials();
         const toAdd = JSON.stringify({
             nicknameauth: credenciales.nicknameauth,
@@ -193,12 +193,12 @@ export class VehiculosService {
             idrazonsocialconstructor: idRazonSocialConstructor,
         });
         return this._http.post(this.actionUrl, toAdd, { headers: this.headers })
-            .map((response: Response) => <VehiculosInterface[]>response.json())
+            .map((response: Response) => <VehiculoreparandosInterface[]>response.json())
             .catch(this.handleError);
     }
 
-    obtenerVehiculosPorIdRazonSocialAsociado = (idRazonSocialAsociado: number): Observable<VehiculosInterface[]> => {
-        this.actionUrl = `${this._configuration.ServerWithApiUrl}obtenerVehiculosPorIDRazonSocialAsociado`;
+    obtenerVehiculoreparandosPorIdRazonSocialAsociado = (idRazonSocialAsociado: number): Observable<VehiculoreparandosInterface[]> => {
+        this.actionUrl = `${this._configuration.ServerWithApiUrl}obtenerVehiculoreparandosPorIDRazonSocialAsociado`;
         const credenciales = this.authLocalstorage.getCredentials();
         const toAdd = JSON.stringify({
             nicknameauth: credenciales.nicknameauth,
@@ -207,12 +207,12 @@ export class VehiculosService {
             idrazonsocialasociado: idRazonSocialAsociado,
         });
         return this._http.post(this.actionUrl, toAdd, { headers: this.headers })
-            .map((response: Response) => <VehiculosInterface[]>response.json())
+            .map((response: Response) => <VehiculoreparandosInterface[]>response.json())
             .catch(this.handleError);
     }
 
-    obtenerEstatusVehiculos = (): Observable<any[]> => {
-        this.actionUrl = `${this._configuration.ServerWithApiUrl}obtenerEstatusVehiculos`;
+    obtenerEstatusVehiculoreparandos = (): Observable<any[]> => {
+        this.actionUrl = `${this._configuration.ServerWithApiUrl}obtenerEstatusVehiculoreparandos`;
         const credenciales = this.authLocalstorage.getCredentials();
         return this._http.post(this.actionUrl, credenciales, { headers: this.headers })
             .map((response: Response) => <any[]>response.json())
@@ -227,8 +227,8 @@ export class VehiculosService {
             .catch(this.handleError);
     }
 
-    obtenerTipoVehiculos = (): Observable<any[]> => {
-        this.actionUrl = `${this._configuration.ServerWithApiUrl}obtenerTipoVehiculos`;
+    obtenerTipoVehiculoreparandos = (): Observable<any[]> => {
+        this.actionUrl = `${this._configuration.ServerWithApiUrl}obtenerTipoVehiculoreparandos`;
         const credenciales = this.authLocalstorage.getCredentials();
         return this._http.post(this.actionUrl, credenciales, { headers: this.headers })
             .map((response: Response) => <any[]>response.json())

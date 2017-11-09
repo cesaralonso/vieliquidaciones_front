@@ -1,0 +1,87 @@
+<div class="widgets">
+    <div class="row">
+        <ba-card title="Listado" baCardClass="with-scroll" class="data-table-container">
+            <div class="panel panel-default">
+                <!-- <div class="panel-heading">Información de Vehiculoreparandos</div> -->
+
+                <table class="table table-striped" [mfData]="data | dataFilter : filterQuery" #mf="mfDataTable" [mfRowsOnPage]="rowsOnPage" [(mfSortBy)]="sortBy" [(mfSortOrder)]="sortOrder">
+                    <thead>
+                        <tr>
+                            <th style="width: 12%"></th>
+                            <th style="width:8%">
+                                <mfDefaultSorter by="fechaIngresa">Ingreso</mfDefaultSorter>
+                            </th>
+                            <th style="width:8%">
+                                <mfDefaultSorter by="fechaSalida">Salida</mfDefaultSorter>
+                            </th>
+                            <th style="width:8%">
+                                <mfDefaultSorter by="fechaEstimada">Estimado</mfDefaultSorter>
+                            </th>
+
+                            <th style="width:8%">
+                                <mfDefaultSorter by="inventario">Inventario</mfDefaultSorter>
+                            </th>
+                            <th style="width:8%">
+                                <mfDefaultSorter by="motivo">Motivo</mfDefaultSorter>
+                            </th>
+                            <th style="width:8%">
+                                <mfDefaultSorter by="status">Status</mfDefaultSorter>
+                            </th>
+                            <th style="width:8%">
+                                <mfDefaultSorter by="orden">Orden</mfDefaultSorter>
+                            </th>
+
+                            <th style="width:8%">
+                                <mfDefaultSorter by="enviotaller_idenviotaller">Enviar a Taller</mfDefaultSorter>
+                            </th>
+                            <th style="width:8%">
+                                <mfDefaultSorter by="taller_idtaller">Taller</mfDefaultSorter>
+                            </th>
+                            <th style="width:8%">
+                                <mfDefaultSorter by="mecanico_idmecanico">Mecanico</mfDefaultSorter>
+                            </th>
+                            <th style="width:8%">
+                                <mfDefaultSorter by="permisotaxiasignado_idpermisotaxiasignado">Permiso Taxi Asignado</mfDefaultSorter>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let item of mf.data;  let i = index">
+                            <td>
+                                <button (click)="editVehiculoreparandosModalShow(item)" class="btn btn-sm btn-info"><i class="fa fa-edit"></i></button>
+                                <button (click)="onDeleteConfirm($event, item.idvehiculoreparando)" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></button>
+                                <button (click)="uploadModalShow(item.idvehiculoreparando, item.fechaIngresa)" class="btn btn-sm btn-success"><i class="fa fa-file"></i></button>
+                                <button (click)="filesModalShow(item.idvehiculoreparando)" class="btn btn-sm btn-warning"><i class="fa fa-eye"></i></button>
+                            </td>
+                            <td>{{ item.fechaIngresa }}</td>
+                            <td>{{ item.fechaSalida }}</td>
+                            <td>{{ item.fechaEstimada }}</td>
+                            <td>{{ item.inventario }}</td>
+                            <td>{{ item.motivo }}</td>
+                            <td>{{ item.status }}</td>
+                            <td>{{ item.orden }}</td>
+                            <td>{{ item.enviotaller_idenviotaller}}</td>
+                            <td>{{ item.taller_idtaller}}</td>
+                            <td>{{ item.mecanico_idmecanico}}</td>
+                            <td>{{ item.permisotaxiasignado_idpermisotaxiasignado}}</td>
+
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="5">
+                                <mfBootstrapPaginator [rowsOnPageSet]="[5,10,15]"></mfBootstrapPaginator>
+                            </td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </ba-card>
+    </div>
+    <div class="row">
+        <div class="col-sm-6">
+            <button (click)="addVehiculoreparandosModalShow()" class="btn btn-success"><i class="fa fa-plus"></i> Agregar</button>
+        </div>
+    </div>
+
+</div>
