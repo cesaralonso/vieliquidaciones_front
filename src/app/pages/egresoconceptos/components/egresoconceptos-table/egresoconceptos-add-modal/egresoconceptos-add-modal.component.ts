@@ -21,12 +21,10 @@ export class EgresoconceptosAddModalComponent extends DialogComponent<Egresoconc
   form: FormGroup;
   submitted: boolean = false;
 
-  vehiculo_idvehiculoAC: AbstractControl;
-  permisotaxi_idpermisotaxiAC: AbstractControl;
+  totalAC: AbstractControl;
+  taller_idtallerAC: AbstractControl;
   fechaAC: AbstractControl;
-  statusAC: AbstractControl;
-  chofer_idchoferAC: AbstractControl;
-
+  concepto_idconceptoAC: AbstractControl;
 
   constructor(
     private service: EgresoconceptosService,
@@ -39,21 +37,16 @@ export class EgresoconceptosAddModalComponent extends DialogComponent<Egresoconc
 
 
     this.form = fb.group({
-
-
-      'vehiculo_idvehiculoAC' : ['', Validators.compose([Validators.required, Validators.minLength(1)])],
-      'permisotaxi_idpermisotaxiAC' : ['', Validators.compose([Validators.required, Validators.minLength(1)])],
+      'totalAC' : ['', Validators.compose([Validators.required, Validators.minLength(1)])],
+      'taller_idtallerAC' : ['', Validators.compose([Validators.required, Validators.minLength(1)])],
       'fechaAC' : ['', Validators.compose([Validators.required, Validators.minLength(1)])],
-      'statusAC' : ['', Validators.compose([Validators.required, Validators.minLength(1)])],
-      'chofer_idchoferAC' : ['', Validators.compose([Validators.required, Validators.minLength(1)])],
-
+      'concepto_idconceptoAC' : ['', Validators.compose([Validators.required, Validators.minLength(1)])],
     });
 
-    this.vehiculo_idvehiculoAC = this.form.controls['vehiculo_idvehiculoAC'];
-    this.permisotaxi_idpermisotaxiAC = this.form.controls['permisotaxi_idpermisotaxiAC'];
+    this.totalAC = this.form.controls['totalAC'];
+    this.taller_idtallerAC = this.form.controls['taller_idtallerAC'];
     this.fechaAC = this.form.controls['fechaAC'];
-    this.statusAC = this.form.controls['statusAC'];
-    this.chofer_idchoferAC = this.form.controls['chofer_idchoferAC'];
+    this.concepto_idconceptoAC = this.form.controls['concepto_idconceptoAC'];
 
   }
 

@@ -18,11 +18,10 @@ export class EgresoconceptosEditModalComponent extends DialogComponent<Egresocon
 
 
   idegresoconcepto: number;
-  vehiculo_idvehiculo: number;
-  permisotaxi_idpermisotaxi: number;
+  total: number;
+  taller_idtaller: number;
   fecha: string;
-  status: string;
-  chofer_idchofer:number;
+  concepto_idconcepto:number;
 
   modalHeader: string;
   id: number;
@@ -33,19 +32,17 @@ export class EgresoconceptosEditModalComponent extends DialogComponent<Egresocon
   egresoconcepto: EgresoconceptosInterface = {
 
     idegresoconcepto: 0,
-    vehiculo_idvehiculo: 0,
-    permisotaxi_idpermisotaxi: 0,
+    total: 0,
+    taller_idtaller: 0,
     fecha: '',
-    status: '',
-    chofer_idchofer:0,
+    concepto_idconcepto:0,
   };
 
   idegresoconceptoAC: AbstractControl;
-  vehiculo_idvehiculoAC: AbstractControl;
-  permisotaxi_idpermisotaxiAC: AbstractControl;
+  totalAC: AbstractControl;
+  taller_idtallerAC: AbstractControl;
   fechaAC: AbstractControl;
-  statusAC: AbstractControl;
-  chofer_idchoferAC: AbstractControl;
+  concepto_idconceptoAC: AbstractControl;
 
 
 
@@ -61,21 +58,19 @@ export class EgresoconceptosEditModalComponent extends DialogComponent<Egresocon
     this.form = fb.group({
 
       'idegresoconceptoAC' : ['', Validators.compose([Validators.required, Validators.minLength(1)])],
-      'vehiculo_idvehiculoAC' : ['', Validators.compose([Validators.required, Validators.minLength(1)])],
-      'permisotaxi_idpermisotaxiAC' : ['', Validators.compose([Validators.required, Validators.minLength(1)])],
+      'totalAC' : ['', Validators.compose([Validators.required, Validators.minLength(1)])],
+      'taller_idtallerAC' : ['', Validators.compose([Validators.required, Validators.minLength(1)])],
       'fechaAC' : ['', Validators.compose([Validators.required, Validators.minLength(1)])],
-      'statusAC' : ['', Validators.compose([Validators.required, Validators.minLength(1)])],
-      'chofer_idchoferAC' : ['', Validators.compose([Validators.required, Validators.minLength(1)])],
+      'concepto_idconceptoAC' : ['', Validators.compose([Validators.required, Validators.minLength(1)])],
 
     });
 
 
     this.idegresoconceptoAC = this.form.controls['idegresoconceptoAC'];
-    this.vehiculo_idvehiculoAC = this.form.controls['vehiculo_idvehiculoAC'];
-    this.permisotaxi_idpermisotaxiAC = this.form.controls['permisotaxi_idpermisotaxiAC'];
+    this.totalAC = this.form.controls['totalAC'];
+    this.taller_idtallerAC = this.form.controls['taller_idtallerAC'];
     this.fechaAC = this.form.controls['fechaAC'];
-    this.statusAC = this.form.controls['statusAC'];
-    this.chofer_idchoferAC = this.form.controls['chofer_idchoferAC'];
+    this.concepto_idconceptoAC = this.form.controls['concepto_idconceptoAC'];
 
   }
 
@@ -98,11 +93,10 @@ export class EgresoconceptosEditModalComponent extends DialogComponent<Egresocon
 
 
           idegresoconcepto: this.idegresoconcepto,
-          vehiculo_idvehiculo: this.vehiculo_idvehiculo,
-          permisotaxi_idpermisotaxi: this.permisotaxi_idpermisotaxi,
+          total: this.total,
+          taller_idtaller: this.taller_idtaller,
           fecha: this.fecha,
-          status: this.status,
-          chofer_idchofer: this.chofer_idchofer,
+          concepto_idconcepto: this.concepto_idconcepto,
 
 
         })
