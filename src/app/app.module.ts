@@ -71,7 +71,7 @@ export type StoreType = {
     BrowserAnimationsModule, // required animations module
     ToastrModule.forRoot(), // ToastrModule added,
     LocalStorageModule.withConfig({
-        prefix: 'immprenzza',
+        prefix: 'vieliquidaciones',
         storageType: 'localStorage',
     }),
     BootstrapModalModule.forRoot({ container: document.body }),

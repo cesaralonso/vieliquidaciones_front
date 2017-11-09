@@ -12,7 +12,8 @@ import { Pages } from './pages.component';
     CommonModule,
     AppTranslationModule,
     NgaModule,
-    routing],
+    routing
+  ],
   declarations: [Pages]
 })
 export class PagesModule {
