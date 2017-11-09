@@ -36,7 +36,6 @@ export class PermisotaxiasignadosService {
     }
 
     editPermisotaxiasignados = (permisotaxiasignados: PermisotaxiasignadosInterface): Observable<PermisotaxiasignadosResponseInterface> =>  {
-        console.log(permisotaxiasignados.claveauth);
         this.actionUrl = `${this._configuration.ServerWithApiUrl}modificarPermisotaxiasignado`;
         const toAdd = JSON.stringify(permisotaxiasignados);
         return this._http.post(this.actionUrl, toAdd, { headers: this.headers })

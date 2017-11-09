@@ -36,7 +36,6 @@ export class LiquidacionesService {
     }
 
     editLiquidaciones = (liquidaciones: LiquidacionesInterface): Observable<LiquidacionesResponseInterface> =>  {
-        console.log(liquidaciones.claveauth);
         this.actionUrl = `${this._configuration.ServerWithApiUrl}modificarLiquidacion`;
         const toAdd = JSON.stringify(liquidaciones);
         return this._http.post(this.actionUrl, toAdd, { headers: this.headers })

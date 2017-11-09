@@ -36,7 +36,6 @@ export class FoliosService {
     }
 
     editFolios = (folios: FoliosInterface): Observable<FoliosResponseInterface> =>  {
-        console.log(folios.claveauth);
         this.actionUrl = `${this._configuration.ServerWithApiUrl}modificarFolio`;
         const toAdd = JSON.stringify(folios);
         return this._http.post(this.actionUrl, toAdd, { headers: this.headers })

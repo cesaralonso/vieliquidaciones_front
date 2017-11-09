@@ -1,5 +1,5 @@
-import { EgresoconceptosResponseInterface } from './permisotaxiasignados-response.interface';
-import { EgresoconceptosInterface } from './permisotaxiasignados.interface';
+import { EgresoconceptosResponseInterface } from './egresoconceptos-response.interface';
+import { EgresoconceptosInterface } from './egresoconceptos.interface';
 import { AuthLocalstorage } from './../../../../shared/auth-localstorage.service';
 import { LocalStorageService } from 'angular-2-local-storage';
 import { Observable } from 'rxjs/Observable';

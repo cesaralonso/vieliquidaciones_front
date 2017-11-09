@@ -66,7 +66,6 @@ export class VehiculosAddModalComponent extends DialogComponent<VehiculosInterfa
 
     });
 
-        this.idvehiculoAC = this.form.controls['idvehiculoAC'];
         this.propietarioAC = this.form.controls['propietarioAC'];
         this.anioAC = this.form.controls['anioAC'];
         this.marcaAC = this.form.controls['marcaAC'];

@@ -36,7 +36,6 @@ export class EnviotalleresService {
     }
 
     editEnviotalleres = (enviotalleres: EnviotalleresInterface): Observable<EnviotalleresResponseInterface> =>  {
-        console.log(enviotalleres.claveauth);
         this.actionUrl = `${this._configuration.ServerWithApiUrl}modificarEnviotaller`;
         const toAdd = JSON.stringify(enviotalleres);
         return this._http.post(this.actionUrl, toAdd, { headers: this.headers })

@@ -20,7 +20,11 @@ export class MecanicosEditModalComponent extends DialogComponent<MecanicosInterf
   idmecanico: number;
   taller_idtaller: number;
   persona_idpersona:number;
+  total: number;
+  fecha: string;
+  concepto_idconcepto:number;
 
+  
   modalHeader: string;
   id: number;
   data: any;
@@ -33,7 +37,7 @@ export class MecanicosEditModalComponent extends DialogComponent<MecanicosInterf
     total: 0,
     taller_idtaller: 0,
     fecha: '',
-    persona_idpersona:0,
+    concepto_idconcepto: 0
   };
 
   idmecanicoAC: AbstractControl;
@@ -86,7 +90,9 @@ export class MecanicosEditModalComponent extends DialogComponent<MecanicosInterf
 
           idmecanico: this.idmecanico,
           taller_idtaller: this.taller_idtaller,
-          persona_idpersona: this.persona_idpersona,
+          total: 0,
+          fecha: '',
+          concepto_idconcepto: 0
 
 
         })

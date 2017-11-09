@@ -36,7 +36,6 @@ export class VehiculosService {
     }
 
     editVehiculos = (vehiculos: VehiculosInterface): Observable<VehiculosResponseInterface> =>  {
-        console.log(vehiculos.claveauth);
         this.actionUrl = `${this._configuration.ServerWithApiUrl}modificarVehiculo`;
         const toAdd = JSON.stringify(vehiculos);
         return this._http.post(this.actionUrl, toAdd, { headers: this.headers })

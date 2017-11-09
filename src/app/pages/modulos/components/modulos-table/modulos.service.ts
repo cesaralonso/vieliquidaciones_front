@@ -36,7 +36,6 @@ export class ModulosService {
     }
 
     editModulos = (modulos: ModulosInterface): Observable<ModulosResponseInterface> =>  {
-        console.log(modulos.claveauth);
         this.actionUrl = `${this._configuration.ServerWithApiUrl}modificarModulo`;
         const toAdd = JSON.stringify(modulos);
         return this._http.post(this.actionUrl, toAdd, { headers: this.headers })

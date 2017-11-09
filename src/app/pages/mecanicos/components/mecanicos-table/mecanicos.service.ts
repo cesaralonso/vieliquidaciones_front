@@ -36,7 +36,6 @@ export class MecanicosService {
     }
 
     editMecanicos = (mecanicos: MecanicosInterface): Observable<MecanicosResponseInterface> =>  {
-        console.log(mecanicos.claveauth);
         this.actionUrl = `${this._configuration.ServerWithApiUrl}modificarMecanico`;
         const toAdd = JSON.stringify(mecanicos);
         return this._http.post(this.actionUrl, toAdd, { headers: this.headers })

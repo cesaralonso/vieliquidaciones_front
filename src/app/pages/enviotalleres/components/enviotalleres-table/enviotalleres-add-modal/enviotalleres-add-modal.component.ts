@@ -45,7 +45,6 @@ export class EnviotalleresAddModalComponent extends DialogComponent<Enviotallere
 
     });
 
-        this.idenviotallerAC = this.form.controls['idenviotallerAC'];
         this.taller_idtallerAC = this.form.controls['taller_idtallerAC'];
         this.enviotaller_idenviotallerAC = this.form.controls['enviotaller_idenviotallerAC'];
         this.fechaAC = this.form.controls['fechaAC'];

@@ -38,7 +38,7 @@ export const routes: Routes = [
       { path: 'ui', loadChildren: './ui/ui.module#UiModule' },
       { path: 'forms', loadChildren: './forms/forms.module#FormsModule' },
       { path: 'tables', loadChildren: './tables/tables.module#TablesModule' },
-      { path: 'obras', loadChildren: './obras/obras.module#ObrasModule', canActivateChild: [AuthGuard] },
+      // { path: 'obras', loadChildren: './obras/obras.module#ObrasModule', canActivateChild: [AuthGuard] },
       { path: 'admin', loadChildren: './admin/admin.module#AdminModule', canActivateChild: [AuthGuard] }
     ]
   }

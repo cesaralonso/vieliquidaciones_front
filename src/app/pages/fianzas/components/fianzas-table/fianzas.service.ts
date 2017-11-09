@@ -36,7 +36,6 @@ export class FianzasService {
     }
 
     editFianzas = (fianzas: FianzasInterface): Observable<FianzasResponseInterface> =>  {
-        console.log(fianzas.claveauth);
         this.actionUrl = `${this._configuration.ServerWithApiUrl}modificarFianza`;
         const toAdd = JSON.stringify(fianzas);
         return this._http.post(this.actionUrl, toAdd, { headers: this.headers })
