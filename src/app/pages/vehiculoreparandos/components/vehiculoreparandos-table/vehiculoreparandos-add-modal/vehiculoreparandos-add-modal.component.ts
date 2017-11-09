@@ -61,7 +61,6 @@ export class VehiculoreparandosAddModalComponent extends DialogComponent<Vehicul
     });
 
 
-        this.idvehiculoreparandoAC = this.form.controls['idvehiculoreparandoAC'];
         this.taller_idtallerAC = this.form.controls['taller_idtallerAC'];
         this.enviotaller_idenviotallerAC = this.form.controls['enviotaller_idenviotallerAC'];
         this.fechaIngresaAC = this.form.controls['fechaIngresaAC'];

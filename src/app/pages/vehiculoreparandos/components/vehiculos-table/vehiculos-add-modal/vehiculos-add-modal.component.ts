@@ -1,11 +1,11 @@
+import { VehiculosInterface } from './../../../../vehiculos/components/vehiculos-table/vehiculos.interface';
 import { DialogComponent, DialogService } from 'ng2-bootstrap-modal';
 import { AuthLocalstorage } from './../../../../../shared/auth-localstorage.service';
-import { VehiculosService } from './../vehiculos.service';
 import { Modals } from './../../../../ui/components/modals/modals.component';
-import { VehiculosInterface } from './../vehiculos.interface';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, AbstractControl, FormBuilder, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
+import { VehiculosService } from 'app/pages/vehiculos/components/vehiculos-table/vehiculos.service';
 
 
 @Component({
