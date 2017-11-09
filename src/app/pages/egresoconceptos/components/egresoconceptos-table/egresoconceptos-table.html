@@ -7,22 +7,18 @@
                 <table class="table table-striped" [mfData]="data | dataFilter : filterQuery" #mf="mfDataTable" [mfRowsOnPage]="rowsOnPage" [(mfSortBy)]="sortBy" [(mfSortOrder)]="sortOrder">
                     <thead>
                         <tr>
-                            <th style="width: 23%"></th>
-                            <th style="width: 7%">
-                                <mfDefaultSorter by="chofer_idchofer">Chofer</mfDefaultSorter>
+                            <th style="width: 20%"></th>
+                            <th style="width: 20%">
+                                <mfDefaultSorter by="taller_idtaller">Taller</mfDefaultSorter>
                             </th>
-                            <th style="width: 7%">
-                                <mfDefaultSorter by="vehiculo_idvehiculo">Vehiculo</mfDefaultSorter>
+                            <th style="width: 20%">
+                                <mfDefaultSorter by="total">Total</mfDefaultSorter>
                             </th>
-                            <th style="width: 7%">
-                                <mfDefaultSorter by="status">Status</mfDefaultSorter>
-                            </th>
-
-                            <th style="width: 7%">
-                                <mfDefaultSorter by="permisotaxi_idpermisotaxi">Permiso</mfDefaultSorter>
+                            <th style="width: 20%">
+                                <mfDefaultSorter by="concepto_idconcepto">Concepto</mfDefaultSorter>
                             </th>
 
-                            <th style="width: 7%">
+                            <th style="width: 20%">
                                 <mfDefaultSorter by="fecha">Fecha</mfDefaultSorter>
                             </th>
 
@@ -33,16 +29,15 @@
                             <td>
                                 <button (click)="editEgresoconceptosModalShow(item)" class="btn btn-sm btn-info"><i class="fa fa-edit"></i></button>
                                 <button (click)="onDeleteConfirm($event, item.idegresoconcepto)" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></button>
-                                <button (click)="uploadModalShow(item.idegresoconcepto, item.chofer_idchofer)" class="btn btn-sm btn-success"><i class="fa fa-file"></i></button>
+                                <button (click)="uploadModalShow(item.idegresoconcepto, item.taller_idtaller)" class="btn btn-sm btn-success"><i class="fa fa-file"></i></button>
                                 <button (click)="filesModalShow(item.idegresoconcepto)" class="btn btn-sm btn-warning"><i class="fa fa-eye"></i></button>
                             </td>
-                            <td>{{ item.chofer_idchofer }}</td>
-                            <td>{{ item.vehiculo_idvehiculo }}</td>
-                            <td>{{ item.status }}</td>
-                            <td>{{ item.permisotaxi_idpermisotaxi }}</td>
+                            <td>{{ item.taller_idtaller }}</td>
+                            <td>{{ item.total }}</td>
+                            <td>{{ item.concepto_idconcepto }}</td>
 
                             <td>{{ item.fecha }}</td>
-                          
+
                         </tr>
                     </tbody>
                     <tfoot>
