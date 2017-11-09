@@ -36,7 +36,6 @@ export class ChoferesService {
     }
 
     editChoferes = (choferes: ChoferesInterface): Observable<ChoferesResponseInterface> =>  {
-        console.log(choferes.claveauth);
         this.actionUrl = `${this._configuration.ServerWithApiUrl}modificarChofer`;
         const toAdd = JSON.stringify(choferes);
         return this._http.post(this.actionUrl, toAdd, { headers: this.headers })

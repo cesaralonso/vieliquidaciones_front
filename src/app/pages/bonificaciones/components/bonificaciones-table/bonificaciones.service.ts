@@ -36,7 +36,6 @@ export class BonificacionesService {
     }
 
     editBonificaciones = (bonificaciones: BonificacionesInterface): Observable<BonificacionesResponseInterface> =>  {
-        console.log(bonificaciones.claveauth);
         this.actionUrl = `${this._configuration.ServerWithApiUrl}modificarBonificacion`;
         const toAdd = JSON.stringify(bonificaciones);
         return this._http.post(this.actionUrl, toAdd, { headers: this.headers })

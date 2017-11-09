@@ -52,7 +52,6 @@ export class PermisotaxisAddModalComponent extends DialogComponent<PermisotaxisI
 
     });
 
-        this.idpermisotaxiAC = this.form.controls['idpermisotaxiAC'];
         this.liquidezAC = this.form.controls['liquidezAC'];
         this.liquidezDomAC = this.form.controls['liquidezDomAC'];
         this.numeroAC = this.form.controls['numeroAC'];

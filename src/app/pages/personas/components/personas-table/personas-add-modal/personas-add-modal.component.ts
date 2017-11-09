@@ -45,8 +45,6 @@ export class PersonasAddModalComponent extends DialogComponent<PersonasInterface
       'sexoAC' : ['', Validators.compose([Validators.required, Validators.minLength(1)])],
       'RFCAC' : ['', Validators.compose([Validators.required, Validators.minLength(1)])],
       'domicilioAC' : ['', Validators.compose([Validators.required, Validators.minLength(1)])],
-      'fechainicioAC' : ['', Validators.compose([Validators.required, Validators.minLength(1)])],
-      'fechafinAC' : ['', Validators.compose([Validators.required, Validators.minLength(1)])],
       'telefonoAC' : ['', Validators.compose([Validators.required, Validators.minLength(1)])],
       'edadAC' : ['', Validators.compose([Validators.required, Validators.minLength(1)])],
       'coordenada_idcoordenadaAC' : ['', Validators.compose([Validators.required, Validators.minLength(1)])],
@@ -57,8 +55,6 @@ export class PersonasAddModalComponent extends DialogComponent<PersonasInterface
     this.sexoAC = this.form.controls['sexoAC'];
     this.RFCAC = this.form.controls['RFCAC'];
     this.domicilioAC = this.form.controls['domicilioAC'];
-    this.fechainicioAC = this.form.controls['fechainicioAC'];
-    this.fechafinAC = this.form.controls['fechafinAC'];
     this.telefonoAC = this.form.controls['telefonoAC'];
     this.edadAC = this.form.controls['edadAC'];
     this.coordenada_idcoordenadaAC = this.form.controls['coordenada_idcoordenadaAC'];

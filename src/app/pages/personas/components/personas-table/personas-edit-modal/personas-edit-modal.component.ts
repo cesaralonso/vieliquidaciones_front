@@ -82,8 +82,6 @@ export class PersonasEditModalComponent extends DialogComponent<PersonasInterfac
     this.sexoAC = this.form.controls['sexoAC'];
     this.RFCAC = this.form.controls['RFCAC'];
     this.domicilioAC = this.form.controls['domicilioAC'];
-    this.fechainicioAC = this.form.controls['fechainicioAC'];
-    this.fechafinAC = this.form.controls['fechafinAC'];
     this.telefonoAC = this.form.controls['telefonoAC'];
     this.edadAC = this.form.controls['edadAC'];
     this.coordenada_idcoordenadaAC = this.form.controls['coordenada_idcoordenadaAC'];
@@ -112,8 +110,6 @@ export class PersonasEditModalComponent extends DialogComponent<PersonasInterfac
           sexo: this.sexo,
           RFC: this.RFC,
           domicilio: this.domicilio,
-          fechainicio: this.fechainicio,
-          fechafin: this.fechafin,
           telefono: this.telefono,
           edad: this.edad,
           coordenada_idcoordenada: this.coordenada_idcoordenada,

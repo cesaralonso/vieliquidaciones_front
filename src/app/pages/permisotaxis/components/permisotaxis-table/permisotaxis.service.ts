@@ -36,7 +36,6 @@ export class PermisotaxisService {
     }
 
     editPermisotaxis = (permisotaxis: PermisotaxisInterface): Observable<PermisotaxisResponseInterface> =>  {
-        console.log(permisotaxis.claveauth);
         this.actionUrl = `${this._configuration.ServerWithApiUrl}modificarPermisotaxi`;
         const toAdd = JSON.stringify(permisotaxis);
         return this._http.post(this.actionUrl, toAdd, { headers: this.headers })

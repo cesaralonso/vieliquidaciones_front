@@ -36,7 +36,6 @@ export class PermisosService {
     }
 
     editPermisos = (permisos: PermisosInterface): Observable<PermisosResponseInterface> =>  {
-        console.log(permisos.claveauth);
         this.actionUrl = `${this._configuration.ServerWithApiUrl}modificarPermiso`;
         const toAdd = JSON.stringify(permisos);
         return this._http.post(this.actionUrl, toAdd, { headers: this.headers })

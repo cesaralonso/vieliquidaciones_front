@@ -36,7 +36,6 @@ export class PersonasService {
     }
 
     editPersonas = (personas: PersonasInterface): Observable<PersonasResponseInterface> =>  {
-        console.log(personas.claveauth);
         this.actionUrl = `${this._configuration.ServerWithApiUrl}modificarPersona`;
         const toAdd = JSON.stringify(personas);
         return this._http.post(this.actionUrl, toAdd, { headers: this.headers })

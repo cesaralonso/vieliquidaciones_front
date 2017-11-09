@@ -36,7 +36,6 @@ export class ConceptosService {
     }
 
     editConceptos = (conceptos: ConceptosInterface): Observable<ConceptosResponseInterface> =>  {
-        console.log(conceptos.claveauth);
         this.actionUrl = `${this._configuration.ServerWithApiUrl}modificarConcepto`;
         const toAdd = JSON.stringify(conceptos);
         return this._http.post(this.actionUrl, toAdd, { headers: this.headers })

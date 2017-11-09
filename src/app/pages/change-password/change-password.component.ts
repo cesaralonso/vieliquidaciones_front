@@ -80,9 +80,11 @@ export class ChangePasswordComponent {
 
       // Valida usuario contra contraseña anterior del usuario
       const credentials: LoginInterface = {
-        nicknameauth: values.nicknameauth,
-        claveauth: values.contrasena,
-        usuarioauth: values.usuarioauth,
+        email: '',
+        password: ''
+        // nicknameauth: values.nicknameauth,
+        // claveauth: values.contrasena,
+        // usuarioauth: values.usuarioauth,
       }
 
       this.authService
@@ -93,7 +95,7 @@ export class ChangePasswordComponent {
   }
 
   private changePassword(response: LoginResponseInterface, valuesChangePasswordForm: ChangePasswordInterface) {
-    if (response.idRespuesta === 0) {
+    if (response.success) {
       // Si fue validado el usuario con la contraseña anterior procede con el cambio de contrasena
       const newPassword = {
         nicknameauth: valuesChangePasswordForm.nicknameauth,
@@ -109,7 +111,7 @@ export class ChangePasswordComponent {
             (data: ChangePasswordResponseInterface) => this.showToast(data));
 
     } else {
-      this.toastrService.error(response.mensajeRespuesta);
+      // this.toastrService.error(response.message);
     }
   }
 

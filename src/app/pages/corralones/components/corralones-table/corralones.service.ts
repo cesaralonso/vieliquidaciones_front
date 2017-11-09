@@ -36,7 +36,6 @@ export class CorralonesService {
     }
 
     editCorralones = (corralones: CorralonesInterface): Observable<CorralonesResponseInterface> =>  {
-        console.log(corralones.claveauth);
         this.actionUrl = `${this._configuration.ServerWithApiUrl}modificarCorralon`;
         const toAdd = JSON.stringify(corralones);
         return this._http.post(this.actionUrl, toAdd, { headers: this.headers })

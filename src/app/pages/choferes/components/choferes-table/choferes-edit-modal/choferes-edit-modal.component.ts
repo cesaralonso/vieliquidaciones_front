@@ -33,7 +33,7 @@ export class ChoferesEditModalComponent extends DialogComponent<ChoferesInterfac
   form: FormGroup;
   submitted: boolean = false;
 
-  chofer: ChoferesInterface = {
+  choferI: ChoferesInterface = {
     idchofer: 0,
     licencia: '',
     status: '',
@@ -132,7 +132,7 @@ export class ChoferesEditModalComponent extends DialogComponent<ChoferesInterfac
   private getChoferes(): void {
     this.service.getChoferes(this.id)
         .subscribe( data => {
-          this.chofer = data[1];
+          this.choferI = data[1];
         },
         error => console.log(error),
         () => console.log('Get chofer complete'));

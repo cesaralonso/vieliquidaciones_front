@@ -36,7 +36,6 @@ export class CoordenadasService {
     }
 
     editCoordenadas = (coordenadas: CoordenadasInterface): Observable<CoordenadasResponseInterface> =>  {
-        console.log(coordenadas.claveauth);
         this.actionUrl = `${this._configuration.ServerWithApiUrl}modificarCoordenada`;
         const toAdd = JSON.stringify(coordenadas);
         return this._http.post(this.actionUrl, toAdd, { headers: this.headers })

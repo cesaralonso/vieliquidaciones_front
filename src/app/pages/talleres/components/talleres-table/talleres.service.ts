@@ -36,7 +36,6 @@ export class TalleresService {
     }
 
     editTalleres = (talleres: TalleresInterface): Observable<TalleresResponseInterface> =>  {
-        console.log(talleres.claveauth);
         this.actionUrl = `${this._configuration.ServerWithApiUrl}modificarTaller`;
         const toAdd = JSON.stringify(talleres);
         return this._http.post(this.actionUrl, toAdd, { headers: this.headers })

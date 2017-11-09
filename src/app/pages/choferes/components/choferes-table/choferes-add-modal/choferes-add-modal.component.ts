@@ -56,7 +56,6 @@ export class ChoferesAddModalComponent extends DialogComponent<ChoferesInterface
 
     });
 
-    this.idchoferAC = this.form.controls['idchoferAC'];
     this.licenciaAC = this.form.controls['licenciaAC'];
     this.statusAC = this.form.controls['statusAC'];
     this.choferAC = this.form.controls['choferAC'];

@@ -1,8 +1,8 @@
+import { EgresoconceptosResponseInterface } from './permisotaxiasignados-response.interface';
+import { EgresoconceptosInterface } from './permisotaxiasignados.interface';
 import { AuthLocalstorage } from './../../../../shared/auth-localstorage.service';
-import { EgresoconceptosResponseInterface } from './egresoconceptos-response.interface';
 import { LocalStorageService } from 'angular-2-local-storage';
 import { Observable } from 'rxjs/Observable';
-import { EgresoconceptosInterface } from './egresoconceptos.interface';
 import { Injectable } from '@angular/core';
 import { Http, Response, Headers } from '@angular/http';
 import { Configuration } from '../../../../app.constants';
@@ -36,7 +36,6 @@ export class EgresoconceptosService {
     }
 
     editEgresoconceptos = (egresoconceptos: EgresoconceptosInterface): Observable<EgresoconceptosResponseInterface> =>  {
-        console.log(egresoconceptos.claveauth);
         this.actionUrl = `${this._configuration.ServerWithApiUrl}modificarEgresoconcepto`;
         const toAdd = JSON.stringify(egresoconceptos);
         return this._http.post(this.actionUrl, toAdd, { headers: this.headers })
