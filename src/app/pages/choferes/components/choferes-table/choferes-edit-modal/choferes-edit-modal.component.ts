@@ -88,7 +88,7 @@ export class ChoferesEditModalComponent extends DialogComponent<ChoferesInterfac
     this.aval1AC = this.form.controls['aval1AC'];
     this.aval2AC = this.form.controls['aval2AC'];
     this.aval3AC = this.form.controls['aval3AC'];
-    this.aval4AC = this.form.controls['aval4AC']
+    this.aval4AC = this.form.controls['aval4AC'];
 
   }
 

@@ -143,7 +143,7 @@ CREATE TABLE IF NOT EXISTS `vieliquidaciones`.`liquidacion` (
   `cambio` INT(11) NULL DEFAULT NULL,
   `folio` VARCHAR(45) NULL DEFAULT NULL,
   `kilometraje` INT(11) NULL DEFAULT NULL,
-  `fecha` INT(11) NULL DEFAULT NULL,
+  `fecha` DATE NULL DEFAULT NULL,
   `nota` VARCHAR(60) NULL DEFAULT NULL,
   `cantPagada` INT(11) NULL DEFAULT NULL,
   `cantDeuda` INT(11) NULL DEFAULT NULL,

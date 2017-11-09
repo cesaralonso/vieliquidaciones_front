@@ -1,0 +1,54 @@
+<div class="row mt-3">
+  <div class="col-md-2"></div>
+  <div class="col-md-8">
+    <div class="modal-content" style="overflow-y: initial !important">
+      <form [formGroup]="form" class="form-horizontal">
+        <div class="modal-header">
+          <h4 class="modal-title">Agregar Fianza</h4>
+          <button class="close" aria-label="Close" (click)="close()">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body" style="height: 65vh; overflow-y: auto;">
+          <ba-card cardTitle="Información de la Fianza">
+
+            <div class="form-group row" [ngClass]="{'has-error': (!montopagadoAC.valid && montopagadoAC.touched), 'has-success': (montopagadoAC.valid && montopagadoAC.touched)}">
+              <label for="inputmontopagadoAC" class="col-sm-2 form-control-label">Monto Pagado</label>
+              <div class="col-sm-10">
+                <input [(ngModel)]="montopagado" [formControl]="montopagadoAC" type="text" class="form-control" id="inputmontopagadoAC" placeholder="Monto Pagado" >
+              </div>
+            </div>
+
+            <div class="form-group row" [ngClass]="{'has-error': (!statusAC.valid && statusAC.touched), 'has-success': (statusAC.valid && statusAC.touched)}">
+              <label for="inputstatusAC" class="col-sm-2 form-control-label">Status</label>
+              <div class="col-sm-10">
+                <input [(ngModel)]="status" [formControl]="statusAC" type="text" class="form-control" id="inputstatusAC" placeholder="Status" >
+              </div>
+            </div>
+
+            <div class="form-group row" [ngClass]="{'has-error': (!montoadeudado.valid && montoadeudado.touched), 'has-success': (montoadeudado.valid && montoadeudado.touched)}">
+              <label for="inputmontoadeudado" class="col-sm-2 form-control-label">Monto Adeudado</label>
+              <div class="col-sm-10">
+                <input [(ngModel)]="montoadeudado" [formControl]="montoadeudado" type="text" class="form-control" id="inputmontoadeudado" placeholder="Monto Adeudado" >
+              </div>
+            </div>
+
+            <div class="form-group row" [ngClass]="{'has-error': (!chofer_idchoferAC.valid && chofer_idchoferAC.touched), 'has-success': (chofer_idchoferAC.valid && chofer_idchoferAC.touched)}">
+              <label for="inputchofer_idchoferAC" class="col-sm-2 form-control-label">Chofer</label>
+              <div class="col-sm-10">
+                <input [(ngModel)]="chofer_idchofer" [formControl]="chofer_idchoferAC" type="text" class="form-control" id="inputchofer_idchoferAC" placeholder="Chofer" >
+              </div>
+            </div>
+
+
+          </ba-card>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-danger cancel-btn" (click)="close()">Cancelar</button>
+          <button [disabled]="!form.valid" class="btn btn-primary confirm-btn" (click)="onSubmit(form.value)">Aceptar</button>
+        </div>
+      </form>
+    </div>
+
+  </div>
+</div>

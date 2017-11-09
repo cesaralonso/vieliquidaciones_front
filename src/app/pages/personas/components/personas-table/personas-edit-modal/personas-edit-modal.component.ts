@@ -17,7 +17,7 @@ import { ToastrService } from 'ngx-toastr';
 export class PersonasEditModalComponent extends DialogComponent<PersonasInterface, any> implements OnInit, PersonasInterface {
 
 
-  idPersona: number;
+  idpersona: number;
   nombre: string;
   sexo: string;
   RFC: string;
@@ -33,7 +33,7 @@ export class PersonasEditModalComponent extends DialogComponent<PersonasInterfac
   submitted: boolean = false;
 
   persona: PersonasInterface = {
-    idPersona: 0,
+    idpersona: 0,
     nombre: '',
     sexo: '',
     RFC: '',
@@ -43,7 +43,7 @@ export class PersonasEditModalComponent extends DialogComponent<PersonasInterfac
     coordenada_idcoordenada: 0,
   };
 
-  idPersonaAC: AbstractControl;
+  idpersonaAC: AbstractControl;
   nombreAC: AbstractControl;
   sexoAC: AbstractControl;
   RFCAC: AbstractControl;
@@ -64,7 +64,7 @@ export class PersonasEditModalComponent extends DialogComponent<PersonasInterfac
 
     this.form = fb.group({
 
-      'idPersonaAC' : this.id,
+      'idpersonaAC' : this.id,
       'nombreAC' : ['', Validators.compose([Validators.required, Validators.minLength(1)])],
       'sexoAC' : ['', Validators.compose([Validators.required, Validators.minLength(1)])],
       'RFCAC' : ['', Validators.compose([Validators.required, Validators.minLength(1)])],
@@ -77,7 +77,7 @@ export class PersonasEditModalComponent extends DialogComponent<PersonasInterfac
 
     });
 
-    this.idPersonaAC = this.form.controls['idPersonaAC'];
+    this.idpersonaAC = this.form.controls['idpersonaAC'];
     this.nombreAC = this.form.controls['nombreAC'];
     this.sexoAC = this.form.controls['sexoAC'];
     this.RFCAC = this.form.controls['RFCAC'];
@@ -107,7 +107,7 @@ export class PersonasEditModalComponent extends DialogComponent<PersonasInterfac
       this.service
         .editPersonas({
 
-          idPersona: this.idPersona,
+          idpersona: this.idpersona,
           nombre: this.nombre,
           sexo: this.sexo,
           RFC: this.RFC,

@@ -1,0 +1,86 @@
+<div class="widgets">
+    <div class="row">
+        <ba-card title="Listado" baCardClass="with-scroll" class="data-table-container">
+            <div class="panel panel-default">
+                <!-- <div class="panel-heading">Información de Liquidaciones</div> -->
+
+                <table class="table table-striped" [mfData]="data | dataFilter : filterQuery" #mf="mfDataTable" [mfRowsOnPage]="rowsOnPage" [(mfSortBy)]="sortBy" [(mfSortOrder)]="sortOrder">
+                    <thead>
+                        <tr>
+                            <th style="width: 23%"></th>
+                            <th style="width: 7%">
+                                <mfDefaultSorter by="cantidadRecibida">Cantidad Recibida</mfDefaultSorter>
+                            </th>
+                            <th style="width: 7%">
+                                <mfDefaultSorter by="cambio">Cambio</mfDefaultSorter>
+                            </th>
+                            <th style="width: 7%">
+                                <mfDefaultSorter by="status">Status</mfDefaultSorter>
+                            </th>
+
+                            <th style="width: 7%">
+                                <mfDefaultSorter by="folio">Folio</mfDefaultSorter>
+                            </th>
+                            <th style="width: 7%">
+                                <mfDefaultSorter by="kilometraje">Kilometraje</mfDefaultSorter>
+                            </th>
+                            <th style="width: 7%">
+                                <mfDefaultSorter by="fecha">Fecha</mfDefaultSorter>
+                            </th>
+                            <th style="width: 7%">
+                                <mfDefaultSorter by="nota">Nota</mfDefaultSorter>
+                            </th>
+                            <th style="width: 7%">
+                                <mfDefaultSorter by="cantPagada">Cantidad Pagada</mfDefaultSorter>
+                            </th>
+                            <th style="width: 7%">
+                                <mfDefaultSorter by="cantDeuda">Cantidad Deuda</mfDefaultSorter>
+                            </th>
+                            <th style="width: 7%">
+                                <mfDefaultSorter by="bonificado">Bonificado</mfDefaultSorter>
+                            </th>
+                            <th style="width: 7%">
+                                <mfDefaultSorter by="chofer_idchofer">Chofer</mfDefaultSorter>
+                            </th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let item of mf.data;  let i = index">
+                            <td>
+                                <button (click)="editLiquidacionesModalShow(item)" class="btn btn-sm btn-info"><i class="fa fa-edit"></i></button>
+                                <button (click)="onDeleteConfirm($event, item.idliquidacion)" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></button>
+                                <button (click)="uploadModalShow(item.idliquidacion, item.cantidadRecibida)" class="btn btn-sm btn-success"><i class="fa fa-file"></i></button>
+                                <button (click)="filesModalShow(item.idliquidacion)" class="btn btn-sm btn-warning"><i class="fa fa-eye"></i></button>
+                            </td>
+                            <td>{{ item.cantidadRecibida }}</td>
+                            <td>{{ item.cambio }}</td>
+                            <td>{{ item.status }}</td>
+                            <td>{{ item.folio }}</td>
+                            <td>{{ item.kilometraje }}</td>
+                            <td>{{ item.fecha }}</td>
+                            <td>{{ item.nota }}</td>
+                            <td>{{ item.cantPagada}}</td>
+                            <td>{{ item.cantDeuda}}</td>
+                            <td>{{ item.bonificado}}</td>
+                            <td>{{ item.chofer_idchofer}}</td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="5">
+                                <mfBootstrapPaginator [rowsOnPageSet]="[5,10,15]"></mfBootstrapPaginator>
+                            </td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </ba-card>
+    </div>
+    <div class="row">
+        <div class="col-sm-6">
+            <button (click)="addLiquidacionesModalShow()" class="btn btn-success"><i class="fa fa-plus"></i> Agregar</button>
+        </div>
+    </div>
+
+</div>

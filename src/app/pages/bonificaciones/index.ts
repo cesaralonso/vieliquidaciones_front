@@ -1,1 +1,1 @@
-export * from './choferes.component';
+export * from './bonificaciones.component';

@@ -1,0 +1,55 @@
+<div class="row mt-3">
+  <div class="col-md-2"></div>
+  <div class="col-md-8">
+    <div class="modal-content" style="overflow-y: initial !important">
+      <form [formGroup]="form" class="form-horizontal">
+        <div class="modal-header">
+          <h4 class="modal-title">Agregar Enviotaller</h4>
+          <button class="close" aria-label="Close" (click)="close()">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body" style="height: 65vh; overflow-y: auto;">
+          <ba-card cardTitle="Información de la Enviotaller">
+
+            <div class="form-group row" [ngClass]="{'has-error': (!taller_idtallerAC.valid && taller_idtallerAC.touched), 'has-success': (taller_idtallerAC.valid && taller_idtallerAC.touched)}">
+              <label for="inputtaller_idtallerAC" class="col-sm-2 form-control-label">Taller</label>
+              <div class="col-sm-10">
+                <input [(ngModel)]="taller_idtaller" [formControl]="taller_idtallerAC" type="text" class="form-control" id="inputtaller_idtallerAC" placeholder="Taller" >
+              </div>
+            </div>
+
+            <div class="form-group row" [ngClass]="{'has-error': (!statusAC.valid && statusAC.touched), 'has-success': (statusAC.valid && statusAC.touched)}">
+              <label for="inputstatusAC" class="col-sm-2 form-control-label">Status</label>
+              <div class="col-sm-10">
+                <input [(ngModel)]="status" [formControl]="statusAC" type="text" class="form-control" id="inputstatusAC" placeholder="Status" >
+              </div>
+            </div>
+
+            <div class="form-group row" [ngClass]="{'has-error': (!fechaAC.valid && fechaAC.touched), 'has-success': (fechaAC.valid && fechaAC.touched)}">
+              <label for="inputfechaAC" class="col-sm-2 form-control-label">Fecha</label>
+              <div class="col-sm-10">
+                <input [(ngModel)]="fecha" [formControl]="fechaAC" type="text" class="form-control" id="inputfechaAC" placeholder="Fecha" >
+              </div>
+            </div>
+
+            <div class="form-group row" [ngClass]="{'has-error': (!enviotaller_idenviotallerAC.valid && enviotaller_idenviotallerAC.touched), 'has-success': (enviotaller_idenviotallerAC.valid && enviotaller_idenviotallerAC.touched)}">
+              <label for="inputenviotaller_idenviotallerAC" class="col-sm-2 form-control-label">Permiso Taxi Asignado</label>
+              <div class="col-sm-10">
+                <input [(ngModel)]="enviotaller_idenviotaller" [formControl]="enviotaller_idenviotallerAC" type="text" class="form-control" id="inputenviotaller_idenviotallerAC" placeholder="Permiso Taxi" >
+              </div>
+            </div>
+
+
+
+          </ba-card>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-danger cancel-btn" (click)="close()">Cancelar</button>
+          <button [disabled]="!form.valid" class="btn btn-primary confirm-btn" (click)="onSubmit(form.value)">Aceptar</button>
+        </div>
+      </form>
+    </div>
+
+  </div>
+</div>

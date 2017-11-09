@@ -9,15 +9,15 @@ import { NgbRatingModule } from '@ng-bootstrap/ng-bootstrap';
 import { DataTableModule } from 'angular2-datatable';
 import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 
-import { routing } from './choferes.routing';
-import { ChoferesComponent } from './choferes.component';
+import { routing } from './bonificaciones.routing';
+import { BonificacionesComponent } from './bonificaciones.component';
 
-import { ChoferesAddModalComponent } from './components/choferes-table/choferes-add-modal/choferes-add-modal.component';
-import { ChoferesEditModalComponent } from './components/choferes-table/choferes-edit-modal/choferes-edit-modal.component';
-import { ChoferesService } from './components/choferes-table/choferes.service';
+import { BonificacionesAddModalComponent } from './components/bonificaciones-table/bonificaciones-add-modal/bonificaciones-add-modal.component';
+import { BonificacionesEditModalComponent } from './components/bonificaciones-table/bonificaciones-edit-modal/bonificaciones-edit-modal.component';
+import { BonificacionesService } from './components/bonificaciones-table/bonificaciones.service';
 
-import { ChoferesTableComponent } from './components/choferes-table/choferes-table.component';
-import { DataFilterPipe } from './components/choferes-table/data-filter.pipe';
+import { BonificacionesTableComponent } from './components/bonificaciones-table/bonificaciones-table.component';
+import { DataFilterPipe } from './components/bonificaciones-table/data-filter.pipe';
 
 @NgModule({
   imports: [
@@ -34,19 +34,19 @@ import { DataFilterPipe } from './components/choferes-table/data-filter.pipe';
     
   ],
   declarations: [
-    ChoferesComponent,
-    ChoferesTableComponent,
+    BonificacionesComponent,
+    BonificacionesTableComponent,
     DataFilterPipe,
-    ChoferesAddModalComponent,
-    ChoferesEditModalComponent,
+    BonificacionesAddModalComponent,
+    BonificacionesEditModalComponent,
   ],
   entryComponents: [
-    ChoferesAddModalComponent,
-    ChoferesEditModalComponent,
+    BonificacionesAddModalComponent,
+    BonificacionesEditModalComponent,
   ],
   providers: [
-    ChoferesService,
+    BonificacionesService,
   ]
 })
-export class ChoferesModule {
+export class BonificacionesModule {
 }

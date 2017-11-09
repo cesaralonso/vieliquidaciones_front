@@ -1,0 +1,69 @@
+<div class="row mt-3">
+  <div class="col-md-2"></div>
+  <div class="col-md-8">
+    <div class="modal-content" style="overflow-y: initial !important">
+      <form [formGroup]="form" class="form-horizontal">
+        <div class="modal-header">
+          <h4 class="modal-title">Agregar Corralon</h4>
+          <button class="close" aria-label="Close" (click)="close()">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body" style="height: 65vh; overflow-y: auto;">
+          <ba-card cardTitle="Información de la Corralon">
+
+            <div class="form-group row" [ngClass]="{'has-error': (!infraccionNumeroAC.valid && infraccionNumeroAC.touched), 'has-success': (infraccionNumeroAC.valid && infraccionNumeroAC.touched)}">
+              <label for="inputinfraccionNumeroAC" class="col-sm-2 form-control-label">Infraccion Numero</label>
+              <div class="col-sm-10">
+                <input [(ngModel)]="infraccionNumero" [formControl]="infraccionNumeroAC" type="text" class="form-control" id="inputinfraccionNumeroAC" placeholder="Infraccion Numero" >
+              </div>
+            </div>
+
+            <div class="form-group row" [ngClass]="{'has-error': (!statusAC.valid && statusAC.touched), 'has-success': (statusAC.valid && statusAC.touched)}">
+              <label for="inputstatusAC" class="col-sm-2 form-control-label">Status</label>
+              <div class="col-sm-10">
+                <input [(ngModel)]="status" [formControl]="statusAC" type="text" class="form-control" id="inputstatusAC" placeholder="Status" >
+              </div>
+            </div>
+
+            <div class="form-group row" [ngClass]="{'has-error': (!corralonNombreAC.valid && corralonNombreAC.touched), 'has-success': (corralonNombreAC.valid && corralonNombreAC.touched)}">
+              <label for="inputcorralonNombreAC" class="col-sm-2 form-control-label">Corralon</label>
+              <div class="col-sm-10">
+                <input [(ngModel)]="corralonNombre" [formControl]="corralonNombreAC" type="text" class="form-control" id="inputcorralonNombreAC" placeholder="Corralon" >
+              </div>
+            </div>
+
+            <div class="form-group row" [ngClass]="{'has-error': (!motivoAC.valid && motivoAC.touched), 'has-success': (motivoAC.valid && motivoAC.touched)}">
+              <label for="inputmotivoAC" class="col-sm-2 form-control-label">Motivo</label>
+              <div class="col-sm-10">
+                <input [(ngModel)]="motivo" [formControl]="motivoAC" type="text" class="form-control" id="inputmotivoAC" placeholder="Motivo" >
+              </div>
+            </div>
+
+            <div class="form-group row" [ngClass]="{'has-error': (!permisotaxiasignado_idpermisotaxiasignadoAC.valid && permisotaxiasignado_idpermisotaxiasignadoAC.touched), 'has-success': (permisotaxiasignado_idpermisotaxiasignadoAC.valid && permisotaxiasignado_idpermisotaxiasignadoAC.touched)}">
+              <label for="inputpermisotaxiasignado_idpermisotaxiasignadoAC" class="col-sm-2 form-control-label">Permiso Taxi Asignado</label>
+              <div class="col-sm-10">
+                <input [(ngModel)]="permisotaxiasignado_idpermisotaxiasignado" [formControl]="permisotaxiasignado_idpermisotaxiasignadoAC" type="text" class="form-control" id="inputpermisotaxiasignado_idpermisotaxiasignadoAC" placeholder="Permiso Taxi Asignado" >
+              </div>
+            </div>
+
+            <div class="form-group row" [ngClass]="{'has-error': (!fechaAC.valid && fechaAC.touched), 'has-success': (fechaAC.valid && fechaAC.touched)}">
+              <label for="inputfechaAC" class="col-sm-2 form-control-label">Fecha</label>
+              <div class="col-sm-10">
+                <input [(ngModel)]="fecha" [formControl]="fechaAC" type="text" class="form-control" id="inputfechaAC" placeholder="Fecha" >
+              </div>
+            </div>
+
+
+
+          </ba-card>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-danger cancel-btn" (click)="close()">Cancelar</button>
+          <button [disabled]="!form.valid" class="btn btn-primary confirm-btn" (click)="onSubmit(form.value)">Aceptar</button>
+        </div>
+      </form>
+    </div>
+
+  </div>
+</div>

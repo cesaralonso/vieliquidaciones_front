@@ -16,7 +16,7 @@ import { ToastrService } from 'ngx-toastr';
 
 export class PermisosEditModalComponent extends DialogComponent<PermisosInterface, any> implements OnInit, PermisosInterface {
 
-  idPermiso: number;
+  idpermiso: number;
   acceso: boolean;
   rol_idrol: number;
   modulo_idmodulo: number;
@@ -28,13 +28,13 @@ export class PermisosEditModalComponent extends DialogComponent<PermisosInterfac
   submitted: boolean = false;
 
   permiso: PermisosInterface = {
-    idPermiso: 0,
+    idpermiso: 0,
     acceso: false,
     rol_idrol: 0,
     modulo_idmodulo: 0,
   };
 
-  idPermisoAC: AbstractControl;
+  idpermisoAC: AbstractControl;
   accesoAC: AbstractControl;
   rol_idrolAC: AbstractControl;
   modulo_idmoduloAC: AbstractControl;
@@ -50,13 +50,13 @@ export class PermisosEditModalComponent extends DialogComponent<PermisosInterfac
 
     this.form = fb.group({
 
-      'idPermisoAC' : this.id,
+      'idpermisoAC' : this.id,
       'accesoAC' : ['', Validators.compose([Validators.required, Validators.minLength(1)])],
       'rol_idrolAC' : ['', Validators.compose([Validators.required, Validators.minLength(1)])],
       'modulo_idmoduloAC' : ['', Validators.compose([Validators.required, Validators.minLength(1)])],
     });
 
-    this.idPermisoAC = this.form.controls['idPermisoAC'];
+    this.idpermisoAC = this.form.controls['idpermisoAC'];
     this.accesoAC = this.form.controls['accesoAC'];
     this.rol_idrolAC = this.form.controls['rol_idrolAC'];
     this.modulo_idmoduloAC = this.form.controls['modulo_idmoduloAC'];
@@ -76,11 +76,11 @@ export class PermisosEditModalComponent extends DialogComponent<PermisosInterfac
       this.service
         .editPermisos({
 
-          idPermiso: this.idPermiso,
+          idpermiso: this.idpermiso,
           acceso: this.acceso,
           rol_idrol: this.rol_idrol,
           modulo_idmodulo: this.modulo_idmodulo,
-          
+
         })
         .subscribe(
             (data: any) => {

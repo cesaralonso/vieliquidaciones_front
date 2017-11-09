@@ -1,16 +1,16 @@
 import { Routes, RouterModule } from '@angular/router';
 import { ModuleWithProviders } from '@angular/core';
 
-import { ChoferesComponent } from './choferes.component';
-import { ChoferesTableComponent } from './components/choferes-table/choferes-table.component';
+import { BonificacionesComponent } from './bonificaciones.component';
+import { BonificacionesTableComponent } from './components/bonificaciones-table/bonificaciones-table.component';
 
 // noinspection TypeScriptValidateTypes
 export const routes: Routes = [
   {
     path: '',
-    component: ChoferesComponent,
+    component: BonificacionesComponent,
     children: [
-      { path: 'choferes-table', component: ChoferesTableComponent }
+      { path: 'bonificaciones-table', component: BonificacionesTableComponent }
     ]
   }
 ];

@@ -1,0 +1,69 @@
+<div class="widgets">
+    <div class="row">
+        <ba-card title="Listado" baCardClass="with-scroll" class="data-table-container">
+            <div class="panel panel-default">
+                <!-- <div class="panel-heading">Información de Corralones</div> -->
+
+                <table class="table table-striped" [mfData]="data | dataFilter : filterQuery" #mf="mfDataTable" [mfRowsOnPage]="rowsOnPage" [(mfSortBy)]="sortBy" [(mfSortOrder)]="sortOrder">
+                    <thead>
+                        <tr>
+                            <th style="width: 40%"></th>
+                            <th style="width: 10%">
+                                <mfDefaultSorter by="fecha">Fecha</mfDefaultSorter>
+                            </th>
+                            <th style="width: 10%">
+                                <mfDefaultSorter by="infraccionNumero">Infraccion</mfDefaultSorter>
+                            </th>
+                            <th style="width: 10%">
+                                <mfDefaultSorter by="corralonNombre">Corralon</mfDefaultSorter>
+                            </th>
+
+                            <th style="width: 10%">
+                                <mfDefaultSorter by="motivo">Motivo</mfDefaultSorter>
+                            </th>
+                            <th style="width: 10%">
+                                <mfDefaultSorter by="status">Status</mfDefaultSorter>
+                            </th>
+
+                            <th style="width: 10%">
+                                <mfDefaultSorter by="permisotaxiasignado_idpermisotaxiasignado">Permiso Taxi Asignado</mfDefaultSorter>
+                            </th>
+
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let item of mf.data;  let i = index">
+                            <td>
+                                <button (click)="editCorralonesModalShow(item)" class="btn btn-sm btn-info"><i class="fa fa-edit"></i></button>
+                                <button (click)="onDeleteConfirm($event, item.idcorralon)" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></button>
+                                <button (click)="uploadModalShow(item.idcorralon, item.fecha)" class="btn btn-sm btn-success"><i class="fa fa-file"></i></button>
+                                <button (click)="filesModalShow(item.idcorralon)" class="btn btn-sm btn-warning"><i class="fa fa-eye"></i></button>
+                            </td>
+                            <td>{{ item.fecha }}</td>
+                            <td>{{ item.infraccionNumero }}</td>
+                            <td>{{ item.corralonNombre }}</td>
+                            <td>{{ item.motivo }}</td>
+                            <td>{{ item.status }}</td>
+                            <td>{{ item.permisotaxiasignado_idpermisotaxiasignado }}</td>
+                          
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="5">
+                                <mfBootstrapPaginator [rowsOnPageSet]="[5,10,15]"></mfBootstrapPaginator>
+                            </td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </ba-card>
+    </div>
+    <div class="row">
+        <div class="col-sm-6">
+            <button (click)="addCorralonesModalShow()" class="btn btn-success"><i class="fa fa-plus"></i> Agregar</button>
+        </div>
+    </div>
+
+</div>
