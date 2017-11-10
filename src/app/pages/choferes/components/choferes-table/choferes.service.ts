@@ -17,7 +17,7 @@ export class ChoferesService {
     private actionUrl: string;
     private headers: Headers;
 
-
+    private endPoint: string;
     constructor(
         private _http: Http, 
         private _configuration: Configuration, 
@@ -25,10 +25,23 @@ export class ChoferesService {
         private authLocalstorage: AuthLocalstorage ) {
         this.headers = new Headers();
         this.headers.append('Content-Type', 'application/json; charset=UTF-8');
+        this.endPoint = `${this._configuration.ServerWithApiUrl}chofer/`;
+    }
+
+    all = (): Observable<ChoferesResponseInterface> => {
+        return this._http.get(this.endPoint)
+            .map((response: Response) => response.json())
+            .catch(this.handleError);
+    }
+
+    add = ( choferes: ChoferesInterface ): Observable<ChoferesResponseInterface> =>  {
+        return this._http.post(this.endPoint, choferes, { headers: this.headers })
+            .map((response: Response) => response.json())
+            .catch(this.handleError);
     }
 
     addChoferes = (choferes: ChoferesInterface): Observable<ChoferesResponseInterface> =>  {
-        this.actionUrl = `${this._configuration.ServerWithApiUrl}agregarChofer`;
+        this.actionUrl = `${this.endPoint}agregarChofer`;
         const toAdd = JSON.stringify(choferes);
         return this._http.post(this.actionUrl, toAdd, { headers: this.headers })
             .map((response: Response) => <ChoferesResponseInterface>response.json())
@@ -36,7 +49,7 @@ export class ChoferesService {
     }
 
     editChoferes = (choferes: ChoferesInterface): Observable<ChoferesResponseInterface> =>  {
-        this.actionUrl = `${this._configuration.ServerWithApiUrl}modificarChofer`;
+        this.actionUrl = `${this.endPoint}modificarChofer`;
         const toAdd = JSON.stringify(choferes);
         return this._http.post(this.actionUrl, toAdd, { headers: this.headers })
             .map((response: Response) => <ChoferesResponseInterface>response.json())
@@ -44,22 +57,13 @@ export class ChoferesService {
     }
 
     getChoferes = (idChofer: number): Observable<ChoferesInterface> => {
-        this.actionUrl = `${this._configuration.ServerWithApiUrl}obtenerChoferesPorIDChofer`;
-        const credenciales = this.authLocalstorage.getCredentials();
-        const toAdd = JSON.stringify({
-            nicknameauth: credenciales.nicknameauth,
-            usuarioauth: credenciales.usuarioauth,
-            claveauth: credenciales.claveauth,
-            idchofer: idChofer,
-        });
-
-        return this._http.post(this.actionUrl, toAdd, { headers: this.headers })
+        return this._http.get(this.endPoint)
             .map((response: Response) => <ChoferesInterface>response.json())
             .catch(this.handleError);
     }
 
     getAllChoferes = (): Observable<ChoferesInterface[]> => {
-        this.actionUrl = `${this._configuration.ServerWithApiUrl}obtenerChoferes`;
+        this.actionUrl = `${this.endPoint}obtenerChoferes`;
        
         const credenciales = JSON.stringify(this.authLocalstorage.getCredentials());
 
@@ -69,7 +73,7 @@ export class ChoferesService {
     }
 
     deleteChoferes = (id: string): Observable<ChoferesResponseInterface[]> => {
-        this.actionUrl = `${this._configuration.ServerWithApiUrl}bajaChoferes`;
+        this.actionUrl = `${this.endPoint}bajaChoferes`;
        
         const credenciales = this.authLocalstorage.getCredentials();
         const toSend = JSON.stringify({
@@ -85,7 +89,7 @@ export class ChoferesService {
     }
 
     autorizarChofer = (idChofer: number): Observable<ChoferesResponseInterface[]> => {
-        this.actionUrl = `${this._configuration.ServerWithApiUrl}autorizarChofer`;
+        this.actionUrl = `${this.endPoint}autorizarChofer`;
         const credenciales = this.authLocalstorage.getCredentials();
         const toAdd = JSON.stringify({
             nicknameauth: credenciales.nicknameauth,
@@ -99,7 +103,7 @@ export class ChoferesService {
     }
 
     bloquearChofer = (idChofer: number): Observable<ChoferesResponseInterface[]> => {
-        this.actionUrl = `${this._configuration.ServerWithApiUrl}bloquearChofer`;
+        this.actionUrl = `${this.endPoint}bloquearChofer`;
         const credenciales = this.authLocalstorage.getCredentials();
         const toAdd = JSON.stringify({
             nicknameauth: credenciales.nicknameauth,
@@ -113,7 +117,7 @@ export class ChoferesService {
     }
 
     cancelarChofer = (idChofer: number): Observable<ChoferesResponseInterface[]> => {
-        this.actionUrl = `${this._configuration.ServerWithApiUrl}cancelarChofer`;
+        this.actionUrl = `${this.endPoint}cancelarChofer`;
         const credenciales = this.authLocalstorage.getCredentials();
         const toAdd = JSON.stringify({
             nicknameauth: credenciales.nicknameauth,
@@ -127,7 +131,7 @@ export class ChoferesService {
     }
 
     finalizarChofer = (idChofer: number): Observable<ChoferesResponseInterface[]> => {
-        this.actionUrl = `${this._configuration.ServerWithApiUrl}FinalizarChofer`;
+        this.actionUrl = `${this.endPoint}FinalizarChofer`;
         const credenciales = this.authLocalstorage.getCredentials();
         const toAdd = JSON.stringify({
             nicknameauth: credenciales.nicknameauth,
@@ -141,7 +145,7 @@ export class ChoferesService {
     }
 
     cambiarEstatusPorIdChofer = (idChofer: number, idEstatusChofer: number): Observable<ChoferesResponseInterface[]> => {
-        this.actionUrl = `${this._configuration.ServerWithApiUrl}cambiarEstatusPorIDChofer`;
+        this.actionUrl = `${this.endPoint}cambiarEstatusPorIDChofer`;
         const credenciales = this.authLocalstorage.getCredentials();
         const toAdd = JSON.stringify({
             nicknameauth: credenciales.nicknameauth,
@@ -156,7 +160,7 @@ export class ChoferesService {
     }
 
     obtenerChoferesPorIdRazonSocialCliente = (idRazonSocialCliente: number): Observable<ChoferesInterface[]> => {
-        this.actionUrl = `${this._configuration.ServerWithApiUrl}obtenerChoferesPorIDRazonSocialCliente`;
+        this.actionUrl = `${this.endPoint}obtenerChoferesPorIDRazonSocialCliente`;
         const credenciales = this.authLocalstorage.getCredentials();
         const toAdd = JSON.stringify({
             nicknameauth: credenciales.nicknameauth,
@@ -170,7 +174,7 @@ export class ChoferesService {
     }
 
     obtenerChoferesPorIdRazonSocialContratista = (idRazonSocialContratista: number): Observable<ChoferesInterface[]> => {
-        this.actionUrl = `${this._configuration.ServerWithApiUrl}obtenerChoferesPorIDRazonSocialContratista`;
+        this.actionUrl = `${this.endPoint}obtenerChoferesPorIDRazonSocialContratista`;
         const credenciales = this.authLocalstorage.getCredentials();
         const toAdd = JSON.stringify({
             nicknameauth: credenciales.nicknameauth,
@@ -184,7 +188,7 @@ export class ChoferesService {
     }
 
     obtenerChoferesPorIdRazonSocialConstructor = (idRazonSocialConstructor: number): Observable<ChoferesInterface[]> => {
-        this.actionUrl = `${this._configuration.ServerWithApiUrl}obtenerChoferesPorIDRazonSocialConstructor`;
+        this.actionUrl = `${this.endPoint}obtenerChoferesPorIDRazonSocialConstructor`;
         const credenciales = this.authLocalstorage.getCredentials();
         const toAdd = JSON.stringify({
             nicknameauth: credenciales.nicknameauth,
@@ -198,7 +202,7 @@ export class ChoferesService {
     }
 
     obtenerChoferesPorIdRazonSocialAsociado = (idRazonSocialAsociado: number): Observable<ChoferesInterface[]> => {
-        this.actionUrl = `${this._configuration.ServerWithApiUrl}obtenerChoferesPorIDRazonSocialAsociado`;
+        this.actionUrl = `${this.endPoint}obtenerChoferesPorIDRazonSocialAsociado`;
         const credenciales = this.authLocalstorage.getCredentials();
         const toAdd = JSON.stringify({
             nicknameauth: credenciales.nicknameauth,
@@ -212,7 +216,7 @@ export class ChoferesService {
     }
 
     obtenerEstatusChoferes = (): Observable<any[]> => {
-        this.actionUrl = `${this._configuration.ServerWithApiUrl}obtenerEstatusChoferes`;
+        this.actionUrl = `${this.endPoint}obtenerEstatusChoferes`;
         const credenciales = this.authLocalstorage.getCredentials();
         return this._http.post(this.actionUrl, credenciales, { headers: this.headers })
             .map((response: Response) => <any[]>response.json())
@@ -220,7 +224,7 @@ export class ChoferesService {
     }
 
     obtenerRazonesSociales = (): Observable<any[]> => {
-        this.actionUrl = `${this._configuration.ServerWithApiUrl}obtenerRazonesSociales`;
+        this.actionUrl = `${this.endPoint}obtenerRazonesSociales`;
         const credenciales = this.authLocalstorage.getCredentials();
         return this._http.post(this.actionUrl, credenciales, { headers: this.headers })
             .map((response: Response) => <any[]>response.json())
@@ -228,7 +232,7 @@ export class ChoferesService {
     }
 
     obtenerTipoChoferes = (): Observable<any[]> => {
-        this.actionUrl = `${this._configuration.ServerWithApiUrl}obtenerTipoChoferes`;
+        this.actionUrl = `${this.endPoint}obtenerTipoChoferes`;
         const credenciales = this.authLocalstorage.getCredentials();
         return this._http.post(this.actionUrl, credenciales, { headers: this.headers })
             .map((response: Response) => <any[]>response.json())
@@ -236,7 +240,7 @@ export class ChoferesService {
     }
 
     setFile = (archivo: any): Observable<any> =>  {
-        this.actionUrl = `${this._configuration.ServerWithApiUrl}AgregarArchivo`;
+        this.actionUrl = `${this.endPoint}AgregarArchivo`;
         const toAdd = JSON.stringify(archivo);
 
         return this._http.post(this.actionUrl, toAdd, { headers: this.headers })
@@ -245,7 +249,7 @@ export class ChoferesService {
     }
 
     getFiles = (idreferencia: number, proceso: string): Observable<any> =>  {
-        this.actionUrl = `${this._configuration.ServerWithApiUrl}ObtenerArchivosPorProcesoPorIdReferencia`;
+        this.actionUrl = `${this.endPoint}ObtenerArchivosPorProcesoPorIdReferencia`;
         const credenciales = this.authLocalstorage.getCredentials();
         const toAdd = JSON.stringify({
             'nicknameauth': credenciales.nicknameauth,

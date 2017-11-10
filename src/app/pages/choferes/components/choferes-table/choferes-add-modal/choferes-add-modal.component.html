@@ -12,63 +12,81 @@
         <div class="modal-body" style="height: 65vh; overflow-y: auto;">
           <ba-card cardTitle="Información de la Chofer">
 
-            <div class="form-group row" [ngClass]="{'has-error': (!licenciaAC.valid && licenciaAC.touched), 'has-success': (licenciaAC.valid && licenciaAC.touched)}">
-              <label for="inputlicenciaAC" class="col-sm-2 form-control-label">Licencia</label>
+            <div class="form-group row" [ngClass]="{'has-error': (!licencia.valid && licencia.touched), 'has-success': (licencia.valid && licencia.touched)}">
+              <label for="inputlicencia" class="col-sm-2 form-control-label">Licencia</label>
               <div class="col-sm-10">
-                <input [(ngModel)]="licencia" [formControl]="licenciaAC" type="text" class="form-control" id="inputlicenciaAC" placeholder="Licencia" >
+                <input [formControl]="licencia" type="text" class="form-control" id="inputlicencia" placeholder="Licencia" >
               </div>
             </div>
 
-            <div class="form-group row" [ngClass]="{'has-error': (!statusAC.valid && statusAC.touched), 'has-success': (statusAC.valid && statusAC.touched)}">
-              <label for="inputstatusAC" class="col-sm-2 form-control-label">Status</label>
+            <div class="form-group row" [ngClass]="{'has-error': (!status.valid && status.touched), 'has-success': (status.valid && status.touched)}">
+              <label for="inputstatus" class="col-sm-2 form-control-label">Status</label>
               <div class="col-sm-10">
-                <input [(ngModel)]="status" [formControl]="statusAC" type="text" class="form-control" id="inputstatusAC" placeholder="Status" >
+                <input [formControl]="status" type="text" class="form-control" id="inputstatus" placeholder="Status" >
               </div>
             </div>
 
-            <div class="form-group row" [ngClass]="{'has-error': (!choferAC.valid && choferAC.touched), 'has-success': (choferAC.valid && choferAC.touched)}">
-              <label for="inputchoferAC" class="col-sm-2 form-control-label">Chofer</label>
+            <div class="form-group row" [ngClass]="{'has-error': (!chofer.valid && chofer.touched), 'has-success': (chofer.valid && chofer.touched)}">
+              <label for="inputchofer" class="col-sm-2 form-control-label">Chofer</label>
               <div class="col-sm-10">
-                <input [(ngModel)]="chofer" [formControl]="choferAC" type="text" class="form-control" id="inputchoferAC" placeholder="Chofer" >
+                <select [formControl]="chofer" name="chofer" class="form-control">
+                  <option *ngFor="let aval of avales" [value]="aval.idpersona">
+                    {{ aval.nombre }}
+                  </option>
+                </select>
               </div>
             </div>
 
-            <div class="form-group row" [ngClass]="{'has-error': (!fianzaAC.valid && fianzaAC.touched), 'has-success': (fianzaAC.valid && fianzaAC.touched)}">
-              <label for="inputfianzaAC" class="col-sm-2 form-control-label">Fianza</label>
+            <div class="form-group row" [ngClass]="{'has-error': (!fianza.valid && fianza.touched), 'has-success': (fianza.valid && fianza.touched)}">
+              <label for="inputfianza" class="col-sm-2 form-control-label">Fianza</label>
               <div class="col-sm-10">
-                <input [(ngModel)]="fianza" [formControl]="fianzaAC" type="text" class="form-control" id="inputfianzaAC" placeholder="Fianza" >
+                <input [formControl]="fianza" type="text" class="form-control" id="inputfianza" placeholder="Fianza" >
               </div>
             </div>
 
-            <div class="form-group row" [ngClass]="{'has-error': (!aval1AC.valid && aval1AC.touched), 'has-success': (aval1AC.valid && aval1AC.touched)}">
-              <label for="inputaval1AC" class="col-sm-2 form-control-label">Aval1</label>
+            <div class="form-group row" [ngClass]="{'has-error': (!aval1.valid && aval1.touched), 'has-success': (aval1.valid && aval1.touched)}">
+              <label for="inputaval1" class="col-sm-2 form-control-label">Aval1</label>
               <div class="col-sm-10">
-                <input [(ngModel)]="aval1" [formControl]="aval1AC" type="text" class="form-control" id="inputaval1AC" placeholder="Aval1" >
+                <select [formControl]="aval1" name="aval1" class="form-control">
+                  <option *ngFor="let aval of avales" [value]="aval.idpersona">
+                    {{ aval.nombre }}
+                  </option>
+                </select>
               </div>
             </div>
 
-            <div class="form-group row" [ngClass]="{'has-error': (!aval2AC.valid && aval2AC.touched), 'has-success': (aval2AC.valid && aval2AC.touched)}">
-              <label for="inputaval2AC" class="col-sm-2 form-control-label">Aval2</label>
+            <div class="form-group row" [ngClass]="{'has-error': (!aval2.valid && aval2.touched), 'has-success': (aval2.valid && aval2.touched)}">
+              <label for="inputaval2" class="col-sm-2 form-control-label">Aval2</label>
               <div class="col-sm-10">
-                <input [(ngModel)]="aval2" [formControl]="aval2AC" type="text" class="form-control" id="inputaval2AC" placeholder="Aval2" >
+                <select [formControl]="aval2" name="aval2" class="form-control">
+                  <option *ngFor="let aval of avales" [value]="aval.idpersona">
+                      {{ aval.nombre }}
+                  </option>
+                </select>
               </div>
             </div>
 
-            <div class="form-group row" [ngClass]="{'has-error': (!aval3AC.valid && aval3AC.touched), 'has-success': (aval3AC.valid && aval3AC.touched)}">
-              <label for="inputaval3AC" class="col-sm-2 form-control-label">Aval3</label>
+            <div class="form-group row" [ngClass]="{'has-error': (!aval3.valid && aval3.touched), 'has-success': (aval3.valid && aval3.touched)}">
+              <label for="inputaval3" class="col-sm-2 form-control-label">Aval3</label>
               <div class="col-sm-10">
-                <input [(ngModel)]="aval3" [formControl]="aval3AC" type="text" class="form-control" id="inputaval3AC" placeholder="Aval3" >
+                <select [formControl]="aval3" name="aval3" class="form-control">
+                  <option *ngFor="let aval of avales" [value]="aval.idpersona">
+                      {{ aval.nombre }}
+                  </option>
+                </select>
               </div>
             </div>
 
-            <div class="form-group row" [ngClass]="{'has-error': (!aval4AC.valid && aval4AC.touched), 'has-success': (aval4AC.valid && aval4AC.touched)}">
-              <label for="inputaval4AC" class="col-sm-2 form-control-label">Aval4</label>
+            <div class="form-group row" [ngClass]="{'has-error': (!aval4.valid && aval4.touched), 'has-success': (aval4.valid && aval4.touched)}">
+              <label for="inputaval4" class="col-sm-2 form-control-label">Aval4</label>
               <div class="col-sm-10">
-                <input [(ngModel)]="aval4" [formControl]="aval4AC" type="text" class="form-control" id="inputaval4AC" placeholder="Aval4" >
+                <select [formControl]="aval4" name="aval4" class="form-control">
+                  <option *ngFor="let aval of avales" [value]="aval.idpersona">
+                      {{ aval.nombre }}
+                  </option>
+                </select>
               </div>
             </div>
-
-
           </ba-card>
         </div>
         <div class="modal-footer">

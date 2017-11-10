@@ -29,9 +29,8 @@ export class AuthLocalstorage {
 
   getCredentials(): CredentialsInterface {
       const credentials: CredentialsInterface = {
-        'claveauth': this.localStorageService.get('claveauth').toString(),
-        'usuarioauth': this.localStorageService.get('usuarioauth').toString(),
-        'nicknameauth': this.localStorageService.get('nicknameauth').toString()
+        'email': this.localStorageService.get('email').toString(),
+        'token': this.localStorageService.get('token').toString()
       }
       return credentials;
   }

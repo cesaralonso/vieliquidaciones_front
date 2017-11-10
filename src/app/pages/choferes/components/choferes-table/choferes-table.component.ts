@@ -84,11 +84,11 @@ export class ChoferesTableComponent implements OnInit {
     }
 
     showToast(data) {
-      if (data.idRespuesta === 0) {
-        this.toastrService.success(data.mensajeRespuesta);
+      if ( data.success ) {
+        this.toastrService.success('Chofer registrado');
         this.getAllChoferes();
       } else {
-        this.toastrService.error(data.mensajeRespuesta);
+        this.toastrService.error('Hubo un problema. Por favor, vuelva a intentarlo');
       }
     }
 
@@ -97,13 +97,11 @@ export class ChoferesTableComponent implements OnInit {
     }
     
     private getAllChoferes(): void {
-      this.service
-          .getAllChoferes()
-          .subscribe(
-              (data: ChoferesInterface[]) =>  {
-                this.data = data;
-              },
-              error => console.log(error),
-              () => console.log('Get all Items complete'))
+      this.service.all() 
+        .subscribe( (data: ChoferesResponseInterface) => {
+          data.success ? this.data = data.result : null
+        },
+        error => console.log(error),
+        () => console.log('Get all Items complete'))
     } 
 }

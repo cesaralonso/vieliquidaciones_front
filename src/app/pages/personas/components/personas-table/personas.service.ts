@@ -16,7 +16,7 @@ export class PersonasService {
 
     private actionUrl: string;
     private headers: Headers;
-
+    private endPoint: string;
 
     constructor(
         private _http: Http, 
@@ -25,8 +25,27 @@ export class PersonasService {
         private authLocalstorage: AuthLocalstorage ) {
         this.headers = new Headers();
         this.headers.append('Content-Type', 'application/json; charset=UTF-8');
+        this.endPoint = `${this._configuration.ServerWithApiUrl}persona/`;
     }
 
+    all = (): Observable<PersonasResponseInterface> => {
+        return this._http.get(this.endPoint)
+            .map((response: Response) => response.json())
+            .catch(this.handleError);
+    }
+
+    findById = ( id ): Observable<PersonasResponseInterface> => {
+        return this._http.get(`${this.endPoint}/${id}`)
+            .map((response: Response) => response.json())
+            .catch(this.handleError);
+    }
+    
+    create = ( persona: PersonasInterface ): Observable<PersonasResponseInterface> => {
+        return this._http.post(this.endPoint, persona, { headers: this.headers })
+            .map((response: Response) => response.json())
+            .catch(this.handleError);
+    }
+    
     addPersonas = (personas: PersonasInterface): Observable<PersonasResponseInterface> =>  {
         this.actionUrl = `${this._configuration.ServerWithApiUrl}agregarPersona`;
         const toAdd = JSON.stringify(personas);
