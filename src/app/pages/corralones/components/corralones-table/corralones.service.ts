@@ -19,13 +19,33 @@ export class CorralonesService {
 
 
     constructor(
-        private _http: Http, 
-        private _configuration: Configuration, 
+        private _http: Http,
+        private _configuration: Configuration,
         private localStorageService: LocalStorageService,
         private authLocalstorage: AuthLocalstorage ) {
         this.headers = new Headers();
         this.headers.append('Content-Type', 'application/json; charset=UTF-8');
     }
+
+
+    all = () : Observable<CorralonesResponseInterface> => {
+           return this._http.get(this.endPoint)
+               .map((response: Response) => response.json())
+               .catch(this.handleError);
+       }
+
+     findById = ( id ) : Observable<CorralonesResponseInterface> => {
+           return this._http.get(`${this.endPoint}/${id}`)
+               .map((response: Response) => response.json())
+               .catch(this.handleError);
+       }
+
+      create = ( corralon: CorralonesInterface ) : Observable<CorralonesResponseInterface> => {
+           return this._http.post(this.endPoint, corralon, { headers: this.headers })
+               .map((response: Response) => response.json())
+               .catch(this.handleError);
+       }
+
 
     addCorralones = (corralones: CorralonesInterface): Observable<CorralonesResponseInterface> =>  {
         this.actionUrl = `${this._configuration.ServerWithApiUrl}agregarCorralon`;
@@ -60,7 +80,7 @@ export class CorralonesService {
 
     getAllCorralones = (): Observable<CorralonesInterface[]> => {
         this.actionUrl = `${this._configuration.ServerWithApiUrl}obtenerCorralones`;
-       
+
         const credenciales = JSON.stringify(this.authLocalstorage.getCredentials());
 
         return this._http.post(this.actionUrl, credenciales, { headers: this.headers })
@@ -70,7 +90,7 @@ export class CorralonesService {
 
     deleteCorralones = (id: string): Observable<CorralonesResponseInterface[]> => {
         this.actionUrl = `${this._configuration.ServerWithApiUrl}bajaCorralones`;
-       
+
         const credenciales = this.authLocalstorage.getCredentials();
         const toSend = JSON.stringify({
             'nicknameauth': credenciales.nicknameauth,

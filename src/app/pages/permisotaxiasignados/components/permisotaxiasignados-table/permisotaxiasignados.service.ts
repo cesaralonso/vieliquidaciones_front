@@ -19,13 +19,31 @@ export class PermisotaxiasignadosService {
 
 
     constructor(
-        private _http: Http, 
-        private _configuration: Configuration, 
+        private _http: Http,
+        private _configuration: Configuration,
         private localStorageService: LocalStorageService,
         private authLocalstorage: AuthLocalstorage ) {
         this.headers = new Headers();
         this.headers.append('Content-Type', 'application/json; charset=UTF-8');
     }
+
+    all = () : Observable<PermisotaxiasignadosResponseInterface> => {
+       return this._http.get(this.endPoint)
+           .map((response: Response) => response.json())
+           .catch(this.handleError);
+   }
+
+ findById = ( id ) : Observable<PermisotaxiasignadosResponseInterface> => {
+       return this._http.get(`${this.endPoint}/${id}`)
+           .map((response: Response) => response.json())
+           .catch(this.handleError);
+   }
+
+  create = ( permisotaxiasignado: PermisotaxiasignadosInterface ) : Observable<PermisotaxiasignadosResponseInterface> => {
+       return this._http.post(this.endPoint, permisotaxiasignado, { headers: this.headers })
+           .map((response: Response) => response.json())
+           .catch(this.handleError);
+   }
 
     addPermisotaxiasignados = (permisotaxiasignados: PermisotaxiasignadosInterface): Observable<PermisotaxiasignadosResponseInterface> =>  {
         this.actionUrl = `${this._configuration.ServerWithApiUrl}agregarPermisotaxiasignado`;
@@ -60,7 +78,7 @@ export class PermisotaxiasignadosService {
 
     getAllPermisotaxiasignados = (): Observable<PermisotaxiasignadosInterface[]> => {
         this.actionUrl = `${this._configuration.ServerWithApiUrl}obtenerPermisotaxiasignados`;
-       
+
         const credenciales = JSON.stringify(this.authLocalstorage.getCredentials());
 
         return this._http.post(this.actionUrl, credenciales, { headers: this.headers })
@@ -70,7 +88,7 @@ export class PermisotaxiasignadosService {
 
     deletePermisotaxiasignados = (id: string): Observable<PermisotaxiasignadosResponseInterface[]> => {
         this.actionUrl = `${this._configuration.ServerWithApiUrl}bajaPermisotaxiasignados`;
-       
+
         const credenciales = this.authLocalstorage.getCredentials();
         const toSend = JSON.stringify({
             'nicknameauth': credenciales.nicknameauth,

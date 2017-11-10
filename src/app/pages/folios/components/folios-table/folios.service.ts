@@ -19,13 +19,31 @@ export class FoliosService {
 
 
     constructor(
-        private _http: Http, 
-        private _configuration: Configuration, 
+        private _http: Http,
+        private _configuration: Configuration,
         private localStorageService: LocalStorageService,
         private authLocalstorage: AuthLocalstorage ) {
         this.headers = new Headers();
         this.headers.append('Content-Type', 'application/json; charset=UTF-8');
     }
+
+    all = () : Observable<FoliosResponseInterface> => {
+           return this._http.get(this.endPoint)
+               .map((response: Response) => response.json())
+               .catch(this.handleError);
+       }
+
+     findById = ( id ) : Observable<FoliosResponseInterface> => {
+           return this._http.get(`${this.endPoint}/${id}`)
+               .map((response: Response) => response.json())
+               .catch(this.handleError);
+       }
+
+      create = ( folio: FoliosInterface ) : Observable<FoliosResponseInterface> => {
+           return this._http.post(this.endPoint, folio, { headers: this.headers })
+               .map((response: Response) => response.json())
+               .catch(this.handleError);
+       }
 
     addFolios = (folios: FoliosInterface): Observable<FoliosResponseInterface> =>  {
         this.actionUrl = `${this._configuration.ServerWithApiUrl}agregarFolio`;
@@ -60,7 +78,7 @@ export class FoliosService {
 
     getAllFolios = (): Observable<FoliosInterface[]> => {
         this.actionUrl = `${this._configuration.ServerWithApiUrl}obtenerFolios`;
-       
+
         const credenciales = JSON.stringify(this.authLocalstorage.getCredentials());
 
         return this._http.post(this.actionUrl, credenciales, { headers: this.headers })
@@ -70,7 +88,7 @@ export class FoliosService {
 
     deleteFolios = (id: string): Observable<FoliosResponseInterface[]> => {
         this.actionUrl = `${this._configuration.ServerWithApiUrl}bajaFolios`;
-       
+
         const credenciales = this.authLocalstorage.getCredentials();
         const toSend = JSON.stringify({
             'nicknameauth': credenciales.nicknameauth,
