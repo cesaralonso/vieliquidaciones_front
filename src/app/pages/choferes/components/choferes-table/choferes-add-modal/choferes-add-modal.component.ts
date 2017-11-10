@@ -1,3 +1,4 @@
+import { PersonasService } from './../../../../personas/components/personas-table/personas.service';
 import { ChoferesInterface } from './../../../../choferes/components/choferes-table/choferes.interface';
 import { ChoferesService } from './../../../../choferes/components/choferes-table/choferes.service';
 import { DialogComponent, DialogService } from 'ng2-bootstrap-modal';
@@ -14,7 +15,8 @@ import { ChoferesResponseInterface } from 'app/pages/choferes/components/chofere
   styleUrls: [('./choferes-add-modal.component.scss')],
   templateUrl: './choferes-add-modal.component.html',
   providers: [
-    ChoferesService
+    ChoferesService,
+    PersonasService
   ]
 })
 
@@ -36,11 +38,11 @@ export class ChoferesAddModalComponent extends DialogComponent<ChoferesInterface
   public avales: ChoferesInterface[];
 
   constructor(
-    private service: ChoferesService,
     fb: FormBuilder,
     private toastrService: ToastrService,
     private authLocalstorage: AuthLocalstorage,
     private choferesService: ChoferesService,
+    private personasService: PersonasService,
     dialogService: DialogService
   ) {
     super(dialogService);
@@ -80,7 +82,7 @@ export class ChoferesAddModalComponent extends DialogComponent<ChoferesInterface
   }
   onSubmit(values: ChoferesInterface): void {
     console.log(values);
-      this.service.add(values)
+      this.choferesService.create(values)
         .subscribe((data: ChoferesResponseInterface) => {
             this.data = data;
             this.confirm();
@@ -88,7 +90,7 @@ export class ChoferesAddModalComponent extends DialogComponent<ChoferesInterface
   }
 
   getChoferes() {
-    this.choferesService.all()
+    this.personasService.all()
       .subscribe( (res: ChoferesResponseInterface) =>
         res.success ? this.avales = res.result : null)
   }

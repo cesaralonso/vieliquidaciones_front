@@ -32,24 +32,23 @@ export class ChoferesService {
            .catch(this.handleError);
    }
 
- findById = ( id ) : Observable<ChoferesResponseInterface> => {
+    findById = ( id ) : Observable<ChoferesResponseInterface> => {
        return this._http.get(`${this.endPoint}/${id}`)
            .map((response: Response) => response.json())
            .catch(this.handleError);
-   }
+    }
 
-  create = ( chofer: ChoferesInterface ) : Observable<ChoferesResponseInterface> => {
+    create = ( chofer: ChoferesInterface ) : Observable<ChoferesResponseInterface> => {
        return this._http.post(this.endPoint, chofer, { headers: this.headers })
            .map((response: Response) => response.json())
            .catch(this.handleError);
    }
 
-   add = ( choferes: ChoferesInterface ): Observable<ChoferesResponseInterface> =>  {
-       return this._http.post(this.endPoint, choferes, { headers: this.headers })
-           .map((response: Response) => response.json())
-           .catch(this.handleError);
-   }
-
+    add = ( choferes: ChoferesInterface ): Observable<ChoferesResponseInterface> =>  {
+        return this._http.post(this.endPoint, choferes, { headers: this.headers })
+            .map((response: Response) => response.json())
+            .catch(this.handleError);
+    }
 
     remove = ( choferId ): Observable<ChoferesResponseInterface> => {
         return this._http.delete(`${this.endPoint}/${choferId}`, { headers: this.headers })
