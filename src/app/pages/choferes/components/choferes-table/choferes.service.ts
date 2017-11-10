@@ -56,17 +56,17 @@ export class ChoferesService {
             .catch(this.handleError);
     }
 
+    edit = (choferes: ChoferesInterface): Observable<ChoferesResponseInterface> =>  {
+        return this._http.patch(this.endPoint, choferes, { headers: this.headers })
+            .map((response: Response) => response.json())
+            .catch(this.handleError);
+    }
+
     addChoferes = (choferes: ChoferesInterface): Observable<ChoferesResponseInterface> =>  {
         this.actionUrl = `${this.endPoint}agregarChofer`;
         const toAdd = JSON.stringify(choferes);
         return this._http.post(this.actionUrl, toAdd, { headers: this.headers })
             .map((response: Response) => <ChoferesResponseInterface>response.json())
-            .catch(this.handleError);
-    }
-
-    edit = (choferes: ChoferesInterface): Observable<ChoferesResponseInterface> =>  {
-        return this._http.patch(this.endPoint, choferes, { headers: this.headers })
-            .map((response: Response) => response.json())
             .catch(this.handleError);
     }
 

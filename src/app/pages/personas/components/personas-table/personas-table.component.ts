@@ -25,34 +25,23 @@ export class PersonasTableComponent implements OnInit {
     sortOrder = 'asc';
 
     constructor(
-      private service: PersonasService, 
+      private personasService: PersonasService, 
       private modalService: NgbModal, 
       private toastrService: ToastrService, 
       private dialogService: DialogService) {
     }
 
-    toInt(num: string) {
-        return +num;
-    }
-
     addPersonasModalShow() {
-      const disposable = this.dialogService.addDialog(PersonasAddModalComponent)
-      .subscribe( data => {
-        if (data) {
-          this.showToast(data);
-        }
-      })
+      this.dialogService.addDialog(PersonasAddModalComponent)
+        .subscribe( data =>  data ? this.showToast(data) : null )
     }
 
     editPersonasModalShow(personas: PersonasInterface) {
-      const disposable = this.dialogService.addDialog(PersonasEditModalComponent, personas)
-      .subscribe( data => {
-        if (data) {
-          this.showToast(data);
-        }
-      },
-      error => console.log(error),
-      () => console.log('Modified complete'));
+      this.dialogService.addDialog(PersonasEditModalComponent, personas)
+      .subscribe( data =>
+        data ? this.showToast(data) : null,
+        error => console.log(error),
+        () => console.log('Modified complete'));
   }
 
     uploadModalShow(id: number, descripcion: string) {
@@ -72,23 +61,23 @@ export class PersonasTableComponent implements OnInit {
 
     onDeleteConfirm(event, id): void {
       if (window.confirm('¿Estas seguro de querer eliminar este registro?')) {
-        this.service.cancelarPersona(id)
-          .subscribe(
-            (data) => this.showToast(data),
+        this.personasService.remove(id)
+          .subscribe( data =>
+            this.showToast(data),
             error => console.log(error),
-            () => console.log('Delete completed')
-          );
+            () => console.log('Delete completed'))
+          ;
       } else {
         console.log('item.id cancelando', id);
       }
     }
 
     showToast(data) {
-      if (data.idRespuesta === 0) {
-        this.toastrService.success(data.mensajeRespuesta);
+      if ( data.success ) {
+        this.toastrService.success(data.message);
         this.getAllPersonas();
       } else {
-        this.toastrService.error(data.mensajeRespuesta);
+        this.toastrService.error(data.message);
       }
     }
 
@@ -97,13 +86,10 @@ export class PersonasTableComponent implements OnInit {
     }
     
     private getAllPersonas(): void {
-      this.service
-          .getAllPersonas()
-          .subscribe(
-              (data: PersonasInterface[]) =>  {
-                this.data = data;
-              },
-              error => console.log(error),
-              () => console.log('Get all Items complete'))
+      this.personasService.all()
+        .subscribe(( data: PersonasResponseInterface) =>
+          this.data = data.result,
+          error => console.log(error),
+          () => console.log('Get all Items complete'))
     } 
 }

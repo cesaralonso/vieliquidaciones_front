@@ -30,18 +30,6 @@ export class PersonasEditModalComponent extends DialogComponent<PersonasInterfac
   id: number;
   data: any;
   form: FormGroup;
-  submitted: boolean = false;
-
-  persona: PersonasInterface = {
-    idpersona: 0,
-    nombre: '',
-    sexo: '',
-    RFC: '',
-    domicilio: '',
-    telefono: 0,
-    edad: 0,
-    coordenada_idcoordenada: 0,
-  };
 
   idpersonaAC: AbstractControl;
   nombreAC: AbstractControl;
@@ -52,9 +40,8 @@ export class PersonasEditModalComponent extends DialogComponent<PersonasInterfac
   edadAC: AbstractControl;
   coordenada_idcoordenadaAC: AbstractControl;
 
-
   constructor(
-    private service: PersonasService,
+    private personasService: PersonasService,
     fb: FormBuilder,
     private toastrService: ToastrService,
     private authLocalstorage: AuthLocalstorage,
@@ -64,20 +51,16 @@ export class PersonasEditModalComponent extends DialogComponent<PersonasInterfac
 
     this.form = fb.group({
 
-      'idpersonaAC' : this.id,
       'nombreAC' : ['', Validators.compose([Validators.required, Validators.minLength(1)])],
       'sexoAC' : ['', Validators.compose([Validators.required, Validators.minLength(1)])],
       'RFCAC' : ['', Validators.compose([Validators.required, Validators.minLength(1)])],
       'domicilioAC' : ['', Validators.compose([Validators.required, Validators.minLength(1)])],
-      'fechainicioAC' : ['', Validators.compose([Validators.required, Validators.minLength(1)])],
-      'fechafinAC' : ['', Validators.compose([Validators.required, Validators.minLength(1)])],
       'telefonoAC' : ['', Validators.compose([Validators.required, Validators.minLength(1)])],
       'edadAC' : ['', Validators.compose([Validators.required, Validators.minLength(1)])],
       'coordenada_idcoordenadaAC' : ['', Validators.compose([Validators.required, Validators.minLength(1)])],
 
     });
 
-    this.idpersonaAC = this.form.controls['idpersonaAC'];
     this.nombreAC = this.form.controls['nombreAC'];
     this.sexoAC = this.form.controls['sexoAC'];
     this.RFCAC = this.form.controls['RFCAC'];
@@ -89,10 +72,7 @@ export class PersonasEditModalComponent extends DialogComponent<PersonasInterfac
   }
 
   ngOnInit() {
-
-
   }
-
 
   confirm() {
     this.result = this.data;
@@ -100,37 +80,19 @@ export class PersonasEditModalComponent extends DialogComponent<PersonasInterfac
   }
 
   onSubmit(values: PersonasInterface): void {
-    this.submitted = true;
-    if (this.form.valid) {
-      this.service
-        .editPersonas({
-
-          idpersona: this.idpersona,
-          nombre: this.nombre,
-          sexo: this.sexo,
-          RFC: this.RFC,
-          domicilio: this.domicilio,
-          telefono: this.telefono,
-          edad: this.edad,
-          coordenada_idcoordenada: this.coordenada_idcoordenada,
-
-
-        })
-        .subscribe(
-            (data: any) => {
-              this.data = data;
-              this.confirm();
-            });
-    }
+    this.personasService.edit({
+        idpersona: this.idpersona,
+        nombre: this.nombre,
+        sexo: this.sexo,
+        RFC: this.RFC,
+        domicilio: this.domicilio,
+        telefono: this.telefono,
+        edad: this.edad,
+        coordenada_idcoordenada: this.coordenada_idcoordenada,
+      })
+      .subscribe( data => {
+          this.data = data;
+          this.confirm();
+      });
   }
-
-  private getPersonas(): void {
-    this.service.getPersonas(this.id)
-        .subscribe( data => {
-          this.persona = data[1];
-        },
-        error => console.log(error),
-        () => console.log('Get persona complete'));
-  }
-
 }

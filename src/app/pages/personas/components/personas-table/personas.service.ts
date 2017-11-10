@@ -46,6 +46,19 @@ export class PersonasService {
             .catch(this.handleError);
     }
     
+    remove = ( personaId ): Observable<PersonasResponseInterface> => {
+        return this._http.delete(`${this.endPoint}/${personaId}`, { headers: this.headers })
+            .map((response: Response) => response.json())
+            .catch(this.handleError);
+    }
+
+    edit = (choferes: PersonasInterface): Observable<PersonasResponseInterface> =>  {
+        return this._http.patch(this.endPoint, choferes, { headers: this.headers })
+            .map((response: Response) => response.json())
+            .catch(this.handleError);
+    }
+
+
     addPersonas = (personas: PersonasInterface): Observable<PersonasResponseInterface> =>  {
         this.actionUrl = `${this._configuration.ServerWithApiUrl}agregarPersona`;
         const toAdd = JSON.stringify(personas);
