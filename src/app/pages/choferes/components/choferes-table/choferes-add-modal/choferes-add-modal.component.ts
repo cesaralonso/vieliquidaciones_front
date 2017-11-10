@@ -1,6 +1,6 @@
-import { PersonasInterface } from './../../../../personas/components/personas-table/personas.interface';
-import { PersonasResponseInterface } from './../../../../personas/components/personas-table/personas-response.interface';
-import { PersonasService } from './../../../../personas/components/personas-table/personas.service';
+import { ChoferesInterface } from './../../../../choferes/components/choferes-table/choferes.interface';
+import { ChoferesResponseInterface } from './../../../../choferes/components/choferes-table/choferes-response.interface';
+import { ChoferesService } from './../../../../choferes/components/choferes-table/choferes.service';
 import { DialogComponent, DialogService } from 'ng2-bootstrap-modal';
 import { AuthLocalstorage } from './../../../../../shared/auth-localstorage.service';
 import { ChoferesService } from './../choferes.service';
@@ -17,7 +17,7 @@ import { ChoferesResponseInterface } from 'app/pages/choferes/components/chofere
   styleUrls: [('./choferes-add-modal.component.scss')],
   templateUrl: './choferes-add-modal.component.html',
   providers: [
-    PersonasService
+    ChoferesService
   ]
 })
 
@@ -35,15 +35,15 @@ export class ChoferesAddModalComponent extends DialogComponent<ChoferesInterface
   public aval2: AbstractControl;
   public aval3: AbstractControl;
   public aval4: AbstractControl;
-  
-  public avales: PersonasInterface[];
+
+  public avales: ChoferesInterface[];
 
   constructor(
     private service: ChoferesService,
     fb: FormBuilder,
     private toastrService: ToastrService,
     private authLocalstorage: AuthLocalstorage,
-    private personasService: PersonasService,
+    private choferesService: ChoferesService,
     dialogService: DialogService
   ) {
     super(dialogService);
@@ -70,12 +70,12 @@ export class ChoferesAddModalComponent extends DialogComponent<ChoferesInterface
     this.aval1 = this.form.controls['aval1'];
     this.aval2 = this.form.controls['aval2'];
     this.aval3 = this.form.controls['aval3'];
-    this.aval4 = this.form.controls['aval4']
+    this.aval4 = this.form.controls['aval4'];
   }
 
 
   ngOnInit() {
-    this.getPersonas()
+    this.getChoferes()
   }
   confirm() {
     this.result = this.data;
@@ -90,9 +90,9 @@ export class ChoferesAddModalComponent extends DialogComponent<ChoferesInterface
         });
   }
 
-  getPersonas() {
-    this.personasService.all()
-      .subscribe( (res: PersonasResponseInterface) => 
+  getChoferes() {
+    this.choferesService.all()
+      .subscribe( (res: ChoferesResponseInterface) =>
         res.success ? this.avales = res.result : null)
   }
 }

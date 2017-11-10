@@ -19,13 +19,32 @@ export class MecanicosService {
 
 
     constructor(
-        private _http: Http, 
-        private _configuration: Configuration, 
+        private _http: Http,
+        private _configuration: Configuration,
         private localStorageService: LocalStorageService,
         private authLocalstorage: AuthLocalstorage ) {
         this.headers = new Headers();
         this.headers.append('Content-Type', 'application/json; charset=UTF-8');
     }
+
+    all = () : Observable<MecanicosResponseInterface> => {
+       return this._http.get(this.endPoint)
+           .map((response: Response) => response.json())
+           .catch(this.handleError);
+   }
+
+ findById = ( id ) : Observable<MecanicosResponseInterface> => {
+       return this._http.get(`${this.endPoint}/${id}`)
+           .map((response: Response) => response.json())
+           .catch(this.handleError);
+   }
+
+  create = ( mecanico: MecanicosInterface ) : Observable<MecanicosResponseInterface> => {
+       return this._http.post(this.endPoint, mecanico, { headers: this.headers })
+           .map((response: Response) => response.json())
+           .catch(this.handleError);
+   }
+
 
     addMecanicos = (mecanicos: MecanicosInterface): Observable<MecanicosResponseInterface> =>  {
         this.actionUrl = `${this._configuration.ServerWithApiUrl}agregarMecanico`;
@@ -60,7 +79,7 @@ export class MecanicosService {
 
     getAllMecanicos = (): Observable<MecanicosInterface[]> => {
         this.actionUrl = `${this._configuration.ServerWithApiUrl}obtenerMecanicos`;
-       
+
         const credenciales = JSON.stringify(this.authLocalstorage.getCredentials());
 
         return this._http.post(this.actionUrl, credenciales, { headers: this.headers })
@@ -70,7 +89,7 @@ export class MecanicosService {
 
     deleteMecanicos = (id: string): Observable<MecanicosResponseInterface[]> => {
         this.actionUrl = `${this._configuration.ServerWithApiUrl}bajaMecanicos`;
-       
+
         const credenciales = this.authLocalstorage.getCredentials();
         const toSend = JSON.stringify({
             'nicknameauth': credenciales.nicknameauth,

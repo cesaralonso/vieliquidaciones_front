@@ -19,13 +19,32 @@ export class EgresoconceptosService {
 
 
     constructor(
-        private _http: Http, 
-        private _configuration: Configuration, 
+        private _http: Http,
+        private _configuration: Configuration,
         private localStorageService: LocalStorageService,
         private authLocalstorage: AuthLocalstorage ) {
         this.headers = new Headers();
         this.headers.append('Content-Type', 'application/json; charset=UTF-8');
     }
+
+    all = () : Observable<EgresoconceptosResponseInterface> => {
+           return this._http.get(this.endPoint)
+               .map((response: Response) => response.json())
+               .catch(this.handleError);
+       }
+
+     findById = ( id ) : Observable<EgresoconceptosResponseInterface> => {
+           return this._http.get(`${this.endPoint}/${id}`)
+               .map((response: Response) => response.json())
+               .catch(this.handleError);
+       }
+
+      create = ( egresoconcepto: EgresoconceptosInterface ) : Observable<EgresoconceptosResponseInterface> => {
+           return this._http.post(this.endPoint, egresoconcepto, { headers: this.headers })
+               .map((response: Response) => response.json())
+               .catch(this.handleError);
+       }
+
 
     addEgresoconceptos = (egresoconceptos: EgresoconceptosInterface): Observable<EgresoconceptosResponseInterface> =>  {
         this.actionUrl = `${this._configuration.ServerWithApiUrl}agregarEgresoconcepto`;
@@ -60,7 +79,7 @@ export class EgresoconceptosService {
 
     getAllEgresoconceptos = (): Observable<EgresoconceptosInterface[]> => {
         this.actionUrl = `${this._configuration.ServerWithApiUrl}obtenerEgresoconceptos`;
-       
+
         const credenciales = JSON.stringify(this.authLocalstorage.getCredentials());
 
         return this._http.post(this.actionUrl, credenciales, { headers: this.headers })
@@ -70,7 +89,7 @@ export class EgresoconceptosService {
 
     deleteEgresoconceptos = (id: string): Observable<EgresoconceptosResponseInterface[]> => {
         this.actionUrl = `${this._configuration.ServerWithApiUrl}bajaEgresoconceptos`;
-       
+
         const credenciales = this.authLocalstorage.getCredentials();
         const toSend = JSON.stringify({
             'nicknameauth': credenciales.nicknameauth,

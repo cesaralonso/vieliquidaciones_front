@@ -19,13 +19,31 @@ export class LiquidacionesService {
 
 
     constructor(
-        private _http: Http, 
-        private _configuration: Configuration, 
+        private _http: Http,
+        private _configuration: Configuration,
         private localStorageService: LocalStorageService,
         private authLocalstorage: AuthLocalstorage ) {
         this.headers = new Headers();
         this.headers.append('Content-Type', 'application/json; charset=UTF-8');
     }
+
+    all = () : Observable<LiquidacionesResponseInterface> => {
+           return this._http.get(this.endPoint)
+               .map((response: Response) => response.json())
+               .catch(this.handleError);
+       }
+
+     findById = ( id ) : Observable<LiquidacionesResponseInterface> => {
+           return this._http.get(`${this.endPoint}/${id}`)
+               .map((response: Response) => response.json())
+               .catch(this.handleError);
+       }
+
+      create = ( liquidacion: LiquidacionesInterface ) : Observable<LiquidacionesResponseInterface> => {
+           return this._http.post(this.endPoint, liquidacion, { headers: this.headers })
+               .map((response: Response) => response.json())
+               .catch(this.handleError);
+       }
 
     addLiquidaciones = (liquidaciones: LiquidacionesInterface): Observable<LiquidacionesResponseInterface> =>  {
         this.actionUrl = `${this._configuration.ServerWithApiUrl}agregarLiquidacion`;
@@ -60,7 +78,7 @@ export class LiquidacionesService {
 
     getAllLiquidaciones = (): Observable<LiquidacionesInterface[]> => {
         this.actionUrl = `${this._configuration.ServerWithApiUrl}obtenerLiquidaciones`;
-       
+
         const credenciales = JSON.stringify(this.authLocalstorage.getCredentials());
 
         return this._http.post(this.actionUrl, credenciales, { headers: this.headers })
@@ -70,7 +88,7 @@ export class LiquidacionesService {
 
     deleteLiquidaciones = (id: string): Observable<LiquidacionesResponseInterface[]> => {
         this.actionUrl = `${this._configuration.ServerWithApiUrl}bajaLiquidaciones`;
-       
+
         const credenciales = this.authLocalstorage.getCredentials();
         const toSend = JSON.stringify({
             'nicknameauth': credenciales.nicknameauth,

@@ -1,5 +1,4 @@
 export interface EnviotalleresResponseInterface {
-    idRespuesta: number;
-    mensajeRespuesta: string;
-    valorRespuesta: string;
-} 
+  success: any;
+  result: any;
+}

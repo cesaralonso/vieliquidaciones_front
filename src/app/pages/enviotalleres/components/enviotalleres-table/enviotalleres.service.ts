@@ -19,13 +19,32 @@ export class EnviotalleresService {
 
 
     constructor(
-        private _http: Http, 
-        private _configuration: Configuration, 
+        private _http: Http,
+        private _configuration: Configuration,
         private localStorageService: LocalStorageService,
         private authLocalstorage: AuthLocalstorage ) {
         this.headers = new Headers();
         this.headers.append('Content-Type', 'application/json; charset=UTF-8');
     }
+
+    all = () : Observable<EnviotalleresResponseInterface> => {
+           return this._http.get(this.endPoint)
+               .map((response: Response) => response.json())
+               .catch(this.handleError);
+       }
+
+     findById = ( id ) : Observable<EnviotalleresResponseInterface> => {
+           return this._http.get(`${this.endPoint}/${id}`)
+               .map((response: Response) => response.json())
+               .catch(this.handleError);
+       }
+
+      create = ( enviotaller: EnviotalleresInterface ) : Observable<EnviotalleresResponseInterface> => {
+           return this._http.post(this.endPoint, enviotaller, { headers: this.headers })
+               .map((response: Response) => response.json())
+               .catch(this.handleError);
+       }
+
 
     addEnviotalleres = (enviotalleres: EnviotalleresInterface): Observable<EnviotalleresResponseInterface> =>  {
         this.actionUrl = `${this._configuration.ServerWithApiUrl}agregarEnviotaller`;
@@ -60,7 +79,7 @@ export class EnviotalleresService {
 
     getAllEnviotalleres = (): Observable<EnviotalleresInterface[]> => {
         this.actionUrl = `${this._configuration.ServerWithApiUrl}obtenerEnviotalleres`;
-       
+
         const credenciales = JSON.stringify(this.authLocalstorage.getCredentials());
 
         return this._http.post(this.actionUrl, credenciales, { headers: this.headers })
@@ -70,7 +89,7 @@ export class EnviotalleresService {
 
     deleteEnviotalleres = (id: string): Observable<EnviotalleresResponseInterface[]> => {
         this.actionUrl = `${this._configuration.ServerWithApiUrl}bajaEnviotalleres`;
-       
+
         const credenciales = this.authLocalstorage.getCredentials();
         const toSend = JSON.stringify({
             'nicknameauth': credenciales.nicknameauth,

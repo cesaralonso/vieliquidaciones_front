@@ -19,8 +19,8 @@ export class ChoferesService {
 
     private endPoint: string;
     constructor(
-        private _http: Http, 
-        private _configuration: Configuration, 
+        private _http: Http,
+        private _configuration: Configuration,
         private localStorageService: LocalStorageService,
         private authLocalstorage: AuthLocalstorage ) {
         this.headers = new Headers();
@@ -29,16 +29,33 @@ export class ChoferesService {
     }
 
     all = (): Observable<ChoferesResponseInterface> => {
-        return this._http.get(this.endPoint)
-            .map((response: Response) => response.json())
-            .catch(this.handleError);
-    }
+       return this._http.get(this.endPoint)
+           .map((response: Response) => response.json())
+           .catch(this.handleError);
+   }
 
-    add = ( choferes: ChoferesInterface ): Observable<ChoferesResponseInterface> =>  {
-        return this._http.post(this.endPoint, choferes, { headers: this.headers })
-            .map((response: Response) => response.json())
-            .catch(this.handleError);
-    }
+
+
+
+
+ findById = ( id ) : Observable<ChoferesResponseInterface> => {
+       return this._http.get(`${this.endPoint}/${id}`)
+           .map((response: Response) => response.json())
+           .catch(this.handleError);
+   }
+
+  create = ( chofer: ChoferesInterface ) : Observable<ChoferesResponseInterface> => {
+       return this._http.post(this.endPoint, chofer, { headers: this.headers })
+           .map((response: Response) => response.json())
+           .catch(this.handleError);
+   }
+
+   add = ( choferes: ChoferesInterface ): Observable<ChoferesResponseInterface> =>  {
+       return this._http.post(this.endPoint, choferes, { headers: this.headers })
+           .map((response: Response) => response.json())
+           .catch(this.handleError);
+   }
+
 
     addChoferes = (choferes: ChoferesInterface): Observable<ChoferesResponseInterface> =>  {
         this.actionUrl = `${this.endPoint}agregarChofer`;
@@ -64,7 +81,7 @@ export class ChoferesService {
 
     getAllChoferes = (): Observable<ChoferesInterface[]> => {
         this.actionUrl = `${this.endPoint}obtenerChoferes`;
-       
+
         const credenciales = JSON.stringify(this.authLocalstorage.getCredentials());
 
         return this._http.post(this.actionUrl, credenciales, { headers: this.headers })
@@ -74,7 +91,7 @@ export class ChoferesService {
 
     deleteChoferes = (id: string): Observable<ChoferesResponseInterface[]> => {
         this.actionUrl = `${this.endPoint}bajaChoferes`;
-       
+
         const credenciales = this.authLocalstorage.getCredentials();
         const toSend = JSON.stringify({
             'nicknameauth': credenciales.nicknameauth,
