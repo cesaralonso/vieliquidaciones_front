@@ -13,11 +13,9 @@ import 'rxjs/add/operator/catch';
 
 @Injectable()
 export class CoordenadasService {
-
     private actionUrl: string;
     private headers: Headers;
-
-
+    private endPoint: string;
     constructor(
         private _http: Http,
         private _configuration: Configuration,
@@ -25,27 +23,26 @@ export class CoordenadasService {
         private authLocalstorage: AuthLocalstorage ) {
         this.headers = new Headers();
         this.headers.append('Content-Type', 'application/json; charset=UTF-8');
+        this.endPoint = `${this._configuration.ServerWithApiUrl}chofer`;
     }
 
     all = () : Observable<CoordenadasResponseInterface> => {
        return this._http.get(this.endPoint)
            .map((response: Response) => response.json())
            .catch(this.handleError);
-   }
+    }
 
- findById = ( id ) : Observable<CoordenadasResponseInterface> => {
-       return this._http.get(`${this.endPoint}/${id}`)
-           .map((response: Response) => response.json())
-           .catch(this.handleError);
-   }
+    findById = ( id ) : Observable<CoordenadasResponseInterface> => {
+        return this._http.get(`${this.endPoint}/${id}`)
+            .map((response: Response) => response.json())
+            .catch(this.handleError);
+    }
 
-  create = ( coordenada: CoordenadasInterface ) : Observable<CoordenadasResponseInterface> => {
-       return this._http.post(this.endPoint, coordenada, { headers: this.headers })
-           .map((response: Response) => response.json())
-           .catch(this.handleError);
-   }
-
-
+    create = ( coordenada: CoordenadasInterface ) : Observable<CoordenadasResponseInterface> => {
+        return this._http.post(this.endPoint, coordenada, { headers: this.headers })
+            .map((response: Response) => response.json())
+            .catch(this.handleError);
+    }
 
     addCoordenadas = (coordenadas: CoordenadasInterface): Observable<CoordenadasResponseInterface> =>  {
         this.actionUrl = `${this._configuration.ServerWithApiUrl}agregarCoordenada`;

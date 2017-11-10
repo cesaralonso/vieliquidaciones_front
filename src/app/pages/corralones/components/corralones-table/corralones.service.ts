@@ -13,11 +13,9 @@ import 'rxjs/add/operator/catch';
 
 @Injectable()
 export class CorralonesService {
-
     private actionUrl: string;
     private headers: Headers;
-
-
+    private endPoint: string;
     constructor(
         private _http: Http,
         private _configuration: Configuration,
@@ -25,8 +23,8 @@ export class CorralonesService {
         private authLocalstorage: AuthLocalstorage ) {
         this.headers = new Headers();
         this.headers.append('Content-Type', 'application/json; charset=UTF-8');
+        this.endPoint = `${this._configuration.ServerWithApiUrl}chofer`;
     }
-
 
     all = () : Observable<CorralonesResponseInterface> => {
            return this._http.get(this.endPoint)
@@ -34,18 +32,17 @@ export class CorralonesService {
                .catch(this.handleError);
        }
 
-     findById = ( id ) : Observable<CorralonesResponseInterface> => {
-           return this._http.get(`${this.endPoint}/${id}`)
-               .map((response: Response) => response.json())
-               .catch(this.handleError);
-       }
+    findById = ( id ) : Observable<CorralonesResponseInterface> => {
+        return this._http.get(`${this.endPoint}/${id}`)
+            .map((response: Response) => response.json())
+            .catch(this.handleError);
+    }
 
-      create = ( corralon: CorralonesInterface ) : Observable<CorralonesResponseInterface> => {
-           return this._http.post(this.endPoint, corralon, { headers: this.headers })
-               .map((response: Response) => response.json())
-               .catch(this.handleError);
-       }
-
+    create = ( corralon: CorralonesInterface ) : Observable<CorralonesResponseInterface> => {
+        return this._http.post(this.endPoint, corralon, { headers: this.headers })
+            .map((response: Response) => response.json())
+            .catch(this.handleError);
+    }
 
     addCorralones = (corralones: CorralonesInterface): Observable<CorralonesResponseInterface> =>  {
         this.actionUrl = `${this._configuration.ServerWithApiUrl}agregarCorralon`;

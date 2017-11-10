@@ -16,7 +16,6 @@ export class ServiciosService {
 
     private actionUrl: string;
     private headers: Headers;
-
     private endPoint: string;
     constructor(
         private _http: Http,

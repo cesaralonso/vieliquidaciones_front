@@ -1,6 +1,3 @@
-import { ServiciosInterface } from './../../../../servicios/components/servicios-table/servicios.interface';
-import { ServiciosResponseInterface } from './../../../../servicios/components/servicios-table/servicios-response.interface';
-import { ServiciosService } from './../../../../servicios/components/servicios-table/servicios.service';
 import { DialogComponent, DialogService } from 'ng2-bootstrap-modal';
 import { AuthLocalstorage } from './../../../../../shared/auth-localstorage.service';
 import { ServiciosService } from './../servicios.service';

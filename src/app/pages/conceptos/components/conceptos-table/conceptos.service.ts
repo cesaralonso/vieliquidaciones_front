@@ -13,11 +13,9 @@ import 'rxjs/add/operator/catch';
 
 @Injectable()
 export class ConceptosService {
-
     private actionUrl: string;
     private headers: Headers;
-
-
+    private endPoint: string;
     constructor(
         private _http: Http,
         private _configuration: Configuration,
@@ -25,25 +23,26 @@ export class ConceptosService {
         private authLocalstorage: AuthLocalstorage ) {
         this.headers = new Headers();
         this.headers.append('Content-Type', 'application/json; charset=UTF-8');
+        this.endPoint = `${this._configuration.ServerWithApiUrl}chofer`;
     }
 
     all = () : Observable<ConceptosResponseInterface> => {
-           return this._http.get(this.endPoint)
-               .map((response: Response) => response.json())
-               .catch(this.handleError);
-       }
+        return this._http.get(this.endPoint)
+            .map((response: Response) => response.json())
+            .catch(this.handleError);
+    }
 
-     findById = ( id ) : Observable<ConceptosResponseInterface> => {
-           return this._http.get(`${this.endPoint}/${id}`)
-               .map((response: Response) => response.json())
-               .catch(this.handleError);
-       }
+    findById = ( id ) : Observable<ConceptosResponseInterface> => {
+        return this._http.get(`${this.endPoint}/${id}`)
+            .map((response: Response) => response.json())
+            .catch(this.handleError);
+    }
 
-      create = ( concepto: ConceptosInterface ) : Observable<ConceptosResponseInterface> => {
-           return this._http.post(this.endPoint, concepto, { headers: this.headers })
-               .map((response: Response) => response.json())
-               .catch(this.handleError);
-       }
+    create = ( concepto: ConceptosInterface ) : Observable<ConceptosResponseInterface> => {
+        return this._http.post(this.endPoint, concepto, { headers: this.headers })
+            .map((response: Response) => response.json())
+            .catch(this.handleError);
+    }
 
     addConceptos = (conceptos: ConceptosInterface): Observable<ConceptosResponseInterface> =>  {
         this.actionUrl = `${this._configuration.ServerWithApiUrl}agregarConcepto`;

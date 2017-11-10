@@ -1,11 +1,8 @@
 import { ChoferesInterface } from './../../../../choferes/components/choferes-table/choferes.interface';
-import { ChoferesResponseInterface } from './../../../../choferes/components/choferes-table/choferes-response.interface';
 import { ChoferesService } from './../../../../choferes/components/choferes-table/choferes.service';
 import { DialogComponent, DialogService } from 'ng2-bootstrap-modal';
 import { AuthLocalstorage } from './../../../../../shared/auth-localstorage.service';
-import { ChoferesService } from './../choferes.service';
 import { Modals } from './../../../../ui/components/modals/modals.component';
-import { ChoferesInterface } from './../choferes.interface';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, AbstractControl, FormBuilder, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';

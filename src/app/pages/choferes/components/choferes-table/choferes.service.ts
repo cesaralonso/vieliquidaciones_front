@@ -13,10 +13,8 @@ import 'rxjs/add/operator/catch';
 
 @Injectable()
 export class ChoferesService {
-
     private actionUrl: string;
     private headers: Headers;
-
     private endPoint: string;
     constructor(
         private _http: Http,
@@ -33,10 +31,6 @@ export class ChoferesService {
            .map((response: Response) => response.json())
            .catch(this.handleError);
    }
-
-
-
-
 
  findById = ( id ) : Observable<ChoferesResponseInterface> => {
        return this._http.get(`${this.endPoint}/${id}`)

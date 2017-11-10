@@ -1,6 +1,3 @@
-import { OrdenesInterface } from './../../../../ordenes/components/ordenes-table/ordenes.interface';
-import { OrdenesResponseInterface } from './../../../../ordenes/components/ordenes-table/ordenes-response.interface';
-import { OrdenesService } from './../../../../ordenes/components/ordenes-table/ordenes.service';
 import { DialogComponent, DialogService } from 'ng2-bootstrap-modal';
 import { AuthLocalstorage } from './../../../../../shared/auth-localstorage.service';
 import { OrdenesService } from './../ordenes.service';
@@ -58,7 +55,6 @@ export class OrdenesAddModalComponent extends DialogComponent<OrdenesInterface, 
       'vehiculoreparando_idvehiculoreparandoAC' : ['', Validators.compose([Validators.required, Validators.minLength(1)])],
     });
 
-    this.idordenAC = this.form.controls['idordenAC'];
     this.fechaAC = this.form.controls['fechaAC'];
     this.statusAC = this.form.controls['statusAC'];
     this.manoObraAC = this.form.controls['manoObraAC'];

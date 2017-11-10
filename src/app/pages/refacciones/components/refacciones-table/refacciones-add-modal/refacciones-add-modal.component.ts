@@ -1,6 +1,3 @@
-import { RefaccionesInterface } from './../../../../refacciones/components/refacciones-table/refacciones.interface';
-import { RefaccionesResponseInterface } from './../../../../refacciones/components/refacciones-table/refacciones-response.interface';
-import { RefaccionesService } from './../../../../refacciones/components/refacciones-table/refacciones.service';
 import { DialogComponent, DialogService } from 'ng2-bootstrap-modal';
 import { AuthLocalstorage } from './../../../../../shared/auth-localstorage.service';
 import { RefaccionesService } from './../refacciones.service';
