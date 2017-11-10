@@ -1,3 +1,6 @@
+import { PersonasInterface } from './../../../../personas/components/personas-table/personas.interface';
+import { PersonasResponseInterface } from './../../../../personas/components/personas-table/personas-response.interface';
+import { PersonasService } from './../../../../personas/components/personas-table/personas.service';
 import { DialogComponent, DialogService } from 'ng2-bootstrap-modal';
 import { AuthLocalstorage } from './../../../../../shared/auth-localstorage.service';
 import { ChoferesService } from './../choferes.service';
@@ -11,11 +14,13 @@ import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'edit-service-modal',
   styleUrls: [('./choferes-edit-modal.component.scss')],
-  templateUrl: './choferes-edit-modal.component.html'
+  templateUrl: './choferes-edit-modal.component.html',
+  providers: [
+    PersonasService
+  ]
 })
 
 export class ChoferesEditModalComponent extends DialogComponent<ChoferesInterface, any> implements OnInit, ChoferesInterface {
-
 
   idchofer: number;
   licencia: string;
@@ -33,35 +38,24 @@ export class ChoferesEditModalComponent extends DialogComponent<ChoferesInterfac
   form: FormGroup;
   submitted: boolean = false;
 
-  choferI: ChoferesInterface = {
-    idchofer: 0,
-    licencia: '',
-    status: '',
-    chofer: 0,
-    fianza: 0,
-    aval1: 0,
-    aval2: 0,
-    aval3: 0,
-    aval4: 0,
-  };
+  public idchoferAC: AbstractControl;
+  public licenciaAC: AbstractControl;
+  public statusAC: AbstractControl;
+  public choferAC: AbstractControl;
+  public fianzaAC: AbstractControl;
+  public aval1AC: AbstractControl;
+  public aval2AC: AbstractControl;
+  public aval3AC: AbstractControl;
+  public aval4AC: AbstractControl;
 
-  idchoferAC: AbstractControl;
-  licenciaAC: AbstractControl;
-  statusAC: AbstractControl;
-  choferAC: AbstractControl;
-  fianzaAC: AbstractControl;
-  aval1AC: AbstractControl;
-  aval2AC: AbstractControl;
-  aval3AC: AbstractControl;
-  aval4AC: AbstractControl;
-
-
+  public avales: PersonasInterface[];
 
   constructor(
-    private service: ChoferesService,
+    private choferesService: ChoferesService,
     fb: FormBuilder,
     private toastrService: ToastrService,
     private authLocalstorage: AuthLocalstorage,
+    private personasService: PersonasService,
     dialogService: DialogService,
   ) {
     super(dialogService);
@@ -93,11 +87,15 @@ export class ChoferesEditModalComponent extends DialogComponent<ChoferesInterfac
   }
 
   ngOnInit() {
-
-
+    this.getPersonas()
   }
 
-
+  getPersonas() {
+    this.personasService.all()
+      .subscribe( (res: PersonasResponseInterface) => 
+        res.success ? this.avales = res.result : null)
+  }
+  
   confirm() {
     this.result = this.data;
     this.close();
@@ -106,9 +104,7 @@ export class ChoferesEditModalComponent extends DialogComponent<ChoferesInterfac
   onSubmit(values: ChoferesInterface): void {
     this.submitted = true;
     if (this.form.valid) {
-      this.service
-        .editChoferes({
-
+      this.choferesService.edit({
           idchofer: this.idchofer,
           licencia: this.licencia,
           status: this.status,
@@ -118,24 +114,11 @@ export class ChoferesEditModalComponent extends DialogComponent<ChoferesInterfac
           aval2: this.aval2,
           aval3: this.aval3,
           aval4: this.aval4,
-
-
-        })
-        .subscribe(
-            (data: any) => {
-              this.data = data;
-              this.confirm();
-            });
+      }).subscribe(
+          (data: any) => {
+            this.data = data;
+            this.confirm();
+      });
     }
   }
-
-  private getChoferes(): void {
-    this.service.getChoferes(this.id)
-        .subscribe( data => {
-          this.choferI = data[1];
-        },
-        error => console.log(error),
-        () => console.log('Get chofer complete'));
-  }
-
 }

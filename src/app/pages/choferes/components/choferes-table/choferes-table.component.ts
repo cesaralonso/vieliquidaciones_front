@@ -10,7 +10,6 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ChoferesAddModalComponent } from './choferes-add-modal/choferes-add-modal.component';
 import { ChoferesEditModalComponent } from './choferes-edit-modal/choferes-edit-modal.component';
 
-
 @Component({
   selector: 'choferes-table',
   templateUrl: './choferes-table.html',
@@ -25,7 +24,7 @@ export class ChoferesTableComponent implements OnInit {
     sortOrder = 'asc';
 
     constructor(
-      private service: ChoferesService, 
+      private choferesService: ChoferesService, 
       private modalService: NgbModal, 
       private toastrService: ToastrService, 
       private dialogService: DialogService) {
@@ -36,20 +35,14 @@ export class ChoferesTableComponent implements OnInit {
     }
 
     addChoferesModalShow() {
-      const disposable = this.dialogService.addDialog(ChoferesAddModalComponent)
-      .subscribe( data => {
-        if (data) {
-          this.showToast(data);
-        }
-      })
+      this.dialogService.addDialog(ChoferesAddModalComponent)
+      .subscribe( data =>  data ? this.showToast(data) : null )
     }
 
     editChoferesModalShow(choferes: ChoferesInterface) {
       const disposable = this.dialogService.addDialog(ChoferesEditModalComponent, choferes)
       .subscribe( data => {
-        if (data) {
-          this.showToast(data);
-        }
+        data ? this.showToast(data) : null
       },
       error => console.log(error),
       () => console.log('Modified complete'));
@@ -72,7 +65,7 @@ export class ChoferesTableComponent implements OnInit {
 
     onDeleteConfirm(event, id): void {
       if (window.confirm('¿Estas seguro de querer eliminar este registro?')) {
-        this.service.cancelarChofer(id)
+        this.choferesService.remove(id)
           .subscribe(
             (data) => this.showToast(data),
             error => console.log(error),
@@ -85,19 +78,19 @@ export class ChoferesTableComponent implements OnInit {
 
     showToast(data) {
       if ( data.success ) {
-        this.toastrService.success('Chofer registrado');
+        this.toastrService.success(data.message);
         this.getAllChoferes();
       } else {
-        this.toastrService.error('Hubo un problema. Por favor, vuelva a intentarlo');
+        this.toastrService.error(data.message);
       }
     }
 
     ngOnInit() {
-        this.getAllChoferes();
+      this.getAllChoferes();
     }
     
     private getAllChoferes(): void {
-      this.service.all() 
+      this.choferesService.all() 
         .subscribe( (data: ChoferesResponseInterface) => {
           data.success ? this.data = data.result : null
         },
