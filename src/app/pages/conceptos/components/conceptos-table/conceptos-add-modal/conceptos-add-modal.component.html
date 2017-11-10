@@ -15,7 +15,7 @@
             <div class="form-group row" [ngClass]="{'has-error': (!nombre.valid && nombre.touched), 'has-success': (nombre.valid && nombre.touched)}">
               <label for="inputnombre" class="col-sm-2 form-control-label">Nombre</label>
               <div class="col-sm-10">
-                <input [(ngModel)]="nombre" [formControl]="nombre" type="text" class="form-control" id="inputnombre" placeholder="Nombre" >
+                <input [formControl]="nombre" type="text" class="form-control" id="inputnombre" placeholder="Nombre" >
               </div>
             </div>
 

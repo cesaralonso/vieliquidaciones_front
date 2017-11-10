@@ -31,28 +31,17 @@ export class ConceptosTableComponent implements OnInit {
       private dialogService: DialogService) {
     }
 
-    toInt(num: string) {
-        return +num;
-    }
-
     addConceptosModalShow() {
-      const disposable = this.dialogService.addDialog(ConceptosAddModalComponent)
-      .subscribe( data => {
-        if (data) {
-          this.showToast(data);
-        }
-      })
+      this.dialogService.addDialog(ConceptosAddModalComponent)
+        .subscribe( data => data ? this.showToast(data) : null )
     }
 
     editConceptosModalShow(conceptos: ConceptosInterface) {
       const disposable = this.dialogService.addDialog(ConceptosEditModalComponent, conceptos)
-      .subscribe( data => {
-        if (data) {
-          this.showToast(data);
-        }
-      },
-      error => console.log(error),
-      () => console.log('Modified complete'));
+      .subscribe( data =>
+        data ? this.showToast(data) : null,
+        error => console.log(error),
+        () => console.log('Modified complete'));
   }
 
     uploadModalShow(id: number, descripcion: string) {
@@ -72,9 +61,9 @@ export class ConceptosTableComponent implements OnInit {
 
     onDeleteConfirm(event, id): void {
       if (window.confirm('¿Estas seguro de querer eliminar este registro?')) {
-        this.service.cancelarConcepto(id)
+        this.service.remove(id)
           .subscribe(
-            (data) => this.showToast(data),
+            data => this.showToast(data),
             error => console.log(error),
             () => console.log('Delete completed')
           );
@@ -84,11 +73,11 @@ export class ConceptosTableComponent implements OnInit {
     }
 
     showToast(data) {
-      if (data.idRespuesta === 0) {
-        this.toastrService.success(data.mensajeRespuesta);
+      if ( data.success ) {
+        this.toastrService.success(data.message);
         this.getAllConceptos();
       } else {
-        this.toastrService.error(data.mensajeRespuesta);
+        this.toastrService.error(data.message);
       }
     }
 
@@ -97,13 +86,10 @@ export class ConceptosTableComponent implements OnInit {
     }
     
     private getAllConceptos(): void {
-      this.service
-          .getAllConceptos()
-          .subscribe(
-              (data: ConceptosInterface[]) =>  {
-                this.data = data;
-              },
-              error => console.log(error),
-              () => console.log('Get all Items complete'))
+      this.service.all()
+        .subscribe( (data: ConceptosResponseInterface) =>
+            this.data = data.result,
+            error => console.log(error),
+            () => console.log('Get all Items complete'))
     } 
 }

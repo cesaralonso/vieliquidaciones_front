@@ -31,6 +31,7 @@ export const routes: Routes = [
     component: Pages,
     children: [
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
+      { path: 'dashboard', loadChildren: './dashboard/dashboard.module#DashboardModule' },
       { path: 'bonificaciones', loadChildren: './bonificaciones/bonificaciones.module#BonificacionesModule' },
       { path: 'choferes', loadChildren: './choferes/choferes.module#ChoferesModule' },
       { path: 'conceptos', loadChildren: './conceptos/conceptos.module#ConceptosModule' },

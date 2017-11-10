@@ -19,48 +19,34 @@ export class ConceptosAddModalComponent extends DialogComponent<ConceptosInterfa
   modalHeader: string;
   data: any;
   form: FormGroup;
-  submitted: boolean = false;
 
-  nombreAC: AbstractControl;
+  public nombre: AbstractControl;
 
   constructor(
-    private service: ConceptosService,
+    private conceptosService: ConceptosService,
     fb: FormBuilder,
     private toastrService: ToastrService,
     private authLocalstorage: AuthLocalstorage,
     dialogService: DialogService
   ) {
     super(dialogService);
-
-
     this.form = fb.group({
-
-
-    'nombreAC' : ['', Validators.compose([Validators.required, Validators.minLength(1)])],
+      'nombre' : ['', Validators.compose([Validators.required, Validators.minLength(1)])],
     });
-
-
-  this.nombreAC = this.form.controls['nombreAC'];
+    this.nombre = this.form.controls['nombre'];
   }
 
-
   ngOnInit() {
-
   }
   confirm() {
     this.result = this.data;
     this.close();
   }
   onSubmit(values: ConceptosInterface): void {
-    this.submitted = true;
-    if (this.form.valid) {
-      this.service
-        .addConceptos(values)
-        .subscribe(
-            (data: any) => {
-              this.data = data;
-              this.confirm();
-            });
-    }
+      this.conceptosService.create(values)
+        .subscribe( data => {
+          this.data = data;
+          this.confirm();
+        });
   }
 }

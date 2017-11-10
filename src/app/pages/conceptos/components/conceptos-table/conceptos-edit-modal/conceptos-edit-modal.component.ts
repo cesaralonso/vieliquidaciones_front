@@ -24,14 +24,6 @@ export class ConceptosEditModalComponent extends DialogComponent<ConceptosInterf
   id: number;
   data: any;
   form: FormGroup;
-  submitted: boolean = false;
-
-  concepto: ConceptosInterface = {
-
-    idconcepto: 0,
-    nombre: '',
-
-  };
 
   idconceptoAC: AbstractControl;
   nombreAC: AbstractControl;
@@ -46,20 +38,13 @@ export class ConceptosEditModalComponent extends DialogComponent<ConceptosInterf
     super(dialogService);
 
     this.form = fb.group({
-
-      'idconceptoAC' : ['', Validators.compose([Validators.required, Validators.minLength(1)])],
       'nombreAC' : ['', Validators.compose([Validators.required, Validators.minLength(1)])],
-
     });
 
-
-    this.idconceptoAC = this.form.controls['idconceptoAC'];
     this.nombreAC = this.form.controls['nombreAC'];
   }
 
   ngOnInit() {
-
-
   }
 
 
@@ -69,31 +54,13 @@ export class ConceptosEditModalComponent extends DialogComponent<ConceptosInterf
   }
 
   onSubmit(values: ConceptosInterface): void {
-    this.submitted = true;
-    if (this.form.valid) {
-      this.service
-        .editConceptos({
-
-
-          idconcepto: this.idconcepto,
-          nombre: this.nombre,
-
-        })
-        .subscribe(
-            (data: any) => {
-              this.data = data;
-              this.confirm();
-            });
-    }
+    this.service.edit({
+        idconcepto: this.idconcepto,
+        nombre: this.nombre,
+      })
+      .subscribe( data => {
+        this.data = data;
+        this.confirm();
+      });
   }
-
-  private getConceptos(): void {
-    this.service.getConceptos(this.id)
-        .subscribe( data => {
-          this.concepto = data[1];
-        },
-        error => console.log(error),
-        () => console.log('Get concepto complete'));
-  }
-
 }

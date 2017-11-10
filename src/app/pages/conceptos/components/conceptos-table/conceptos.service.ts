@@ -23,7 +23,7 @@ export class ConceptosService {
         private authLocalstorage: AuthLocalstorage ) {
         this.headers = new Headers();
         this.headers.append('Content-Type', 'application/json; charset=UTF-8');
-        this.endPoint = `${this._configuration.ServerWithApiUrl}chofer`;
+        this.endPoint = `${this._configuration.ServerWithApiUrl}concepto`;
     }
 
     all = () : Observable<ConceptosResponseInterface> => {
@@ -44,7 +44,19 @@ export class ConceptosService {
             .catch(this.handleError);
     }
 
-    addConceptos = (conceptos: ConceptosInterface): Observable<ConceptosResponseInterface> =>  {
+    remove = ( choferId ): Observable<ConceptosInterface> => {
+        return this._http.delete(`${this.endPoint}/${choferId}`, { headers: this.headers })
+            .map((response: Response) => response.json())
+            .catch(this.handleError);
+    }
+
+    edit = ( choferes: ConceptosInterface ): Observable<ConceptosInterface> =>  {
+        return this._http.patch(this.endPoint, choferes, { headers: this.headers })
+            .map((response: Response) => response.json())
+            .catch(this.handleError);
+    }
+
+    addConceptos = ( conceptos: ConceptosInterface ): Observable<ConceptosResponseInterface> =>  {
         this.actionUrl = `${this._configuration.ServerWithApiUrl}agregarConcepto`;
         const toAdd = JSON.stringify(conceptos);
         return this._http.post(this.actionUrl, toAdd, { headers: this.headers })
