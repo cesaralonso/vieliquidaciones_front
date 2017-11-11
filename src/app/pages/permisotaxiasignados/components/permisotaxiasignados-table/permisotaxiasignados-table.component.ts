@@ -24,28 +24,20 @@ export class PermisotaxiasignadosTableComponent implements OnInit {
     sortBy = 'idpermisotaxiasignado';
     sortOrder = 'asc';
 
-    constructor(
-      private service: PermisotaxiasignadosService, 
-      private modalService: NgbModal, 
-      private toastrService: ToastrService, 
-      private dialogService: DialogService) {
-    }
+  constructor(
+    private service: PermisotaxiasignadosService, 
+    private modalService: NgbModal, 
+    private toastrService: ToastrService, 
+    private dialogService: DialogService) {
+  }
 
-    toInt(num: string) {
-        return +num;
-    }
+  addPermisotaxiasignadosModalShow() {
+    this.dialogService.addDialog(PermisotaxiasignadosAddModalComponent)
+      .subscribe( data => data ? this.showToast(data) : null )
+  }
 
-    addPermisotaxiasignadosModalShow() {
-      const disposable = this.dialogService.addDialog(PermisotaxiasignadosAddModalComponent)
-      .subscribe( data => {
-        if (data) {
-          this.showToast(data);
-        }
-      })
-    }
-
-    editPermisotaxiasignadosModalShow(permisotaxiasignados: PermisotaxiasignadosInterface) {
-      const disposable = this.dialogService.addDialog(PermisotaxiasignadosEditModalComponent, permisotaxiasignados)
+  editPermisotaxiasignadosModalShow(permisotaxiasignados: PermisotaxiasignadosInterface) {
+      this.dialogService.addDialog(PermisotaxiasignadosEditModalComponent, permisotaxiasignados)
       .subscribe( data => {
         if (data) {
           this.showToast(data);
@@ -55,55 +47,37 @@ export class PermisotaxiasignadosTableComponent implements OnInit {
       () => console.log('Modified complete'));
   }
 
-    uploadModalShow(id: number, descripcion: string) {
-      const activeModal = this.modalService.open(UploadModalComponent, { size: 'lg' });
-      activeModal.componentInstance.modalHeader = 'Agregar Archivo a Permisotaxiasignado';
-      activeModal.componentInstance.id = id;
-      activeModal.componentInstance.descripcion = descripcion;
-      activeModal.componentInstance.referencia = 'Permisotaxiasignado';
+  onDeleteConfirm(event, id): void {
+    if (window.confirm('¿Estas seguro de querer eliminar este registro?')) {
+      this.service.cancelarPermisotaxiasignado(id)
+        .subscribe(
+          (data) => this.showToast(data),
+          error => console.log(error),
+          () => console.log('Delete completed')
+        );
+    } else {
+      console.log('item.id cancelando', id);
     }
+  }
 
-    filesModalShow(id: number) {
-      const activeModal = this.modalService.open(FilesUploadModalComponent, { size: 'lg' });
-      activeModal.componentInstance.modalHeader = 'Ver Archivos de Permisotaxiasignado';
-      activeModal.componentInstance.id = id;
-      activeModal.componentInstance.referencia = 'Permisotaxiasignado';
-    }
-
-    onDeleteConfirm(event, id): void {
-      if (window.confirm('¿Estas seguro de querer eliminar este registro?')) {
-        this.service.cancelarPermisotaxiasignado(id)
-          .subscribe(
-            (data) => this.showToast(data),
-            error => console.log(error),
-            () => console.log('Delete completed')
-          );
-      } else {
-        console.log('item.id cancelando', id);
-      }
-    }
-
-    showToast(data) {
+  showToast(data) {
       if (data.idRespuesta === 0) {
         this.toastrService.success(data.mensajeRespuesta);
         this.getAllPermisotaxiasignados();
       } else {
         this.toastrService.error(data.mensajeRespuesta);
       }
-    }
+  }
 
-    ngOnInit() {
-        this.getAllPermisotaxiasignados();
-    }
+  ngOnInit() {
+    this.getAllPermisotaxiasignados();
+  }
     
-    private getAllPermisotaxiasignados(): void {
-      this.service
-          .getAllPermisotaxiasignados()
-          .subscribe(
-              (data: PermisotaxiasignadosInterface[]) =>  {
-                this.data = data;
-              },
-              error => console.log(error),
-              () => console.log('Get all Items complete'))
-    } 
+  private getAllPermisotaxiasignados(): void {
+    this.service.all()
+        .subscribe( (data: PermisotaxiasignadosResponseInterface) =>
+            this.data = data.result,
+            error => console.log(error),
+            () => console.log('Get all Items complete'))
+  } 
 }

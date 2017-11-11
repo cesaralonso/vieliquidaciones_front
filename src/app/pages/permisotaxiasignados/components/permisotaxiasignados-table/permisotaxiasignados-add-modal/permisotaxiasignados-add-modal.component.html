@@ -15,28 +15,33 @@
             <div class="form-group row" [ngClass]="{'has-error': (!vehiculo_idvehiculoAC.valid && vehiculo_idvehiculoAC.touched), 'has-success': (vehiculo_idvehiculoAC.valid && vehiculo_idvehiculoAC.touched)}">
               <label for="inputvehiculo_idvehiculoAC" class="col-sm-2 form-control-label">Vehiculo</label>
               <div class="col-sm-10">
-                <input [(ngModel)]="vehiculo_idvehiculo" [formControl]="vehiculo_idvehiculoAC" type="text" class="form-control" id="inputvehiculo_idvehiculoAC" placeholder="Vehiculo" >
+                <input [formControl]="vehiculo_idvehiculoAC" type="text" class="form-control" id="inputvehiculo_idvehiculoAC" placeholder="Vehiculo" >
+                <select class="form-control" name="vehiculo_idvehiculoAC" >
+                  <option *ngFor="let vehiculo of vehiculos" [value]="vehiculo.idvehiculo">
+                    {{ vehiculo.idvehiculo }}
+                  </option>
+                </select>
               </div>
             </div>
 
             <div class="form-group row" [ngClass]="{'has-error': (!statusAC.valid && statusAC.touched), 'has-success': (statusAC.valid && statusAC.touched)}">
               <label for="inputstatusAC" class="col-sm-2 form-control-label">Status</label>
               <div class="col-sm-10">
-                <input [(ngModel)]="status" [formControl]="statusAC" type="text" class="form-control" id="inputstatusAC" placeholder="Status" >
+                <input [formControl]="statusAC" type="text" class="form-control" id="inputstatusAC" placeholder="Status" >
               </div>
             </div>
 
             <div class="form-group row" [ngClass]="{'has-error': (!fechaAC.valid && fechaAC.touched), 'has-success': (fechaAC.valid && fechaAC.touched)}">
               <label for="inputfechaAC" class="col-sm-2 form-control-label">Fecha</label>
               <div class="col-sm-10">
-                <input [(ngModel)]="fecha" [formControl]="fechaAC" type="text" class="form-control" id="inputfechaAC" placeholder="Fecha" >
+                <input [formControl]="fechaAC" type="text" class="form-control" id="inputfechaAC" placeholder="Fecha" >
               </div>
             </div>
 
             <div class="form-group row" [ngClass]="{'has-error': (!permisotaxi_idpermisotaxiAC.valid && permisotaxi_idpermisotaxiAC.touched), 'has-success': (permisotaxi_idpermisotaxiAC.valid && permisotaxi_idpermisotaxiAC.touched)}">
               <label for="inputpermisotaxi_idpermisotaxiAC" class="col-sm-2 form-control-label">Permiso Taxi</label>
               <div class="col-sm-10">
-                <input [(ngModel)]="permisotaxi_idpermisotaxi" [formControl]="permisotaxi_idpermisotaxiAC" type="text" class="form-control" id="inputpermisotaxi_idpermisotaxiAC" placeholder="Permiso Taxi" >
+                <input [formControl]="permisotaxi_idpermisotaxiAC" type="text" class="form-control" id="inputpermisotaxi_idpermisotaxiAC" placeholder="Permiso Taxi" >
               </div>
             </div>
 
@@ -44,7 +49,7 @@
             <div class="form-group row" [ngClass]="{'has-error': (!chofer_idchoferAC.valid && chofer_idchoferAC.touched), 'has-success': (chofer_idchoferAC.valid && chofer_idchoferAC.touched)}">
               <label for="inputchofer_idchoferAC" class="col-sm-2 form-control-label">Chofer</label>
               <div class="col-sm-10">
-                <input [(ngModel)]="chofer_idchofer" [formControl]="chofer_idchoferAC" type="text" class="form-control" id="inputchofer_idchoferAC" placeholder="Chofer" >
+                <input [formControl]="chofer_idchoferAC" type="text" class="form-control" id="inputchofer_idchoferAC" placeholder="Chofer" >
               </div>
             </div>
 

@@ -23,7 +23,7 @@ export class PermisotaxiasignadosService {
         private authLocalstorage: AuthLocalstorage ) {
         this.headers = new Headers();
         this.headers.append('Content-Type', 'application/json; charset=UTF-8');
-        this.endPoint = `${this._configuration.ServerWithApiUrl}chofer`;        
+        this.endPoint = `${this._configuration.ServerWithApiUrl}permisotaxiasignado`;        
     }
 
     all = () : Observable<PermisotaxiasignadosResponseInterface> => {
@@ -32,17 +32,29 @@ export class PermisotaxiasignadosService {
            .catch(this.handleError);
    }
 
- findById = ( id ) : Observable<PermisotaxiasignadosResponseInterface> => {
+    findById = ( id ) : Observable<PermisotaxiasignadosResponseInterface> => {
        return this._http.get(`${this.endPoint}/${id}`)
            .map((response: Response) => response.json())
            .catch(this.handleError);
    }
 
-  create = ( permisotaxiasignado: PermisotaxiasignadosInterface ) : Observable<PermisotaxiasignadosResponseInterface> => {
+    create = ( permisotaxiasignado: PermisotaxiasignadosInterface ) : Observable<PermisotaxiasignadosResponseInterface> => {
        return this._http.post(this.endPoint, permisotaxiasignado, { headers: this.headers })
            .map((response: Response) => response.json())
            .catch(this.handleError);
    }
+
+   remove = ( choferId ): Observable<PermisotaxiasignadosInterface> => {
+        return this._http.delete(`${this.endPoint}/${choferId}`, { headers: this.headers })
+            .map((response: Response) => response.json())
+            .catch(this.handleError);
+    }
+    
+    edit = (choferes: PermisotaxiasignadosInterface): Observable<PermisotaxiasignadosInterface> =>  {
+        return this._http.patch(this.endPoint, choferes, { headers: this.headers })
+            .map((response: Response) => response.json())
+            .catch(this.handleError);
+    }
 
     addPermisotaxiasignados = (permisotaxiasignados: PermisotaxiasignadosInterface): Observable<PermisotaxiasignadosResponseInterface> =>  {
         this.actionUrl = `${this._configuration.ServerWithApiUrl}agregarPermisotaxiasignado`;

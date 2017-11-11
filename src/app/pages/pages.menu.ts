@@ -62,6 +62,18 @@ export const PAGES_MENU = [
           }
         }
       },
+      {
+        path: 'permisotaxiasignados',
+        data: {
+          menu: {
+            title: 'Asignar permisos',
+            icon: 'ion-social-buffer',
+            selected: false,
+            expanded: false,
+            order: 0
+          }
+        }
+      },
       // {
       //   path: 'expenses',
       //   data: {

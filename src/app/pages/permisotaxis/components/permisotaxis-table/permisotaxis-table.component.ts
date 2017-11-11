@@ -10,7 +10,6 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { PermisotaxisAddModalComponent } from './permisotaxis-add-modal/permisotaxis-add-modal.component';
 import { PermisotaxisEditModalComponent } from './permisotaxis-edit-modal/permisotaxis-edit-modal.component';
 
-
 @Component({
   selector: 'permisotaxis-table',
   templateUrl: './permisotaxis-table.html',
@@ -43,7 +42,7 @@ export class PermisotaxisTableComponent implements OnInit {
           error => console.log(error),
           () => console.log('Modified complete'));
     }
-    
+
     onDeleteConfirm(event, id): void {
       if (window.confirm('¿Estas seguro de querer eliminar este registro?')) {
         this.service.remove(id)
