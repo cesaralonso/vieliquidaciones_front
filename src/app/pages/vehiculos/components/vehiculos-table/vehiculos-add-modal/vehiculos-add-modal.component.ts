@@ -1,3 +1,5 @@
+import { PersonasInterface } from './../../../../personas/components/personas-table/personas.interface';
+import { PersonasService } from './../../../../personas/components/personas-table/personas.service';
 import { DialogComponent, DialogService } from 'ng2-bootstrap-modal';
 import { AuthLocalstorage } from './../../../../../shared/auth-localstorage.service';
 import { VehiculosService } from './../vehiculos.service';
@@ -11,7 +13,10 @@ import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'add-service-modal',
   styleUrls: [('./vehiculos-add-modal.component.scss')],
-  templateUrl: './vehiculos-add-modal.component.html'
+  templateUrl: './vehiculos-add-modal.component.html',
+  providers: [
+    PersonasService
+  ]
 })
 
 export class VehiculosAddModalComponent extends DialogComponent<VehiculosInterface, any> implements OnInit {
@@ -19,87 +24,88 @@ export class VehiculosAddModalComponent extends DialogComponent<VehiculosInterfa
   modalHeader: string;
   data: any;
   form: FormGroup;
-  submitted: boolean = false;
 
-  propietarioAC: AbstractControl;
-  anioAC: AbstractControl;
-  marcaAC: AbstractControl;
-  kilometrajeAC: AbstractControl;
-  modeloAC: AbstractControl;
-  serieAC: AbstractControl;
-  serieMotorAC: AbstractControl;
-  placaAC: AbstractControl;
-  statusAC: AbstractControl;
-  polizaAC: AbstractControl;
-  polizaTipoAC: AbstractControl;
-  condActualAC: AbstractControl;
-  condInicialAC: AbstractControl;
-  colorAC: AbstractControl;
+  public propietario: AbstractControl;
+  public anio: AbstractControl;
+  public marca: AbstractControl;
+  public kilometraje: AbstractControl;
+  public modelo: AbstractControl;
+  public serie: AbstractControl;
+  public serieMotor: AbstractControl;
+  public placa: AbstractControl;
+  public status: AbstractControl;
+  public poliza: AbstractControl;
+  public polizaTipo: AbstractControl;
+  public condActual: AbstractControl;
+  public condInicial: AbstractControl;
+  public color: AbstractControl;
 
-
+  public propietarios: PersonasInterface[];
 
   constructor(
-    private service: VehiculosService,
+    private vehiculosService: VehiculosService,
     fb: FormBuilder,
     private toastrService: ToastrService,
     private authLocalstorage: AuthLocalstorage,
+    private personasService: PersonasService,
     dialogService: DialogService
   ) {
     super(dialogService);
 
 
     this.form = fb.group({
-      'propietarioAC' : ['', Validators.compose([Validators.required, Validators.minLength(1)])],
-      'anioAC' : ['', Validators.compose([Validators.required, Validators.minLength(1)])],
-      'marcaAC' : ['', Validators.compose([Validators.required, Validators.minLength(1)])],
-      'kilometrajeAC' : ['', Validators.compose([Validators.required, Validators.minLength(1)])],
-      'modeloAC' : ['', Validators.compose([Validators.required, Validators.minLength(1)])],
-      'serieAC' : ['', Validators.compose([Validators.required, Validators.minLength(1)])],
-      'serieMotorAC' : ['', Validators.compose([Validators.required, Validators.minLength(1)])],
-      'placaAC' : ['', Validators.compose([Validators.required, Validators.minLength(1)])],
-      'statusAC' : ['', Validators.compose([Validators.required, Validators.minLength(1)])],
-      'polizaAC' : ['', Validators.compose([Validators.required, Validators.minLength(1)])],
-      'polizaTipoAC' : ['', Validators.compose([Validators.required, Validators.minLength(1)])],
-      'condActualAC' : ['', Validators.compose([Validators.required, Validators.minLength(1)])],
-      'condInicialAC' : ['', Validators.compose([Validators.required, Validators.minLength(1)])],
-      'colorAC' : ['', Validators.compose([Validators.required, Validators.minLength(1)])],
+      'propietario' : ['', Validators.compose([Validators.required, Validators.minLength(1)])],
+      'anio' : ['', Validators.compose([Validators.required, Validators.minLength(1)])],
+      'marca' : ['', Validators.compose([Validators.required, Validators.minLength(1)])],
+      'kilometraje' : ['', Validators.compose([Validators.required, Validators.minLength(1)])],
+      'modelo' : ['', Validators.compose([Validators.required, Validators.minLength(1)])],
+      'serie' : ['', Validators.compose([Validators.required, Validators.minLength(1)])],
+      'serieMotor' : ['', Validators.compose([Validators.required, Validators.minLength(1)])],
+      'placa' : ['', Validators.compose([Validators.required, Validators.minLength(1)])],
+      'status' : ['', Validators.compose([Validators.required, Validators.minLength(1)])],
+      'poliza' : ['', Validators.compose([Validators.required, Validators.minLength(1)])],
+      'polizaTipo' : ['', Validators.compose([Validators.required, Validators.minLength(1)])],
+      'condActual' : ['', Validators.compose([Validators.required, Validators.minLength(1)])],
+      'condInicial' : ['', Validators.compose([Validators.required, Validators.minLength(1)])],
+      'color' : ['', Validators.compose([Validators.required, Validators.minLength(1)])],
 
     });
 
-        this.propietarioAC = this.form.controls['propietarioAC'];
-        this.anioAC = this.form.controls['anioAC'];
-        this.marcaAC = this.form.controls['marcaAC'];
-        this.kilometrajeAC = this.form.controls['kilometrajeAC'];
-        this.modeloAC = this.form.controls['modeloAC'];
-        this.serieAC = this.form.controls['serieAC'];
-        this.serieMotorAC = this.form.controls['serieMotorAC'];
-        this.placaAC = this.form.controls['placaAC'];
-        this.statusAC = this.form.controls['statusAC'];
-        this.polizaAC = this.form.controls['polizaAC'];
-        this.polizaTipoAC = this.form.controls['polizaTipoAC'];
-        this.condActualAC = this.form.controls['condActualAC'];
-        this.condInicialAC = this.form.controls['condInicialAC'];
-        this.colorAC = this.form.controls['colorAC'];
+        this.propietario = this.form.controls['propietario'];
+        this.anio = this.form.controls['anio'];
+        this.marca = this.form.controls['marca'];
+        this.kilometraje = this.form.controls['kilometraje'];
+        this.modelo = this.form.controls['modelo'];
+        this.serie = this.form.controls['serie'];
+        this.serieMotor = this.form.controls['serieMotor'];
+        this.placa = this.form.controls['placa'];
+        this.status = this.form.controls['status'];
+        this.poliza = this.form.controls['poliza'];
+        this.polizaTipo = this.form.controls['polizaTipo'];
+        this.condActual = this.form.controls['condActual'];
+        this.condInicial = this.form.controls['condInicial'];
+        this.color = this.form.controls['color'];
   }
 
 
   ngOnInit() {
-
+    this.getPersonas()
   }
   confirm() {
     this.result = this.data;
     this.close();
   }
   onSubmit(values: VehiculosInterface): void {
-    this.submitted = true;
-    if (this.form.valid) {
-      this.service
-        .addVehiculos(values)
-        .subscribe(
-            (data: any) => {
-              this.data = data;
-              this.confirm();
-            });
-    }
+    console.log(values)  
+    this.vehiculosService.create(values)
+      .subscribe (data => {
+          this.data = data;
+          this.confirm();
+        });
+  }
+
+  getPersonas() {
+    this.personasService.all()
+      .subscribe( res => res.success ? this.propietarios = res.result : null)
   }
 }

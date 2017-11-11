@@ -25,7 +25,7 @@ export class VehiculosTableComponent implements OnInit {
     sortOrder = 'asc';
 
     constructor(
-      private service: VehiculosService, 
+      private vehiculosService: VehiculosService, 
       private modalService: NgbModal, 
       private toastrService: ToastrService, 
       private dialogService: DialogService) {
@@ -36,24 +36,17 @@ export class VehiculosTableComponent implements OnInit {
     }
 
     addVehiculosModalShow() {
-      const disposable = this.dialogService.addDialog(VehiculosAddModalComponent)
-      .subscribe( data => {
-        if (data) {
-          this.showToast(data);
-        }
-      })
+      this.dialogService.addDialog(VehiculosAddModalComponent)
+        .subscribe( data => data ? this.showToast(data) : null )
     }
 
     editVehiculosModalShow(vehiculos: VehiculosInterface) {
-      const disposable = this.dialogService.addDialog(VehiculosEditModalComponent, vehiculos)
-      .subscribe( data => {
-        if (data) {
-          this.showToast(data);
-        }
-      },
-      error => console.log(error),
-      () => console.log('Modified complete'));
-  }
+      this.dialogService.addDialog(VehiculosEditModalComponent, vehiculos)
+        .subscribe( data => 
+          data ? this.showToast(data) : null,
+          error => console.log(error),
+          () => console.log('Modified complete'));
+    }
 
     uploadModalShow(id: number, descripcion: string) {
       const activeModal = this.modalService.open(UploadModalComponent, { size: 'lg' });
@@ -72,9 +65,9 @@ export class VehiculosTableComponent implements OnInit {
 
     onDeleteConfirm(event, id): void {
       if (window.confirm('¿Estas seguro de querer eliminar este registro?')) {
-        this.service.cancelarVehiculo(id)
+        this.vehiculosService.remove(id)
           .subscribe(
-            (data) => this.showToast(data),
+            data => this.showToast(data),
             error => console.log(error),
             () => console.log('Delete completed')
           );
@@ -84,25 +77,22 @@ export class VehiculosTableComponent implements OnInit {
     }
 
     showToast(data) {
-      if (data.idRespuesta === 0) {
-        this.toastrService.success(data.mensajeRespuesta);
+      if (data.success) {
+        this.toastrService.success(data.message);
         this.getAllVehiculos();
       } else {
-        this.toastrService.error(data.mensajeRespuesta);
+        this.toastrService.error(data.message);
       }
     }
 
     ngOnInit() {
-        this.getAllVehiculos();
+      this.getAllVehiculos();
     }
     
     private getAllVehiculos(): void {
-      this.service
-          .getAllVehiculos()
-          .subscribe(
-              (data: VehiculosInterface[]) =>  {
-                this.data = data;
-              },
+      this.vehiculosService.all()
+          .subscribe( (data: VehiculosResponseInterface) =>
+              this.data = data.result,
               error => console.log(error),
               () => console.log('Get all Items complete'))
     } 

@@ -31,50 +31,24 @@ export class PermisotaxisTableComponent implements OnInit {
       private dialogService: DialogService) {
     }
 
-    toInt(num: string) {
-        return +num;
-    }
-
     addPermisotaxisModalShow() {
-      const disposable = this.dialogService.addDialog(PermisotaxisAddModalComponent)
-      .subscribe( data => {
-        if (data) {
-          this.showToast(data);
-        }
-      })
+      this.dialogService.addDialog(PermisotaxisAddModalComponent)
+        .subscribe( data => data ? this.showToast(data) : null )
     }
 
     editPermisotaxisModalShow(permisotaxis: PermisotaxisInterface) {
-      const disposable = this.dialogService.addDialog(PermisotaxisEditModalComponent, permisotaxis)
-      .subscribe( data => {
-        if (data) {
-          this.showToast(data);
-        }
-      },
-      error => console.log(error),
-      () => console.log('Modified complete'));
-  }
-
-    uploadModalShow(id: number, descripcion: string) {
-      const activeModal = this.modalService.open(UploadModalComponent, { size: 'lg' });
-      activeModal.componentInstance.modalHeader = 'Agregar Archivo a Permisotaxi';
-      activeModal.componentInstance.id = id;
-      activeModal.componentInstance.descripcion = descripcion;
-      activeModal.componentInstance.referencia = 'Permisotaxi';
+      this.dialogService.addDialog(PermisotaxisEditModalComponent, permisotaxis)
+        .subscribe( data =>
+          data ? this.showToast(data) : null,
+          error => console.log(error),
+          () => console.log('Modified complete'));
     }
-
-    filesModalShow(id: number) {
-      const activeModal = this.modalService.open(FilesUploadModalComponent, { size: 'lg' });
-      activeModal.componentInstance.modalHeader = 'Ver Archivos de Permisotaxi';
-      activeModal.componentInstance.id = id;
-      activeModal.componentInstance.referencia = 'Permisotaxi';
-    }
-
+    
     onDeleteConfirm(event, id): void {
       if (window.confirm('¿Estas seguro de querer eliminar este registro?')) {
-        this.service.cancelarPermisotaxi(id)
+        this.service.remove(id)
           .subscribe(
-            (data) => this.showToast(data),
+            data => this.showToast(data),
             error => console.log(error),
             () => console.log('Delete completed')
           );
@@ -84,26 +58,23 @@ export class PermisotaxisTableComponent implements OnInit {
     }
 
     showToast(data) {
-      if (data.idRespuesta === 0) {
-        this.toastrService.success(data.mensajeRespuesta);
+      if (data.success) {
+        this.toastrService.success(data.message);
         this.getAllPermisotaxis();
       } else {
-        this.toastrService.error(data.mensajeRespuesta);
+        this.toastrService.error(data.message);
       }
     }
 
     ngOnInit() {
-        this.getAllPermisotaxis();
+      this.getAllPermisotaxis();
     }
     
     private getAllPermisotaxis(): void {
-      this.service
-          .getAllPermisotaxis()
-          .subscribe(
-              (data: PermisotaxisInterface[]) =>  {
-                this.data = data;
-              },
-              error => console.log(error),
-              () => console.log('Get all Items complete'))
+      this.service.all()
+        .subscribe( (data: PermisotaxisResponseInterface) =>
+          this.data = data.result,
+          error => console.log(error),
+          () => console.log('Get all Items complete'))
     } 
 }

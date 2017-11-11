@@ -1,3 +1,5 @@
+import { PersonasService } from './../../../../personas/components/personas-table/personas.service';
+import { PersonasInterface } from './../../../../personas/components/personas-table/personas.interface';
 import { DialogComponent, DialogService } from 'ng2-bootstrap-modal';
 import { AuthLocalstorage } from './../../../../../shared/auth-localstorage.service';
 import { PermisotaxisService } from './../permisotaxis.service';
@@ -11,7 +13,10 @@ import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'edit-service-modal',
   styleUrls: [('./permisotaxis-edit-modal.component.scss')],
-  templateUrl: './permisotaxis-edit-modal.component.html'
+  templateUrl: './permisotaxis-edit-modal.component.html',
+  providers: [
+    PersonasService
+  ]
 })
 
 export class PermisotaxisEditModalComponent extends DialogComponent<PermisotaxisInterface, any> implements OnInit, PermisotaxisInterface {
@@ -25,60 +30,41 @@ export class PermisotaxisEditModalComponent extends DialogComponent<Permisotaxis
   vigencia: string;
   status: string;
 
-
   modalHeader: string;
   id: number;
   data: any;
   form: FormGroup;
   submitted: boolean = false;
 
-  permisotaxi: PermisotaxisInterface = {
-
-    idpermisotaxi: 0,
-    liquidez: 0,
-    liquidezDom: 0,
-    numero: '',
-    propietario: 0,
-    fechaAlta: '',
-    vigencia: '',
-    status: '',
-  };
-
-  idpermisotaxiAC: AbstractControl;
-  liquidezAC: AbstractControl;
-  liquidezDomAC: AbstractControl;
-  numeroAC: AbstractControl;
-  propietarioAC: AbstractControl;
-  fechaAltaAC: AbstractControl;
-  vigenciaAC: AbstractControl;
-  statusAC: AbstractControl;
-
-
-
+  public idpermisotaxiAC: AbstractControl;
+  public liquidezAC: AbstractControl;
+  public liquidezDomAC: AbstractControl;
+  public numeroAC: AbstractControl;
+  public propietarioAC: AbstractControl;
+  public fechaAltaAC: AbstractControl;
+  public vigenciaAC: AbstractControl;
+  public statusAC: AbstractControl;
+  
+  public propietarios: PersonasInterface[];
   constructor(
     private service: PermisotaxisService,
     fb: FormBuilder,
     private toastrService: ToastrService,
     private authLocalstorage: AuthLocalstorage,
+    private personasService: PersonasService,
     dialogService: DialogService,
   ) {
     super(dialogService);
-
     this.form = fb.group({
-
-      'idpermisotaxiAC' : ['', Validators.compose([Validators.required, Validators.minLength(1)])],
       'liquidezAC' : ['', Validators.compose([Validators.required, Validators.minLength(1)])],
       'liquidezDomAC' : ['', Validators.compose([Validators.required, Validators.minLength(1)])],
       'numeroAC' : ['', Validators.compose([Validators.required, Validators.minLength(1)])],
       'propietarioAC' : ['', Validators.compose([Validators.required, Validators.minLength(1)])],
-      'fechaAltaAC' : ['', Validators.compose([Validators.required, Validators.minLength(1)])],
-      'vigenciaAC' : ['', Validators.compose([Validators.required, Validators.minLength(1)])],
+      'fechaAltaAC' : ['', ],
+      'vigenciaAC' : ['', ],
       'statusAC' : ['', Validators.compose([Validators.required, Validators.minLength(1)])],
 
     });
-
-
-    this.idpermisotaxiAC = this.form.controls['idpermisotaxiAC'];
     this.liquidezAC = this.form.controls['liquidezAC'];
     this.liquidezDomAC = this.form.controls['liquidezDomAC'];
     this.numeroAC = this.form.controls['numeroAC'];
@@ -86,14 +72,10 @@ export class PermisotaxisEditModalComponent extends DialogComponent<Permisotaxis
     this.fechaAltaAC = this.form.controls['fechaAltaAC'];
     this.vigenciaAC = this.form.controls['vigenciaAC'];
     this.statusAC = this.form.controls['statusAC'];
-
   }
-
   ngOnInit() {
-
-
+    this.getPersonas()
   }
-
 
   confirm() {
     this.result = this.data;
@@ -103,10 +85,7 @@ export class PermisotaxisEditModalComponent extends DialogComponent<Permisotaxis
   onSubmit(values: PermisotaxisInterface): void {
     this.submitted = true;
     if (this.form.valid) {
-      this.service
-        .editPermisotaxis({
-
-
+      this.service.edit({
           idpermisotaxi: this.idpermisotaxi,
           liquidez: this.liquidez,
           liquidezDom: this.liquidezDom,
@@ -115,24 +94,20 @@ export class PermisotaxisEditModalComponent extends DialogComponent<Permisotaxis
           fechaAlta: this.fechaAlta,
           vigencia: this.vigencia,
           status: this.status,
-
-
         })
-        .subscribe(
-            (data: any) => {
-              this.data = data;
-              this.confirm();
-            });
+        .subscribe( data => {
+            this.data = data;
+            this.confirm();
+          });
     }
   }
 
-  private getPermisotaxis(): void {
-    this.service.getPermisotaxis(this.id)
-        .subscribe( data => {
-          this.permisotaxi = data[1];
-        },
-        error => console.log(error),
-        () => console.log('Get permisotaxi complete'));
+  getPersonas() {
+    this.personasService.all()
+      .subscribe( res => res.success ? this.propietarios = res.result : null)
   }
 
+  parseDate(dateString: string): Date {
+    return dateString ? new Date(dateString) : null
+  }
 }

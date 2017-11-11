@@ -1,3 +1,5 @@
+import { PersonasInterface } from './../../../../personas/components/personas-table/personas.interface';
+import { PersonasService } from './../../../../personas/components/personas-table/personas.service';
 import { DialogComponent, DialogService } from 'ng2-bootstrap-modal';
 import { AuthLocalstorage } from './../../../../../shared/auth-localstorage.service';
 import { VehiculosService } from './../vehiculos.service';
@@ -7,11 +9,13 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, AbstractControl, FormBuilder, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 
-
 @Component({
   selector: 'edit-service-modal',
   styleUrls: [('./vehiculos-edit-modal.component.scss')],
-  templateUrl: './vehiculos-edit-modal.component.html'
+  templateUrl: './vehiculos-edit-modal.component.html',
+  providers: [
+    PersonasService
+  ]
 })
 
 export class VehiculosEditModalComponent extends DialogComponent<VehiculosInterface, any> implements OnInit, VehiculosInterface {
@@ -39,55 +43,34 @@ export class VehiculosEditModalComponent extends DialogComponent<VehiculosInterf
   form: FormGroup;
   submitted: boolean = false;
 
-  vehiculo: VehiculosInterface = {
+  public idvehiculoAC: AbstractControl;
+  public propietarioAC: AbstractControl;
+  public anioAC: AbstractControl;
+  public marcaAC: AbstractControl;
+  public kilometrajeAC: AbstractControl;
+  public modeloAC: AbstractControl;
+  public serieAC: AbstractControl;
+  public serieMotorAC: AbstractControl;
+  public placaAC: AbstractControl;
+  public statusAC: AbstractControl;
+  public polizaAC: AbstractControl;
+  public polizaTipoAC: AbstractControl;
+  public condActualAC: AbstractControl;
+  public condInicialAC: AbstractControl;
+  public colorAC: AbstractControl;
 
-    idvehiculo: 0,
-    propietario: 0,
-    anio: 0,
-    marca: '',
-    kilometraje: 0,
-    modelo: '',
-    serie: '',
-    serieMotor:'',
-    placa:'',
-    status: '',
-    poliza:'',
-    polizaTipo:'',
-    condActual: '',
-    condInicial:'',
-    color:'',
-  };
-
-  idvehiculoAC: AbstractControl;
-  propietarioAC: AbstractControl;
-  anioAC: AbstractControl;
-  marcaAC: AbstractControl;
-  kilometrajeAC: AbstractControl;
-  modeloAC: AbstractControl;
-  serieAC: AbstractControl;
-  serieMotorAC: AbstractControl;
-  placaAC: AbstractControl;
-  statusAC: AbstractControl;
-  polizaAC: AbstractControl;
-  polizaTipoAC: AbstractControl;
-  condActualAC: AbstractControl;
-  condInicialAC: AbstractControl;
-  colorAC: AbstractControl;
-
-
+  public propietarios: PersonasInterface[];
 
   constructor(
     private service: VehiculosService,
     fb: FormBuilder,
     private toastrService: ToastrService,
     private authLocalstorage: AuthLocalstorage,
+    private personasService: PersonasService,
     dialogService: DialogService,
   ) {
     super(dialogService);
-
     this.form = fb.group({
-
-      'idvehiculoAC' : ['', Validators.compose([Validators.required, Validators.minLength(1)])],
       'propietarioAC' : ['', Validators.compose([Validators.required, Validators.minLength(1)])],
       'anioAC' : ['', Validators.compose([Validators.required, Validators.minLength(1)])],
       'marcaAC' : ['', Validators.compose([Validators.required, Validators.minLength(1)])],
@@ -102,11 +85,7 @@ export class VehiculosEditModalComponent extends DialogComponent<VehiculosInterf
       'condActualAC' : ['', Validators.compose([Validators.required, Validators.minLength(1)])],
       'condInicialAC' : ['', Validators.compose([Validators.required, Validators.minLength(1)])],
       'colorAC' : ['', Validators.compose([Validators.required, Validators.minLength(1)])],
-
     });
-
-
-    this.idvehiculoAC = this.form.controls['idvehiculoAC'];
     this.propietarioAC = this.form.controls['propietarioAC'];
     this.anioAC = this.form.controls['anioAC'];
     this.marcaAC = this.form.controls['marcaAC'];
@@ -121,14 +100,11 @@ export class VehiculosEditModalComponent extends DialogComponent<VehiculosInterf
     this.condActualAC = this.form.controls['condActualAC'];
     this.condInicialAC = this.form.controls['condInicialAC'];
     this.colorAC = this.form.controls['colorAC'];
-
   }
 
   ngOnInit() {
-
-
+    this.getPersonas()
   }
-
 
   confirm() {
     this.result = this.data;
@@ -136,45 +112,31 @@ export class VehiculosEditModalComponent extends DialogComponent<VehiculosInterf
   }
 
   onSubmit(values: VehiculosInterface): void {
-    this.submitted = true;
-    if (this.form.valid) {
-      this.service
-        .editVehiculos({
-
-
-          idvehiculo: this.idvehiculo,
-          propietario: this.propietario,
-          anio: this.anio,
-          marca: this.marca,
-          kilometraje: this.kilometraje,
-          modelo: this.modelo,
-          serie: this.serie,
-          serieMotor: this.serieMotor,
-          placa: this.placa,
-          status: this.status,
-          poliza: this.poliza,
-          polizaTipo: this.polizaTipo,
-          condActual: this.condActual,
-          condInicial: this.condInicial,
-          color: this.color,
-
-
-        })
-        .subscribe(
-            (data: any) => {
-              this.data = data;
-              this.confirm();
-            });
-    }
+    this.service.edit({
+        idvehiculo: this.idvehiculo,
+        propietario: this.propietario,
+        anio: this.anio,
+        marca: this.marca,
+        kilometraje: this.kilometraje,
+        modelo: this.modelo,
+        serie: this.serie,
+        serieMotor: this.serieMotor,
+        placa: this.placa,
+        status: this.status,
+        poliza: this.poliza,
+        polizaTipo: this.polizaTipo,
+        condActual: this.condActual,
+        condInicial: this.condInicial,
+        color: this.color,
+      })
+      .subscribe( data => {
+        this.data = data;
+        this.confirm();
+      });
   }
 
-  private getVehiculos(): void {
-    this.service.getVehiculos(this.id)
-        .subscribe( data => {
-          this.vehiculo = data[1];
-        },
-        error => console.log(error),
-        () => console.log('Get vehiculo complete'));
+  getPersonas() {
+    this.personasService.all()
+      .subscribe( res => res.success ? this.propietarios = res.result : null)
   }
-
 }

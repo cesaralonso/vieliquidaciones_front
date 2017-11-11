@@ -50,6 +50,18 @@ export const PAGES_MENU = [
           }
         }
       },
+      {
+        path: 'permisotaxis',
+        data: {
+          menu: {
+            title: 'Permisos taxis',
+            icon: 'ion-social-buffer',
+            selected: false,
+            expanded: false,
+            order: 0
+          }
+        }
+      },
       // {
       //   path: 'expenses',
       //   data: {

@@ -30,13 +30,9 @@ export class ChoferesTableComponent implements OnInit {
       private dialogService: DialogService) {
     }
 
-    toInt(num: string) {
-        return +num;
-    }
-
     addChoferesModalShow() {
       this.dialogService.addDialog(ChoferesAddModalComponent)
-      .subscribe( data =>  data ? this.showToast(data) : null )
+        .subscribe( data =>  data ? this.showToast(data) : null )
     }
 
     editChoferesModalShow(choferes: ChoferesInterface) {
@@ -91,10 +87,9 @@ export class ChoferesTableComponent implements OnInit {
     
     private getAllChoferes(): void {
       this.choferesService.all() 
-        .subscribe( (data: ChoferesResponseInterface) => {
-          data.success ? this.data = data.result : null
-        },
-        error => console.log(error),
-        () => console.log('Get all Items complete'))
+        .subscribe( (data: ChoferesResponseInterface) => 
+          data.success ? this.data = data.result : null,
+          error => console.log(error),
+          () => console.log('Get all Items complete'))
     } 
 }

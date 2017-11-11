@@ -23,7 +23,7 @@ export class VehiculosService {
         private authLocalstorage: AuthLocalstorage ) {
         this.headers = new Headers();
         this.headers.append('Content-Type', 'application/json; charset=UTF-8');
-        this.endPoint = `${this._configuration.ServerWithApiUrl}chofer`;
+        this.endPoint = `${this._configuration.ServerWithApiUrl}vehiculo`;
         
     }
 
@@ -33,17 +33,29 @@ export class VehiculosService {
                .catch(this.handleError);
        }
 
-     findById = ( id ) : Observable<VehiculosResponseInterface> => {
-           return this._http.get(`${this.endPoint}/${id}`)
-               .map((response: Response) => response.json())
-               .catch(this.handleError);
-       }
+    findById = ( id ) : Observable<VehiculosResponseInterface> => {
+        return this._http.get(`${this.endPoint}/${id}`)
+            .map((response: Response) => response.json())
+            .catch(this.handleError);
+    }
 
-      create = ( vehiculo: VehiculosInterface ) : Observable<VehiculosResponseInterface> => {
-           return this._http.post(this.endPoint, vehiculo, { headers: this.headers })
-               .map((response: Response) => response.json())
-               .catch(this.handleError);
-       }
+    create = ( vehiculo: VehiculosInterface ) : Observable<VehiculosResponseInterface> => {
+        return this._http.post(this.endPoint, vehiculo, { headers: this.headers })
+            .map((response: Response) => response.json())
+            .catch(this.handleError);
+    }
+
+    remove = ( choferId ): Observable<VehiculosResponseInterface> => {
+        return this._http.delete(`${this.endPoint}/${choferId}`, { headers: this.headers })
+            .map((response: Response) => response.json())
+            .catch(this.handleError);
+    }
+
+    edit = (vehiculo: VehiculosInterface): Observable<VehiculosResponseInterface> =>  {
+        return this._http.patch(this.endPoint, vehiculo, { headers: this.headers })
+            .map((response: Response) => response.json())
+            .catch(this.handleError);
+    }
 
     addVehiculos = (vehiculos: VehiculosInterface): Observable<VehiculosResponseInterface> =>  {
         this.actionUrl = `${this._configuration.ServerWithApiUrl}agregarVehiculo`;

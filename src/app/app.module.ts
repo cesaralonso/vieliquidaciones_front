@@ -14,7 +14,7 @@ import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateService } from '@ngx-translate/core';
-
+import { LOCALE_ID } from '@angular/core';
 
 /*
  * Platform and Environment providers/directives/pipes
@@ -87,6 +87,7 @@ export type StoreType = {
     AuthLocalstorage,
     FilesUploadModalService,
     UploadModalService,
+    { provide: LOCALE_ID, useValue: "es-MX" },
   ]
 })
 

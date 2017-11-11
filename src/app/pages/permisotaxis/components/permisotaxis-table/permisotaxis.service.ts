@@ -23,7 +23,7 @@ export class PermisotaxisService {
         private authLocalstorage: AuthLocalstorage ) {
         this.headers = new Headers();
         this.headers.append('Content-Type', 'application/json; charset=UTF-8');
-        this.endPoint = `${this._configuration.ServerWithApiUrl}chofer`;        
+        this.endPoint = `${this._configuration.ServerWithApiUrl}permisotaxi`;        
     }
 
     all = () : Observable<PermisotaxisResponseInterface> => {
@@ -32,17 +32,29 @@ export class PermisotaxisService {
                .catch(this.handleError);
        }
 
-     findById = ( id ) : Observable<PermisotaxisResponseInterface> => {
-           return this._http.get(`${this.endPoint}/${id}`)
-               .map((response: Response) => response.json())
-               .catch(this.handleError);
-       }
+    findById = ( id ) : Observable<PermisotaxisResponseInterface> => {
+        return this._http.get(`${this.endPoint}/${id}`)
+            .map((response: Response) => response.json())
+            .catch(this.handleError);
+    }
 
-      create = ( permisotaxi: PermisotaxisInterface ) : Observable<PermisotaxisResponseInterface> => {
-           return this._http.post(this.endPoint, permisotaxi, { headers: this.headers })
-               .map((response: Response) => response.json())
-               .catch(this.handleError);
-       }
+    create = ( permisotaxi: PermisotaxisInterface ) : Observable<PermisotaxisResponseInterface> => {
+        return this._http.post(this.endPoint, permisotaxi, { headers: this.headers })
+            .map((response: Response) => response.json())
+            .catch(this.handleError);
+    }
+
+    remove = ( choferId ): Observable<PermisotaxisResponseInterface> => {
+        return this._http.delete(`${this.endPoint}/${choferId}`, { headers: this.headers })
+            .map((response: Response) => response.json())
+            .catch(this.handleError);
+    }
+
+    edit = (choferes: PermisotaxisInterface): Observable<PermisotaxisResponseInterface> =>  {
+        return this._http.patch(this.endPoint, choferes, { headers: this.headers })
+            .map((response: Response) => response.json())
+            .catch(this.handleError);
+    }
 
     addPermisotaxis = (permisotaxis: PermisotaxisInterface): Observable<PermisotaxisResponseInterface> =>  {
         this.actionUrl = `${this._configuration.ServerWithApiUrl}agregarPermisotaxi`;

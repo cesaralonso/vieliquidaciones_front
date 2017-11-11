@@ -61,8 +61,6 @@
                             <td>
                                 <button (click)="editVehiculosModalShow(item)" class="btn btn-sm btn-info"><i class="fa fa-edit"></i></button>
                                 <button (click)="onDeleteConfirm($event, item.idvehiculo)" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></button>
-                                <button (click)="uploadModalShow(item.idvehiculo, item.marca)" class="btn btn-sm btn-success"><i class="fa fa-file"></i></button>
-                                <button (click)="filesModalShow(item.idvehiculo)" class="btn btn-sm btn-warning"><i class="fa fa-eye"></i></button>
                             </td>
                             <td>{{ item.marca }}</td>
                             <td>{{ item.modelo }}</td>
