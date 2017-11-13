@@ -12,11 +12,10 @@
         <div class="modal-body" style="height: 65vh; overflow-y: auto;">
           <ba-card cardTitle="Información de la Permisotaxiasignado">
 
-            <div class="form-group row" [ngClass]="{'has-error': (!vehiculo_idvehiculoAC.valid && vehiculo_idvehiculoAC.touched), 'has-success': (vehiculo_idvehiculoAC.valid && vehiculo_idvehiculoAC.touched)}">
-              <label for="inputvehiculo_idvehiculoAC" class="col-sm-2 form-control-label">Vehiculo</label>
+            <div class="form-group row" [ngClass]="{'has-error': (!vehiculo_idvehiculo.valid && vehiculo_idvehiculo.touched), 'has-success': (vehiculo_idvehiculo.valid && vehiculo_idvehiculo.touched)}">
+              <label for="inputvehiculo_idvehiculo" class="col-sm-2 form-control-label">Vehiculo</label>
               <div class="col-sm-10">
-                <input [formControl]="vehiculo_idvehiculoAC" type="text" class="form-control" id="inputvehiculo_idvehiculoAC" placeholder="Vehiculo" >
-                <select class="form-control" name="vehiculo_idvehiculoAC" >
+                <select [formControl]="vehiculo_idvehiculo" class="form-control" name="vehiculo_idvehiculo" >
                   <option *ngFor="let vehiculo of vehiculos" [value]="vehiculo.idvehiculo">
                     {{ vehiculo.idvehiculo }}
                   </option>
@@ -24,32 +23,40 @@
               </div>
             </div>
 
-            <div class="form-group row" [ngClass]="{'has-error': (!statusAC.valid && statusAC.touched), 'has-success': (statusAC.valid && statusAC.touched)}">
-              <label for="inputstatusAC" class="col-sm-2 form-control-label">Status</label>
+            <div class="form-group row" [ngClass]="{'has-error': (!status.valid && status.touched), 'has-success': (status.valid && status.touched)}">
+              <label for="inputstatus" class="col-sm-2 form-control-label">Status</label>
               <div class="col-sm-10">
-                <input [formControl]="statusAC" type="text" class="form-control" id="inputstatusAC" placeholder="Status" >
+                <input [formControl]="status" type="text" class="form-control" id="inputstatus" placeholder="Status" >
               </div>
             </div>
 
-            <div class="form-group row" [ngClass]="{'has-error': (!fechaAC.valid && fechaAC.touched), 'has-success': (fechaAC.valid && fechaAC.touched)}">
-              <label for="inputfechaAC" class="col-sm-2 form-control-label">Fecha</label>
+            <div class="form-group row" [ngClass]="{'has-error': (!fecha.valid && fecha.touched), 'has-success': (fecha.valid && fecha.touched)}">
+              <label for="inputfecha" class="col-sm-2 form-control-label">Fecha</label>
               <div class="col-sm-10">
-                <input [formControl]="fechaAC" type="text" class="form-control" id="inputfechaAC" placeholder="Fecha" >
+                <input [formControl]="fecha" type="date" class="form-control" id="inputfecha" placeholder="Fecha" >
               </div>
             </div>
 
-            <div class="form-group row" [ngClass]="{'has-error': (!permisotaxi_idpermisotaxiAC.valid && permisotaxi_idpermisotaxiAC.touched), 'has-success': (permisotaxi_idpermisotaxiAC.valid && permisotaxi_idpermisotaxiAC.touched)}">
-              <label for="inputpermisotaxi_idpermisotaxiAC" class="col-sm-2 form-control-label">Permiso Taxi</label>
+            <div class="form-group row" [ngClass]="{'has-error': (!permisotaxi_idpermisotaxi.valid && permisotaxi_idpermisotaxi.touched), 'has-success': (permisotaxi_idpermisotaxi.valid && permisotaxi_idpermisotaxi.touched)}">
+              <label for="inputpermisotaxi_idpermisotaxi" class="col-sm-2 form-control-label">Permiso Taxi</label>
               <div class="col-sm-10">
-                <input [formControl]="permisotaxi_idpermisotaxiAC" type="text" class="form-control" id="inputpermisotaxi_idpermisotaxiAC" placeholder="Permiso Taxi" >
+                <select [formControl]="permisotaxi_idpermisotaxi" class="form-control" name="permisotaxi_idpermisotaxi">
+                  <option *ngFor="let permiso of permisos" [value]="permiso.idpermisotaxi">
+                    {{ permiso.numero }}
+                  </option>
+                </select>
               </div>
             </div>
 
 
-            <div class="form-group row" [ngClass]="{'has-error': (!chofer_idchoferAC.valid && chofer_idchoferAC.touched), 'has-success': (chofer_idchoferAC.valid && chofer_idchoferAC.touched)}">
-              <label for="inputchofer_idchoferAC" class="col-sm-2 form-control-label">Chofer</label>
+            <div class="form-group row" [ngClass]="{'has-error': (!chofer_idchofer.valid && chofer_idchofer.touched), 'has-success': (chofer_idchofer.valid && chofer_idchofer.touched)}">
+              <label for="inputchofer_idchofer" class="col-sm-2 form-control-label">Chofer</label>
               <div class="col-sm-10">
-                <input [formControl]="chofer_idchoferAC" type="text" class="form-control" id="inputchofer_idchoferAC" placeholder="Chofer" >
+                <select [formControl]="chofer_idchofer" class="form-control" name="chofer_idchofer">
+                  <option *ngFor="let chofer of choferes" [value]="chofer.idchofer">
+                    {{ chofer.idchofer }}
+                  </option>
+                </select>
               </div>
             </div>
 

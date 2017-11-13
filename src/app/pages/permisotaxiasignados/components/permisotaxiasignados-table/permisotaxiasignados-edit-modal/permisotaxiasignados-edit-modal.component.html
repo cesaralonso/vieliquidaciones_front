@@ -29,7 +29,7 @@
             <div class="form-group row" [ngClass]="{'has-error': (!fechaAC.valid && fechaAC.touched), 'has-success': (fechaAC.valid && fechaAC.touched)}">
               <label for="inputfechaAC" class="col-sm-2 form-control-label">Fecha</label>
               <div class="col-sm-10">
-                <input [(ngModel)]="fecha" [formControl]="fechaAC" type="text" class="form-control" id="inputfechaAC" placeholder="Fecha" >
+                <input [value]="fecha | date:'yyyy-MM-dd'" (input)="fecha=parseDate($event.target.value)" [formControl]="fechaAC" type="date" class="form-control" id="inputfechaAC" placeholder="Fecha" >
               </div>
             </div>
 

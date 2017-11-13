@@ -33,17 +33,18 @@ export class PermisotaxiasignadosAddModalComponent extends DialogComponent<Permi
   form: FormGroup;
   submitted: boolean = false;
 
-  vehiculo_idvehiculoAC: AbstractControl;
-  permisotaxi_idpermisotaxiAC: AbstractControl;
-  fechaAC: AbstractControl;
-  statusAC: AbstractControl;
-  chofer_idchoferAC: AbstractControl;
+  public vehiculo_idvehiculo: AbstractControl;
+  public permisotaxi_idpermisotaxi: AbstractControl;
+  public fecha: AbstractControl;
+  public status: AbstractControl;
+  public chofer_idchofer: AbstractControl;
+  
   public choferes: ChoferesInterface[];
   public permisos: PermisotaxisInterface[];
   public vehiculos: VehiculosInterface[];
 
   constructor(
-    private service: PermisotaxiasignadosService,
+    private permisotaxiasignadosService: PermisotaxiasignadosService,
     fb: FormBuilder,
     private toastrService: ToastrService,
     private authLocalstorage: AuthLocalstorage,
@@ -54,18 +55,18 @@ export class PermisotaxiasignadosAddModalComponent extends DialogComponent<Permi
   ) {
     super(dialogService);
     this.form = fb.group({
-      'vehiculo_idvehiculoAC' : ['', Validators.compose([Validators.required, Validators.minLength(1)])],
-      'permisotaxi_idpermisotaxiAC' : ['', Validators.compose([Validators.required, Validators.minLength(1)])],
-      'fechaAC' : ['', Validators.compose([Validators.required, Validators.minLength(1)])],
-      'statusAC' : ['', Validators.compose([Validators.required, Validators.minLength(1)])],
-      'chofer_idchoferAC' : ['', Validators.compose([Validators.required, Validators.minLength(1)])],
+      'vehiculo_idvehiculo' : ['', Validators.compose([Validators.required, Validators.minLength(1)])],
+      'permisotaxi_idpermisotaxi' : ['', Validators.compose([Validators.required, Validators.minLength(1)])],
+      'fecha' : ['', Validators.compose([Validators.required, Validators.minLength(1)])],
+      'status' : ['', Validators.compose([Validators.required, Validators.minLength(1)])],
+      'chofer_idchofer' : ['', Validators.compose([Validators.required, Validators.minLength(1)])],
 
     });
-    this.vehiculo_idvehiculoAC = this.form.controls['vehiculo_idvehiculoAC'];
-    this.permisotaxi_idpermisotaxiAC = this.form.controls['permisotaxi_idpermisotaxiAC'];
-    this.fechaAC = this.form.controls['fechaAC'];
-    this.statusAC = this.form.controls['statusAC'];
-    this.chofer_idchoferAC = this.form.controls['chofer_idchoferAC'];
+    this.vehiculo_idvehiculo = this.form.controls['vehiculo_idvehiculo'];
+    this.permisotaxi_idpermisotaxi = this.form.controls['permisotaxi_idpermisotaxi'];
+    this.fecha = this.form.controls['fecha'];
+    this.status = this.form.controls['status'];
+    this.chofer_idchofer = this.form.controls['chofer_idchofer'];
 
   }
 
@@ -75,21 +76,19 @@ export class PermisotaxiasignadosAddModalComponent extends DialogComponent<Permi
     this.getAllPermisos()
     this.getAllVehiculos()
   }
+
   confirm() {
     this.result = this.data;
     this.close();
   }
+
   onSubmit(values: PermisotaxiasignadosInterface): void {
-    this.submitted = true;
-    if (this.form.valid) {
-      this.service
-        .addPermisotaxiasignados(values)
-        .subscribe(
-            (data: any) => {
-              this.data = data;
-              this.confirm();
-            });
-    }
+    console.log(values)
+    this.permisotaxiasignadosService.create( values )
+      .subscribe( data => {
+        this.data = data;
+        this.confirm();
+      });
   }
 
   getAllChoferes() {

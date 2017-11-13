@@ -30,19 +30,19 @@ export class PermisotaxiasignadosService {
        return this._http.get(this.endPoint)
            .map((response: Response) => response.json())
            .catch(this.handleError);
-   }
+    }
 
     findById = ( id ) : Observable<PermisotaxiasignadosResponseInterface> => {
        return this._http.get(`${this.endPoint}/${id}`)
            .map((response: Response) => response.json())
            .catch(this.handleError);
-   }
+    }
 
     create = ( permisotaxiasignado: PermisotaxiasignadosInterface ) : Observable<PermisotaxiasignadosResponseInterface> => {
        return this._http.post(this.endPoint, permisotaxiasignado, { headers: this.headers })
            .map((response: Response) => response.json())
            .catch(this.handleError);
-   }
+    }
 
    remove = ( choferId ): Observable<PermisotaxiasignadosInterface> => {
         return this._http.delete(`${this.endPoint}/${choferId}`, { headers: this.headers })

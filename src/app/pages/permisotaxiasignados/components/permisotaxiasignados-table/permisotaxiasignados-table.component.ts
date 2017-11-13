@@ -38,20 +38,17 @@ export class PermisotaxiasignadosTableComponent implements OnInit {
 
   editPermisotaxiasignadosModalShow(permisotaxiasignados: PermisotaxiasignadosInterface) {
       this.dialogService.addDialog(PermisotaxiasignadosEditModalComponent, permisotaxiasignados)
-      .subscribe( data => {
-        if (data) {
-          this.showToast(data);
-        }
-      },
-      error => console.log(error),
-      () => console.log('Modified complete'));
+        .subscribe( data =>
+          data ? this.showToast(data) : null,
+          error => console.log(error),
+          () => console.log('Modified complete'));
   }
 
   onDeleteConfirm(event, id): void {
     if (window.confirm('¿Estas seguro de querer eliminar este registro?')) {
-      this.service.cancelarPermisotaxiasignado(id)
+      this.service.remove(id)
         .subscribe(
-          (data) => this.showToast(data),
+          data => this.showToast(data),
           error => console.log(error),
           () => console.log('Delete completed')
         );
@@ -61,11 +58,11 @@ export class PermisotaxiasignadosTableComponent implements OnInit {
   }
 
   showToast(data) {
-      if (data.idRespuesta === 0) {
-        this.toastrService.success(data.mensajeRespuesta);
+      if (data.success) {
+        this.toastrService.success(data.message);
         this.getAllPermisotaxiasignados();
       } else {
-        this.toastrService.error(data.mensajeRespuesta);
+        this.toastrService.error(data.message);
       }
   }
 

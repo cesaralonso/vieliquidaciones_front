@@ -16,7 +16,6 @@ import { ToastrService } from 'ngx-toastr';
 
 export class PermisotaxiasignadosEditModalComponent extends DialogComponent<PermisotaxiasignadosInterface, any> implements OnInit, PermisotaxiasignadosInterface {
 
-
   idpermisotaxiasignado: number;
   vehiculo_idvehiculo: number;
   permisotaxi_idpermisotaxi: number;
@@ -28,29 +27,15 @@ export class PermisotaxiasignadosEditModalComponent extends DialogComponent<Perm
   id: number;
   data: any;
   form: FormGroup;
-  submitted: boolean = false;
 
-  permisotaxiasignado: PermisotaxiasignadosInterface = {
-
-    idpermisotaxiasignado: 0,
-    vehiculo_idvehiculo: 0,
-    permisotaxi_idpermisotaxi: 0,
-    fecha: '',
-    status: '',
-    chofer_idchofer:0,
-  };
-
-  idpermisotaxiasignadoAC: AbstractControl;
-  vehiculo_idvehiculoAC: AbstractControl;
-  permisotaxi_idpermisotaxiAC: AbstractControl;
-  fechaAC: AbstractControl;
-  statusAC: AbstractControl;
-  chofer_idchoferAC: AbstractControl;
-
-
+  public vehiculo_idvehiculoAC: AbstractControl;
+  public permisotaxi_idpermisotaxiAC: AbstractControl;
+  public fechaAC: AbstractControl;
+  public statusAC: AbstractControl;
+  public chofer_idchoferAC: AbstractControl;
 
   constructor(
-    private service: PermisotaxiasignadosService,
+    private permisotaxiasignadosService: PermisotaxiasignadosService,
     fb: FormBuilder,
     private toastrService: ToastrService,
     private authLocalstorage: AuthLocalstorage,
@@ -59,31 +44,21 @@ export class PermisotaxiasignadosEditModalComponent extends DialogComponent<Perm
     super(dialogService);
 
     this.form = fb.group({
-
-      'idpermisotaxiasignadoAC' : ['', Validators.compose([Validators.required, Validators.minLength(1)])],
       'vehiculo_idvehiculoAC' : ['', Validators.compose([Validators.required, Validators.minLength(1)])],
       'permisotaxi_idpermisotaxiAC' : ['', Validators.compose([Validators.required, Validators.minLength(1)])],
       'fechaAC' : ['', Validators.compose([Validators.required, Validators.minLength(1)])],
       'statusAC' : ['', Validators.compose([Validators.required, Validators.minLength(1)])],
       'chofer_idchoferAC' : ['', Validators.compose([Validators.required, Validators.minLength(1)])],
-
     });
-
-
-    this.idpermisotaxiasignadoAC = this.form.controls['idpermisotaxiasignadoAC'];
     this.vehiculo_idvehiculoAC = this.form.controls['vehiculo_idvehiculoAC'];
     this.permisotaxi_idpermisotaxiAC = this.form.controls['permisotaxi_idpermisotaxiAC'];
     this.fechaAC = this.form.controls['fechaAC'];
     this.statusAC = this.form.controls['statusAC'];
     this.chofer_idchoferAC = this.form.controls['chofer_idchoferAC'];
-
   }
 
   ngOnInit() {
-
-
   }
-
 
   confirm() {
     this.result = this.data;
@@ -91,36 +66,22 @@ export class PermisotaxiasignadosEditModalComponent extends DialogComponent<Perm
   }
 
   onSubmit(values: PermisotaxiasignadosInterface): void {
-    this.submitted = true;
-    if (this.form.valid) {
-      this.service
-        .editPermisotaxiasignados({
-
-
+      this.permisotaxiasignadosService.edit({
           idpermisotaxiasignado: this.idpermisotaxiasignado,
           vehiculo_idvehiculo: this.vehiculo_idvehiculo,
           permisotaxi_idpermisotaxi: this.permisotaxi_idpermisotaxi,
           fecha: this.fecha,
           status: this.status,
           chofer_idchofer: this.chofer_idchofer,
-
-
         })
         .subscribe(
             (data: any) => {
               this.data = data;
               this.confirm();
             });
-    }
   }
 
-  private getPermisotaxiasignados(): void {
-    this.service.getPermisotaxiasignados(this.id)
-        .subscribe( data => {
-          this.permisotaxiasignado = data[1];
-        },
-        error => console.log(error),
-        () => console.log('Get permisotaxiasignado complete'));
+  parseDate(dateString: string): Date {
+    return dateString ? new Date(dateString) : null
   }
-
 }
