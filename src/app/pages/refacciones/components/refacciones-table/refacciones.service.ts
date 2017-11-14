@@ -25,7 +25,7 @@ export class RefaccionesService {
         private authLocalstorage: AuthLocalstorage ) {
         this.headers = new Headers();
         this.headers.append('Content-Type', 'application/json; charset=UTF-8');
-        this.endPoint = `${this._configuration.ServerWithApiUrl}refaccion/`;
+        this.endPoint = `${this._configuration.ServerWithApiUrl}refaccion`;
     }
 
     all = (): Observable<RefaccionesResponseInterface> => {
@@ -35,31 +35,28 @@ export class RefaccionesService {
     }
 
 
-     findById = ( id ) : Observable<RefaccionesResponseInterface> => {
-           return this._http.get(`${this.endPoint}/${id}`)
-               .map((response: Response) => response.json())
-               .catch(this.handleError);
-    }
-
-
-      create = ( refaccion: RefaccionesInterface ) : Observable<RefaccionesResponseInterface> => {
-           return this._http.post(this.endPoint, refaccion, { headers: this.headers })
-               .map((response: Response) => response.json())
-               .catch(this.handleError);
-    }
-
-
-    add = ( refacciones: RefaccionesInterface ): Observable<RefaccionesResponseInterface> =>  {
-        return this._http.post(this.endPoint, refacciones, { headers: this.headers })
+    findById = ( id ) : Observable<RefaccionesResponseInterface> => {
+        return this._http.get(`${this.endPoint}/${id}`)
             .map((response: Response) => response.json())
             .catch(this.handleError);
     }
 
-    addRefacciones = (refacciones: RefaccionesInterface): Observable<RefaccionesResponseInterface> =>  {
-        this.actionUrl = `${this.endPoint}agregarRefaccion`;
-        const toAdd = JSON.stringify(refacciones);
-        return this._http.post(this.actionUrl, toAdd, { headers: this.headers })
-            .map((response: Response) => <RefaccionesResponseInterface>response.json())
+
+    create = ( refaccion: RefaccionesInterface ) : Observable<RefaccionesResponseInterface> => {
+        return this._http.post(this.endPoint, refaccion, { headers: this.headers })
+            .map((response: Response) => response.json())
+            .catch(this.handleError);
+    }
+
+    remove = ( choferId ): Observable<RefaccionesResponseInterface> => {
+        return this._http.delete(`${this.endPoint}/${choferId}`, { headers: this.headers })
+            .map((response: Response) => response.json())
+            .catch(this.handleError);
+    }
+
+    edit = (vehiculo: RefaccionesInterface): Observable<RefaccionesResponseInterface> =>  {
+        return this._http.patch(this.endPoint, vehiculo, { headers: this.headers })
+            .map((response: Response) => response.json())
             .catch(this.handleError);
     }
 

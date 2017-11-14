@@ -42,6 +42,7 @@ export const routes: Routes = [
       { path: 'fianzas', loadChildren: './fianzas/fianzas.module#FianzasModule' },
       { path: 'folios', loadChildren: './folios/folios.module#FoliosModule' },
       { path: 'liquidaciones', loadChildren: './liquidaciones/liquidaciones.module#LiquidacionesModule' },
+      { path: 'refacciones', loadChildren: './refacciones/refacciones.module#RefaccionesModule' },
       { path: 'mecanicos', loadChildren: './mecanicos/mecanicos.module#MecanicosModule' },
       { path: 'modulos', loadChildren: './modulos/modulos.module#ModulosModule' },
       { path: 'permisos', loadChildren: './permisos/permisos.module#PermisosModule' },

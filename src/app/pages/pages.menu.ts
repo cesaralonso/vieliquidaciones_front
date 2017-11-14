@@ -182,6 +182,18 @@ export const PAGES_MENU = [
           }
         }
       },
+      {
+        path: 'refacciones',
+        data: {
+          menu: {
+            title: 'Refacciones',
+            icon: 'ion-social-buffer',
+            selected: false,
+            expanded: false,
+            order: 0
+          }
+        }
+      },
       // {
       //   path: 'admin',
       //   data: {
