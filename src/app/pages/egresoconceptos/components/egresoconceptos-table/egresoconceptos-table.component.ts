@@ -1,15 +1,11 @@
-import { UploadModalComponent } from './../../../../shared/components/upload-modal/upload-modal.component';
-import { FilesUploadModalComponent } from './../../../../shared/components/files-upload-modal/files-upload-modal.component';
 import { DialogService } from 'ng2-bootstrap-modal';
 import { ToastrService } from 'ngx-toastr';
 import { EgresoconceptosInterface } from './egresoconceptos.interface';
 import { EgresoconceptosResponseInterface } from './egresoconceptos-response.interface';
 import { Component, OnInit } from '@angular/core';
 import { EgresoconceptosService } from './egresoconceptos.service';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { EgresoconceptosAddModalComponent } from './egresoconceptos-add-modal/egresoconceptos-add-modal.component';
 import { EgresoconceptosEditModalComponent } from './egresoconceptos-edit-modal/egresoconceptos-edit-modal.component';
-
 
 @Component({
   selector: 'egresoconceptos-table',
@@ -25,54 +21,27 @@ export class EgresoconceptosTableComponent implements OnInit {
     sortOrder = 'asc';
 
     constructor(
-      private service: EgresoconceptosService, 
-      private modalService: NgbModal, 
+      private egresoconceptosService: EgresoconceptosService, 
       private toastrService: ToastrService, 
       private dialogService: DialogService) {
     }
 
-    toInt(num: string) {
-        return +num;
-    }
-
     addEgresoconceptosModalShow() {
-      const disposable = this.dialogService.addDialog(EgresoconceptosAddModalComponent)
-      .subscribe( data => {
-        if (data) {
-          this.showToast(data);
-        }
-      })
+      this.dialogService.addDialog(EgresoconceptosAddModalComponent)
+        .subscribe( data => data ? this.showToast(data) : null)
     }
 
     editEgresoconceptosModalShow(egresoconceptos: EgresoconceptosInterface) {
-      const disposable = this.dialogService.addDialog(EgresoconceptosEditModalComponent, egresoconceptos)
-      .subscribe( data => {
-        if (data) {
-          this.showToast(data);
-        }
-      },
-      error => console.log(error),
-      () => console.log('Modified complete'));
+      this.dialogService.addDialog(EgresoconceptosEditModalComponent, egresoconceptos)
+        .subscribe( data => 
+          data ? this.showToast(data) : null,
+          error => console.log(error),
+          () => console.log('Modified complete'));
   }
-
-    uploadModalShow(id: number, descripcion: string) {
-      const activeModal = this.modalService.open(UploadModalComponent, { size: 'lg' });
-      activeModal.componentInstance.modalHeader = 'Agregar Archivo a Egresoconcepto';
-      activeModal.componentInstance.id = id;
-      activeModal.componentInstance.descripcion = descripcion;
-      activeModal.componentInstance.referencia = 'Egresoconcepto';
-    }
-
-    filesModalShow(id: number) {
-      const activeModal = this.modalService.open(FilesUploadModalComponent, { size: 'lg' });
-      activeModal.componentInstance.modalHeader = 'Ver Archivos de Egresoconcepto';
-      activeModal.componentInstance.id = id;
-      activeModal.componentInstance.referencia = 'Egresoconcepto';
-    }
 
     onDeleteConfirm(event, id): void {
       if (window.confirm('¿Estas seguro de querer eliminar este registro?')) {
-        this.service.cancelarEgresoconcepto(id)
+        this.egresoconceptosService.remove(id)
           .subscribe(
             (data) => this.showToast(data),
             error => console.log(error),
@@ -84,11 +53,11 @@ export class EgresoconceptosTableComponent implements OnInit {
     }
 
     showToast(data) {
-      if (data.idRespuesta === 0) {
-        this.toastrService.success(data.mensajeRespuesta);
+      if ( data.success ) {
+        this.toastrService.success(data.message);
         this.getAllEgresoconceptos();
       } else {
-        this.toastrService.error(data.mensajeRespuesta);
+        this.toastrService.error(data.message);
       }
     }
 
@@ -97,13 +66,10 @@ export class EgresoconceptosTableComponent implements OnInit {
     }
     
     private getAllEgresoconceptos(): void {
-      this.service
-          .getAllEgresoconceptos()
-          .subscribe(
-              (data: EgresoconceptosInterface[]) =>  {
-                this.data = data;
-              },
-              error => console.log(error),
-              () => console.log('Get all Items complete'))
+      this.egresoconceptosService.all()
+        .subscribe( (data: EgresoconceptosResponseInterface) =>
+            this.data = data.result,
+            error => console.log(error),
+            () => console.log('Get all Items complete'))
     } 
 }

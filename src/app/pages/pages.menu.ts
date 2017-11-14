@@ -158,66 +158,18 @@ export const PAGES_MENU = [
           }
         }
       },
-      // {
-      //   path: 'expenses',
-      //   data: {
-      //     menu: {
-      //       title: 'general.menu.gastos',
-      //       icon: 'ion-social-usd-outline',
-      //       selected: false,
-      //       expanded: false,
-      //       order: 0
-      //     }
-      //   }
-      // },
-      // {
-      //   path: 'costs',
-      //   data: {
-      //     menu: {
-      //       title: 'general.menu.costos',
-      //       icon: 'ion-social-usd',
-      //       selected: false,
-      //       expanded: false,
-      //       order: 0
-      //     }
-      //   }
-      // },
-      // {
-      //   path: 'categories',
-      //   data: {
-      //     menu: {
-      //       title: 'general.menu.categorias',
-      //       icon: 'ion-android-list',
-      //       selected: false,
-      //       expanded: false,
-      //       order: 0
-      //     }
-      //   }
-      // },
-      // {
-      //   path: 'materials',
-      //   data: {
-      //     menu: {
-      //       title: 'general.menu.materiales',
-      //       icon: 'ion-cube',
-      //       selected: false,
-      //       expanded: false,
-      //       order: 0
-      //     }
-      //   }
-      // },
-      // {
-      //   path: 'reports',
-      //   data: {
-      //     menu: {
-      //       title: 'general.menu.reportes',
-      //       icon: 'ion-ios-list-outline',
-      //       selected: false,
-      //       expanded: false,
-      //       order: 0
-      //     }
-      //   }
-      // },
+      {
+        path: 'egresoconceptos',
+        data: {
+          menu: {
+            title: 'Egreso de conceptos',
+            icon: 'ion-social-buffer',
+            selected: false,
+            expanded: false,
+            order: 0
+          }
+        }
+      },
       // {
       //   path: 'admin',
       //   data: {

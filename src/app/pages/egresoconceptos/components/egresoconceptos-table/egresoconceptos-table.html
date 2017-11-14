@@ -2,12 +2,10 @@
     <div class="row">
         <ba-card title="Listado" baCardClass="with-scroll" class="data-table-container">
             <div class="panel panel-default">
-                <!-- <div class="panel-heading">Información de Egresoconceptos</div> -->
-
                 <table class="table table-striped" [mfData]="data | dataFilter : filterQuery" #mf="mfDataTable" [mfRowsOnPage]="rowsOnPage" [(mfSortBy)]="sortBy" [(mfSortOrder)]="sortOrder">
                     <thead>
                         <tr>
-                            <th style="width: 20%"></th>
+                            <th style="width: 10%"></th>
                             <th style="width: 20%">
                                 <mfDefaultSorter by="taller_idtaller">Taller</mfDefaultSorter>
                             </th>
@@ -17,11 +15,9 @@
                             <th style="width: 20%">
                                 <mfDefaultSorter by="concepto_idconcepto">Concepto</mfDefaultSorter>
                             </th>
-
                             <th style="width: 20%">
                                 <mfDefaultSorter by="fecha">Fecha</mfDefaultSorter>
                             </th>
-
                         </tr>
                     </thead>
                     <tbody>
@@ -29,15 +25,11 @@
                             <td>
                                 <button (click)="editEgresoconceptosModalShow(item)" class="btn btn-sm btn-info"><i class="fa fa-edit"></i></button>
                                 <button (click)="onDeleteConfirm($event, item.idegresoconcepto)" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></button>
-                                <button (click)="uploadModalShow(item.idegresoconcepto, item.taller_idtaller)" class="btn btn-sm btn-success"><i class="fa fa-file"></i></button>
-                                <button (click)="filesModalShow(item.idegresoconcepto)" class="btn btn-sm btn-warning"><i class="fa fa-eye"></i></button>
                             </td>
                             <td>{{ item.taller_idtaller }}</td>
                             <td>{{ item.total }}</td>
                             <td>{{ item.concepto_idconcepto }}</td>
-
-                            <td>{{ item.fecha }}</td>
-
+                            <td>{{ item.fecha | date }}</td>
                         </tr>
                     </tbody>
                     <tfoot>
