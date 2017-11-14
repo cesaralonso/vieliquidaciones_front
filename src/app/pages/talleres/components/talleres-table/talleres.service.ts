@@ -23,26 +23,38 @@ export class TalleresService {
         private authLocalstorage: AuthLocalstorage ) {
         this.headers = new Headers();
         this.headers.append('Content-Type', 'application/json; charset=UTF-8');
-        this.endPoint = `${this._configuration.ServerWithApiUrl}chofer`;                
+        this.endPoint = `${this._configuration.ServerWithApiUrl}taller`;                
     }
 
     all = () : Observable<TalleresResponseInterface> => {
-           return this._http.get(this.endPoint)
-               .map((response: Response) => response.json())
-               .catch(this.handleError);
-       }
+        return this._http.get(this.endPoint)
+            .map((response: Response) => response.json())
+            .catch(this.handleError);
+    }
 
-     findById = ( id ) : Observable<TalleresResponseInterface> => {
-           return this._http.get(`${this.endPoint}/${id}`)
-               .map((response: Response) => response.json())
-               .catch(this.handleError);
-       }
+    findById = ( id ) : Observable<TalleresResponseInterface> => {
+        return this._http.get(`${this.endPoint}/${id}`)
+            .map((response: Response) => response.json())
+            .catch(this.handleError);
+    }
 
-      create = ( taller: TalleresInterface ) : Observable<TalleresResponseInterface> => {
-           return this._http.post(this.endPoint, taller, { headers: this.headers })
-               .map((response: Response) => response.json())
-               .catch(this.handleError);
-       }
+    create = ( taller: TalleresInterface ) : Observable<TalleresResponseInterface> => {
+        return this._http.post(this.endPoint, taller, { headers: this.headers })
+            .map((response: Response) => response.json())
+            .catch(this.handleError);
+    }
+
+    remove = ( choferId ): Observable<TalleresResponseInterface> => {
+        return this._http.delete(`${this.endPoint}/${choferId}`, { headers: this.headers })
+            .map((response: Response) => response.json())
+            .catch(this.handleError);
+    }
+
+    edit = (vehiculo: TalleresInterface): Observable<TalleresResponseInterface> =>  {
+        return this._http.patch(this.endPoint, vehiculo, { headers: this.headers })
+            .map((response: Response) => response.json())
+            .catch(this.handleError);
+    }
 
     addTalleres = (talleres: TalleresInterface): Observable<TalleresResponseInterface> =>  {
         this.actionUrl = `${this._configuration.ServerWithApiUrl}agregarTaller`;

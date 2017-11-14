@@ -21,15 +21,15 @@ export class TalleresAddModalComponent extends DialogComponent<TalleresInterface
   form: FormGroup;
   submitted: boolean = false;
 
-    nombreAC: AbstractControl;
-    direccionAC: AbstractControl;
-    descripcionAC: AbstractControl;
-    telefonoAC: AbstractControl;
-    coordenada_idcoordenadaAC: AbstractControl;
+  public nombre: AbstractControl;
+  public direccion: AbstractControl;
+  public descripcion: AbstractControl;
+  public telefono: AbstractControl;
+  public coordenada_idcoordenada: AbstractControl;
 
 
   constructor(
-    private service: TalleresService,
+    private talleresService: TalleresService,
     fb: FormBuilder,
     private toastrService: ToastrService,
     private authLocalstorage: AuthLocalstorage,
@@ -39,40 +39,32 @@ export class TalleresAddModalComponent extends DialogComponent<TalleresInterface
 
 
     this.form = fb.group({
-
-            'nombreAC' : ['', Validators.compose([Validators.required, Validators.minLength(1)])],
-            'direccionAC' : ['', Validators.compose([Validators.required, Validators.minLength(1)])],
-            'descripcionAC' : ['', Validators.compose([Validators.required, Validators.minLength(1)])],
-            'telefonoAC' : ['', Validators.compose([Validators.required, Validators.minLength(1)])],
-            'coordenada_idcoordenadaAC' : ['', Validators.compose([Validators.required, Validators.minLength(1)])],
-
+      'nombre' : ['', Validators.compose([Validators.required, Validators.minLength(1)])],
+      'direccion' : ['', Validators.compose([Validators.required, Validators.minLength(1)])],
+      'descripcion' : ['', Validators.compose([Validators.required, Validators.minLength(1)])],
+      'telefono' : ['', Validators.compose([Validators.required, Validators.minLength(1)])],
+      'coordenada_idcoordenada' : ['', Validators.compose([Validators.required, Validators.minLength(1)])],
     });
-
-        this.nombreAC = this.form.controls['nombreAC'];
-        this.direccionAC = this.form.controls['direccionAC'];
-        this.descripcionAC = this.form.controls['descripcionAC'];
-        this.telefonoAC = this.form.controls['telefonoAC'];
-        this.coordenada_idcoordenadaAC = this.form.controls['coordenada_idcoordenadaAC'];
+    this.nombre = this.form.controls['nombre'];
+    this.direccion = this.form.controls['direccion'];
+    this.descripcion = this.form.controls['descripcion'];
+    this.telefono = this.form.controls['telefono'];
+    this.coordenada_idcoordenada = this.form.controls['coordenada_idcoordenada'];
   }
-
 
   ngOnInit() {
-
   }
+
   confirm() {
     this.result = this.data;
     this.close();
   }
+
   onSubmit(values: TalleresInterface): void {
-    this.submitted = true;
-    if (this.form.valid) {
-      this.service
-        .addTalleres(values)
-        .subscribe(
-            (data: any) => {
-              this.data = data;
-              this.confirm();
-            });
-    }
+    this.talleresService.create(values)
+      .subscribe( data => {
+        this.data = data;
+        this.confirm();
+      });
   }
 }

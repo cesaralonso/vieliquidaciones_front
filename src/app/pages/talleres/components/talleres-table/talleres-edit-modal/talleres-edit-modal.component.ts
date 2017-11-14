@@ -30,22 +30,12 @@ export class TalleresEditModalComponent extends DialogComponent<TalleresInterfac
   form: FormGroup;
   submitted: boolean = false;
 
-  taller: TalleresInterface = {
-
-    idtaller: 0,
-    nombre: '',
-    direccion: '',
-    descripcion: '',
-    telefono:0,
-    coordenada_idcoordenada:0,
-  };
-
-  idtallerAC: AbstractControl;
-  nombreAC: AbstractControl;
-  direccionAC: AbstractControl;
-  descripcionAC: AbstractControl;
-  telefonoAC: AbstractControl;
-  coordenada_idcoordenadaAC: AbstractControl;
+  public idtallerAC: AbstractControl;
+  public nombreAC: AbstractControl;
+  public direccionAC: AbstractControl;
+  public descripcionAC: AbstractControl;
+  public telefonoAC: AbstractControl;
+  public coordenada_idcoordenadaAC: AbstractControl;
 
 
 
@@ -57,31 +47,21 @@ export class TalleresEditModalComponent extends DialogComponent<TalleresInterfac
     dialogService: DialogService,
   ) {
     super(dialogService);
-
     this.form = fb.group({
-
-      'idtallerAC' : ['', Validators.compose([Validators.required, Validators.minLength(1)])],
       'nombreAC' : ['', Validators.compose([Validators.required, Validators.minLength(1)])],
       'direccionAC' : ['', Validators.compose([Validators.required, Validators.minLength(1)])],
       'descripcionAC' : ['', Validators.compose([Validators.required, Validators.minLength(1)])],
       'telefonoAC' : ['', Validators.compose([Validators.required, Validators.minLength(1)])],
       'coordenada_idcoordenadaAC' : ['', Validators.compose([Validators.required, Validators.minLength(1)])],
-
     });
-
-
-    this.idtallerAC = this.form.controls['idtallerAC'];
     this.nombreAC = this.form.controls['nombreAC'];
     this.direccionAC = this.form.controls['direccionAC'];
     this.descripcionAC = this.form.controls['descripcionAC'];
     this.telefonoAC = this.form.controls['telefonoAC'];
     this.coordenada_idcoordenadaAC = this.form.controls['coordenada_idcoordenadaAC'];
-
   }
 
   ngOnInit() {
-
-
   }
 
 
@@ -91,36 +71,17 @@ export class TalleresEditModalComponent extends DialogComponent<TalleresInterfac
   }
 
   onSubmit(values: TalleresInterface): void {
-    this.submitted = true;
-    if (this.form.valid) {
-      this.service
-        .editTalleres({
-
-
-          idtaller: this.idtaller,
-          nombre: this.nombre,
-          direccion: this.direccion,
-          descripcion: this.descripcion,
-          telefono: this.telefono,
-          coordenada_idcoordenada: this.coordenada_idcoordenada,
-
-
-        })
-        .subscribe(
-            (data: any) => {
-              this.data = data;
-              this.confirm();
-            });
-    }
-  }
-
-  private getTalleres(): void {
-    this.service.getTalleres(this.id)
-        .subscribe( data => {
-          this.taller = data[1];
-        },
-        error => console.log(error),
-        () => console.log('Get taller complete'));
+    this.service.edit({
+        idtaller: this.idtaller,
+        nombre: this.nombre,
+        direccion: this.direccion,
+        descripcion: this.descripcion,
+        telefono: this.telefono,
+        coordenada_idcoordenada: this.coordenada_idcoordenada,
+      }).subscribe( data => {
+        this.data = data;
+        this.confirm();
+      });
   }
 
 }

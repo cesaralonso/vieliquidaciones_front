@@ -12,38 +12,38 @@
         <div class="modal-body" style="height: 65vh; overflow-y: auto;">
           <ba-card cardTitle="Información de la Taller">
 
-            <div class="form-group row" [ngClass]="{'has-error': (!nombreAC.valid && nombreAC.touched), 'has-success': (nombreAC.valid && nombreAC.touched)}">
-              <label for="inputnombreAC" class="col-sm-2 form-control-label">Nombre</label>
+            <div class="form-group row" [ngClass]="{'has-error': (!nombre.valid && nombre.touched), 'has-success': (nombre.valid && nombre.touched)}">
+              <label for="inputnombre" class="col-sm-2 form-control-label">Nombre</label>
               <div class="col-sm-10">
-                <input [(ngModel)]="nombre" [formControl]="nombreAC" type="text" class="form-control" id="inputnombreAC" placeholder="Nombre" >
+                <input [formControl]="nombre" type="text" class="form-control" id="inputnombre" placeholder="Nombre" >
               </div>
             </div>
 
-            <div class="form-group row" [ngClass]="{'has-error': (!direccionAC.valid && direccionAC.touched), 'has-success': (direccionAC.valid && direccionAC.touched)}">
-              <label for="inputdireccionAC" class="col-sm-2 form-control-label">Direccion</label>
+            <div class="form-group row" [ngClass]="{'has-error': (!direccion.valid && direccion.touched), 'has-success': (direccion.valid && direccion.touched)}">
+              <label for="inputdireccion" class="col-sm-2 form-control-label">Direccion</label>
               <div class="col-sm-10">
-                <input [(ngModel)]="direccion" [formControl]="direccionAC" type="text" class="form-control" id="inputdireccionAC" placeholder="Direccion" >
+                <input [formControl]="direccion" type="text" class="form-control" id="inputdireccion" placeholder="Direccion" >
               </div>
             </div>
 
-            <div class="form-group row" [ngClass]="{'has-error': (!telefonoAC.valid && telefonoAC.touched), 'has-success': (telefonoAC.valid && telefonoAC.touched)}">
-              <label for="inputtelefonoAC" class="col-sm-2 form-control-label">Telefono</label>
+            <div class="form-group row" [ngClass]="{'has-error': (!telefono.valid && telefono.touched), 'has-success': (telefono.valid && telefono.touched)}">
+              <label for="inputtelefono" class="col-sm-2 form-control-label">Telefono</label>
               <div class="col-sm-10">
-                <input [(ngModel)]="telefono" [formControl]="telefonoAC" type="text" class="form-control" id="inputtelefonoAC" placeholder="Telefono" >
+                <input [formControl]="telefono" type="text" class="form-control" id="inputtelefono" placeholder="Telefono" >
               </div>
             </div>
 
-            <div class="form-group row" [ngClass]="{'has-error': (!descripcionAC.valid && descripcionAC.touched), 'has-success': (descripcionAC.valid && descripcionAC.touched)}">
-              <label for="inputdescripcionAC" class="col-sm-2 form-control-label">Descripcion</label>
+            <div class="form-group row" [ngClass]="{'has-error': (!descripcion.valid && descripcion.touched), 'has-success': (descripcion.valid && descripcion.touched)}">
+              <label for="inputdescripcion" class="col-sm-2 form-control-label">Descripcion</label>
               <div class="col-sm-10">
-                <input [(ngModel)]="descripcion" [formControl]="descripcionAC" type="text" class="form-control" id="inputdescripcionAC" placeholder="Descripcion" >
+                <input [formControl]="descripcion" type="text" class="form-control" id="inputdescripcion" placeholder="Descripcion" >
               </div>
             </div>
 
-            <div class="form-group row" [ngClass]="{'has-error': (!coordenada_idcoordenadaAC.valid && coordenada_idcoordenadaAC.touched), 'has-success': (coordenada_idcoordenadaAC.valid && coordenada_idcoordenadaAC.touched)}">
-              <label for="inputcoordenada_idcoordenadaAC" class="col-sm-2 form-control-label">Coordenada</label>
+            <div class="form-group row" [ngClass]="{'has-error': (!coordenada_idcoordenada.valid && coordenada_idcoordenada.touched), 'has-success': (coordenada_idcoordenada.valid && coordenada_idcoordenada.touched)}">
+              <label for="inputcoordenada_idcoordenada" class="col-sm-2 form-control-label">Coordenada</label>
               <div class="col-sm-10">
-                <input [(ngModel)]="coordenada_idcoordenada" [formControl]="coordenada_idcoordenadaAC" type="text" class="form-control" id="inputcoordenada_idcoordenadaAC" placeholder="Coordenada" >
+                <input [formControl]="coordenada_idcoordenada" type="text" class="form-control" id="inputcoordenada_idcoordenada" placeholder="Coordenada" >
               </div>
             </div>
 
