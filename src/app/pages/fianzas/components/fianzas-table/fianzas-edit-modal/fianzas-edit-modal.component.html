@@ -26,21 +26,23 @@
               </div>
             </div>
 
-            <div class="form-group row" [ngClass]="{'has-error': (!montoadeudado.valid && montoadeudado.touched), 'has-success': (montoadeudado.valid && montoadeudado.touched)}">
-              <label for="inputmontoadeudado" class="col-sm-2 form-control-label">Monto Adeudado</label>
+            <div class="form-group row" [ngClass]="{'has-error': (!montoadeudadoAC.valid && montoadeudadoAC.touched), 'has-success': (montoadeudadoAC.valid && montoadeudadoAC.touched)}">
+              <label for="inputmontoadeudadoAC" class="col-sm-2 form-control-label">Monto Adeudado</label>
               <div class="col-sm-10">
-                <input [(ngModel)]="montoadeudado" [formControl]="montoadeudado" type="text" class="form-control" id="inputmontoadeudado" placeholder="Monto Adeudado" >
+                <input [(ngModel)]="montoadeudado" [formControl]="montoadeudadoAC" type="text" class="form-control" id="inputmontoadeudado" placeholder="Monto Adeudado" >
               </div>
             </div>
 
             <div class="form-group row" [ngClass]="{'has-error': (!chofer_idchoferAC.valid && chofer_idchoferAC.touched), 'has-success': (chofer_idchoferAC.valid && chofer_idchoferAC.touched)}">
               <label for="inputchofer_idchoferAC" class="col-sm-2 form-control-label">Chofer</label>
               <div class="col-sm-10">
-                <input [(ngModel)]="chofer_idchofer" [formControl]="chofer_idchoferAC" type="text" class="form-control" id="inputchofer_idchoferAC" placeholder="Chofer" >
+                <select [(ngModel)]="chofer_idchofer" class="form-control" [formControl]="chofer_idchoferAC" name="chofer_idchofer">
+                    <option *ngFor="let chofer of choferes" [value]="chofer.idchofer">
+                      {{ chofer.idchofer }}
+                    </option>
+                  </select>
               </div>
             </div>
-
-
           </ba-card>
         </div>
         <div class="modal-footer">

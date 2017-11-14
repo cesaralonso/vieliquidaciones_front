@@ -1,5 +1,3 @@
-import { UploadModalComponent } from './../../../../shared/components/upload-modal/upload-modal.component';
-import { FilesUploadModalComponent } from './../../../../shared/components/files-upload-modal/files-upload-modal.component';
 import { DialogService } from 'ng2-bootstrap-modal';
 import { ToastrService } from 'ngx-toastr';
 import { FianzasInterface } from './fianzas.interface';
@@ -25,56 +23,31 @@ export class FianzasTableComponent implements OnInit {
     sortOrder = 'asc';
 
     constructor(
-      private service: FianzasService, 
+      private fianzasService: FianzasService, 
       private modalService: NgbModal, 
       private toastrService: ToastrService, 
-      private dialogService: DialogService) {
-    }
-
-    toInt(num: string) {
-        return +num;
+      private dialogService: DialogService
+    ) {
     }
 
     addFianzasModalShow() {
-      const disposable = this.dialogService.addDialog(FianzasAddModalComponent)
-      .subscribe( data => {
-        if (data) {
-          this.showToast(data);
-        }
-      })
+      this.dialogService.addDialog(FianzasAddModalComponent)
+        .subscribe( data => data ? this.showToast(data) : null )
     }
 
     editFianzasModalShow(fianzas: FianzasInterface) {
-      const disposable = this.dialogService.addDialog(FianzasEditModalComponent, fianzas)
-      .subscribe( data => {
-        if (data) {
-          this.showToast(data);
-        }
-      },
-      error => console.log(error),
-      () => console.log('Modified complete'));
-  }
-
-    uploadModalShow(id: number, descripcion: string) {
-      const activeModal = this.modalService.open(UploadModalComponent, { size: 'lg' });
-      activeModal.componentInstance.modalHeader = 'Agregar Archivo a Fianza';
-      activeModal.componentInstance.id = id;
-      activeModal.componentInstance.descripcion = descripcion;
-      activeModal.componentInstance.referencia = 'Fianza';
-    }
-
-    filesModalShow(id: number) {
-      const activeModal = this.modalService.open(FilesUploadModalComponent, { size: 'lg' });
-      activeModal.componentInstance.modalHeader = 'Ver Archivos de Fianza';
-      activeModal.componentInstance.id = id;
-      activeModal.componentInstance.referencia = 'Fianza';
+      this.dialogService.addDialog(FianzasEditModalComponent, fianzas)
+        .subscribe( data => 
+          data ? this.showToast(data) : null,
+          error => console.log(error),
+          () => console.log('Modified complete'));
     }
 
     onDeleteConfirm(event, id): void {
       if (window.confirm('¿Estas seguro de querer eliminar este registro?')) {
-        this.service.cancelarFianza(id)
+        this.fianzasService.remove(id)
           .subscribe(
-            (data) => this.showToast(data),
+            data => this.showToast(data),
             error => console.log(error),
             () => console.log('Delete completed')
           );
@@ -84,11 +57,11 @@ export class FianzasTableComponent implements OnInit {
     }
 
     showToast(data) {
-      if (data.idRespuesta === 0) {
-        this.toastrService.success(data.mensajeRespuesta);
+      if ( data.success ) {
+        this.toastrService.success(data.message);
         this.getAllFianzas();
       } else {
-        this.toastrService.error(data.mensajeRespuesta);
+        this.toastrService.error(data.message);
       }
     }
 
@@ -97,13 +70,10 @@ export class FianzasTableComponent implements OnInit {
     }
     
     private getAllFianzas(): void {
-      this.service
-          .getAllFianzas()
-          .subscribe(
-              (data: FianzasInterface[]) =>  {
-                this.data = data;
-              },
-              error => console.log(error),
-              () => console.log('Get all Items complete'))
+      this.fianzasService.all()
+        .subscribe( (data: FianzasResponseInterface) =>
+          this.data = data.result,
+          error => console.log(error),
+          () => console.log('Get all Items complete'))
     } 
 }

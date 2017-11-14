@@ -23,27 +23,38 @@ export class FianzasService {
         private authLocalstorage: AuthLocalstorage ) {
         this.headers = new Headers();
         this.headers.append('Content-Type', 'application/json; charset=UTF-8');
-        this.endPoint = `${this._configuration.ServerWithApiUrl}chofer`;        
+        this.endPoint = `${this._configuration.ServerWithApiUrl}fianza`;        
     }
 
     all = () : Observable<FianzasResponseInterface> => {
        return this._http.get(this.endPoint)
            .map((response: Response) => response.json())
            .catch(this.handleError);
-   }
+    }
 
- findById = ( id ) : Observable<FianzasResponseInterface> => {
+    findById = ( id ) : Observable<FianzasResponseInterface> => {
        return this._http.get(`${this.endPoint}/${id}`)
            .map((response: Response) => response.json())
            .catch(this.handleError);
-   }
+    }
 
-  create = ( fianza: FianzasInterface ) : Observable<FianzasResponseInterface> => {
+    create = ( fianza: FianzasInterface ) : Observable<FianzasResponseInterface> => {
        return this._http.post(this.endPoint, fianza, { headers: this.headers })
            .map((response: Response) => response.json())
            .catch(this.handleError);
-   }
+    }
 
+    remove = ( choferId ): Observable<FianzasResponseInterface> => {
+        return this._http.delete(`${this.endPoint}/${choferId}`, { headers: this.headers })
+            .map((response: Response) => response.json())
+            .catch(this.handleError);
+    }
+
+    edit = (choferes: FianzasInterface): Observable<FianzasResponseInterface> =>  {
+        return this._http.patch(this.endPoint, choferes, { headers: this.headers })
+            .map((response: Response) => response.json())
+            .catch(this.handleError);
+    }
 
     addFianzas = (fianzas: FianzasInterface): Observable<FianzasResponseInterface> =>  {
         this.actionUrl = `${this._configuration.ServerWithApiUrl}agregarFianza`;
