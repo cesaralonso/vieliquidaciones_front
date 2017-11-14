@@ -74,6 +74,90 @@ export const PAGES_MENU = [
           }
         }
       },
+      {
+        path: 'fianzas',
+        data: {
+          menu: {
+            title: 'Fianzas',
+            icon: 'ion-social-buffer',
+            selected: false,
+            expanded: false,
+            order: 0
+          }
+        }
+      },
+      {
+        path: 'talleres',
+        data: {
+          menu: {
+            title: 'Talleres',
+            icon: 'ion-social-buffer',
+            selected: false,
+            expanded: false,
+            order: 0
+          }
+        }
+      },
+      {
+        path: 'mecanicos',
+        data: {
+          menu: {
+            title: 'Mecánicos',
+            icon: 'ion-social-buffer',
+            selected: false,
+            expanded: false,
+            order: 0
+          }
+        }
+      },
+      {
+        path: 'modulos',
+        data: {
+          menu: {
+            title: 'Módulos',
+            icon: 'ion-social-buffer',
+            selected: false,
+            expanded: false,
+            order: 0
+          }
+        }
+      },
+      {
+        path: 'bonificaciones',
+        data: {
+          menu: {
+            title: 'Bonifiaciones',
+            icon: 'ion-social-buffer',
+            selected: false,
+            expanded: false,
+            order: 0
+          }
+        }
+      },
+      {
+        path: 'corralones',
+        data: {
+          menu: {
+            title: 'Corralón',
+            icon: 'ion-social-buffer',
+            selected: false,
+            expanded: false,
+            order: 0
+          }
+        }
+      },
+      {
+        path: 'enviotalleres',
+        data: {
+          menu: {
+            title: 'Envío a taller',
+            icon: 'ion-social-buffer',
+            selected: false,
+            expanded: false,
+            order: 0
+          }
+        }
+      },
       // {
       //   path: 'expenses',
       //   data: {
