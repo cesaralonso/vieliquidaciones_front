@@ -1,3 +1,4 @@
+import { PermisotaxiasignadosInterface } from './../../../../permisotaxiasignados/components/permisotaxiasignados-table/permisotaxiasignados.interface';
 import { PermisotaxiasignadosService } from './../../../../permisotaxiasignados/components/permisotaxiasignados-table/permisotaxiasignados.service';
 import { TalleresService } from 'app/pages/talleres/components/talleres-table/talleres.service';
 import { DialogComponent, DialogService } from 'ng2-bootstrap-modal';
@@ -7,6 +8,7 @@ import { EnviotalleresInterface } from './../enviotalleres.interface';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, AbstractControl, FormBuilder, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
+import { TalleresInterface } from 'app/pages/talleres/components/talleres-table/talleres.interface';
 
 @Component({
   selector: 'edit-service-modal',
@@ -34,6 +36,8 @@ export class EnviotalleresEditModalComponent extends DialogComponent<Enviotaller
   public permisotaxiasignado_idpermisotaxiasignadoAC: AbstractControl;
   public fechaAC: AbstractControl;
   public motivoAC: AbstractControl;
+  public talleres: TalleresInterface[]
+  public permisos: PermisotaxiasignadosInterface[]
   constructor(
     private enviotalleresService: EnviotalleresService,
     fb: FormBuilder,
@@ -47,7 +51,7 @@ export class EnviotalleresEditModalComponent extends DialogComponent<Enviotaller
     this.form = fb.group({
       'taller_idtallerAC' : ['', Validators.compose([Validators.required, Validators.minLength(1)])],
       'permisotaxiasignado_idpermisotaxiasignadoAC' : ['', Validators.compose([Validators.required, Validators.minLength(1)])],
-      'motivo' : ['', Validators.compose([Validators.required, Validators.minLength(1)])],
+      'motivoAC' : ['', Validators.compose([Validators.required, Validators.minLength(1)])],
       'fechaAC' : ['', Validators.compose([Validators.required, Validators.minLength(1)])],
     });
     this.taller_idtallerAC = this.form.controls['taller_idtallerAC'];
@@ -57,6 +61,8 @@ export class EnviotalleresEditModalComponent extends DialogComponent<Enviotaller
   }
 
   ngOnInit() {
+    this.getAllPermisos()
+    this.getAllTalleres()
   }
 
   confirm() {
@@ -76,5 +82,17 @@ export class EnviotalleresEditModalComponent extends DialogComponent<Enviotaller
         this.confirm();
       });
   }
+  getAllTalleres() {
+    this.talleresService.all()
+      .subscribe( res => res.success ? this.talleres = res.result : null)
+  }
 
+  getAllPermisos() {
+    this.permisotaxiasignadosService.all()
+      .subscribe( res => res.success ? this.permisos = res.result : null)
+  }
+
+  parseDate(dateString: string): Date {
+    return dateString ? new Date(dateString) : null
+  }
 }
