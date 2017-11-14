@@ -1,12 +1,9 @@
-import { UploadModalComponent } from './../../../../shared/components/upload-modal/upload-modal.component';
-import { FilesUploadModalComponent } from './../../../../shared/components/files-upload-modal/files-upload-modal.component';
 import { DialogService } from 'ng2-bootstrap-modal';
 import { ToastrService } from 'ngx-toastr';
 import { MecanicosInterface } from './mecanicos.interface';
 import { MecanicosResponseInterface } from './mecanicos-response.interface';
 import { Component, OnInit } from '@angular/core';
 import { MecanicosService } from './mecanicos.service';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { MecanicosAddModalComponent } from './mecanicos-add-modal/mecanicos-add-modal.component';
 import { MecanicosEditModalComponent } from './mecanicos-edit-modal/mecanicos-edit-modal.component';
 
@@ -25,56 +22,29 @@ export class MecanicosTableComponent implements OnInit {
     sortOrder = 'asc';
 
     constructor(
-      private service: MecanicosService, 
-      private modalService: NgbModal, 
+      private mecanicosService: MecanicosService, 
       private toastrService: ToastrService, 
       private dialogService: DialogService) {
     }
 
-    toInt(num: string) {
-        return +num;
-    }
-
     addMecanicosModalShow() {
-      const disposable = this.dialogService.addDialog(MecanicosAddModalComponent)
-      .subscribe( data => {
-        if (data) {
-          this.showToast(data);
-        }
-      })
+      this.dialogService.addDialog(MecanicosAddModalComponent)
+        .subscribe( data => data ? this.showToast(data) : null )
     }
 
     editMecanicosModalShow(mecanicos: MecanicosInterface) {
-      const disposable = this.dialogService.addDialog(MecanicosEditModalComponent, mecanicos)
-      .subscribe( data => {
-        if (data) {
-          this.showToast(data);
-        }
-      },
-      error => console.log(error),
-      () => console.log('Modified complete'));
-  }
-
-    uploadModalShow(id: number, descripcion: string) {
-      const activeModal = this.modalService.open(UploadModalComponent, { size: 'lg' });
-      activeModal.componentInstance.modalHeader = 'Agregar Archivo a Mecanico';
-      activeModal.componentInstance.id = id;
-      activeModal.componentInstance.descripcion = descripcion;
-      activeModal.componentInstance.referencia = 'Mecanico';
-    }
-
-    filesModalShow(id: number) {
-      const activeModal = this.modalService.open(FilesUploadModalComponent, { size: 'lg' });
-      activeModal.componentInstance.modalHeader = 'Ver Archivos de Mecanico';
-      activeModal.componentInstance.id = id;
-      activeModal.componentInstance.referencia = 'Mecanico';
+      this.dialogService.addDialog(MecanicosEditModalComponent, mecanicos)
+        .subscribe( data =>
+          data ? this.showToast(data) : null,
+          error => console.log(error),
+          () => console.log('Modified complete'));
     }
 
     onDeleteConfirm(event, id): void {
       if (window.confirm('¿Estas seguro de querer eliminar este registro?')) {
-        this.service.cancelarMecanico(id)
+        this.mecanicosService.remove(id)
           .subscribe(
-            (data) => this.showToast(data),
+            data => this.showToast(data),
             error => console.log(error),
             () => console.log('Delete completed')
           );
@@ -84,11 +54,11 @@ export class MecanicosTableComponent implements OnInit {
     }
 
     showToast(data) {
-      if (data.idRespuesta === 0) {
-        this.toastrService.success(data.mensajeRespuesta);
+      if (data.success) {
+        this.toastrService.success(data.message);
         this.getAllMecanicos();
       } else {
-        this.toastrService.error(data.mensajeRespuesta);
+        this.toastrService.error(data.message);
       }
     }
 
@@ -97,13 +67,10 @@ export class MecanicosTableComponent implements OnInit {
     }
     
     private getAllMecanicos(): void {
-      this.service
-          .getAllMecanicos()
-          .subscribe(
-              (data: MecanicosInterface[]) =>  {
-                this.data = data;
-              },
-              error => console.log(error),
-              () => console.log('Get all Items complete'))
+      this.mecanicosService.all()
+        .subscribe( (data: MecanicosResponseInterface) =>
+            this.data = data.result,
+            error => console.log(error),
+            () => console.log('Get all Items complete'))
     } 
 }

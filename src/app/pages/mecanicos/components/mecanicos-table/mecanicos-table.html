@@ -14,8 +14,6 @@
                             <th style="width: 30%">
                                 <mfDefaultSorter by="persona_idpersona">Mecanico</mfDefaultSorter>
                             </th>
-
-
                         </tr>
                     </thead>
                     <tbody>
@@ -23,12 +21,9 @@
                             <td>
                                 <button (click)="editMecanicosModalShow(item)" class="btn btn-sm btn-info"><i class="fa fa-edit"></i></button>
                                 <button (click)="onDeleteConfirm($event, item.idmecanico)" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></button>
-                                <button (click)="uploadModalShow(item.idmecanico, item.taller_idtaller)" class="btn btn-sm btn-success"><i class="fa fa-file"></i></button>
-                                <button (click)="filesModalShow(item.idmecanico)" class="btn btn-sm btn-warning"><i class="fa fa-eye"></i></button>
                             </td>
                             <td>{{ item.taller_idtaller }}</td>
                             <td>{{ item.persona_idpersona }}</td>
-
                         </tr>
                     </tbody>
                     <tfoot>

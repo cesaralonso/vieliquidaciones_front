@@ -23,27 +23,37 @@ export class MecanicosService {
         private authLocalstorage: AuthLocalstorage ) {
         this.headers = new Headers();
         this.headers.append('Content-Type', 'application/json; charset=UTF-8');
-        this.endPoint = `${this._configuration.ServerWithApiUrl}chofer`;        
+        this.endPoint = `${this._configuration.ServerWithApiUrl}mecanico`;        
     }
 
     all = () : Observable<MecanicosResponseInterface> => {
        return this._http.get(this.endPoint)
            .map((response: Response) => response.json())
            .catch(this.handleError);
-   }
+    }
 
- findById = ( id ) : Observable<MecanicosResponseInterface> => {
+    findById = ( id ) : Observable<MecanicosResponseInterface> => {
        return this._http.get(`${this.endPoint}/${id}`)
            .map((response: Response) => response.json())
            .catch(this.handleError);
    }
 
-  create = ( mecanico: MecanicosInterface ) : Observable<MecanicosResponseInterface> => {
+    create = ( mecanico: MecanicosInterface ) : Observable<MecanicosResponseInterface> => {
        return this._http.post(this.endPoint, mecanico, { headers: this.headers })
            .map((response: Response) => response.json())
            .catch(this.handleError);
-   }
-
+    }
+   remove = ( choferId ): Observable<MecanicosResponseInterface> => {
+        return this._http.delete(`${this.endPoint}/${choferId}`, { headers: this.headers })
+            .map((response: Response) => response.json())
+            .catch(this.handleError);
+    }
+    
+    edit = (vehiculo: MecanicosInterface): Observable<MecanicosResponseInterface> =>  {
+        return this._http.patch(this.endPoint, vehiculo, { headers: this.headers })
+            .map((response: Response) => response.json())
+            .catch(this.handleError);
+    }
 
     addMecanicos = (mecanicos: MecanicosInterface): Observable<MecanicosResponseInterface> =>  {
         this.actionUrl = `${this._configuration.ServerWithApiUrl}agregarMecanico`;
