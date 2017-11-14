@@ -170,6 +170,18 @@ export const PAGES_MENU = [
           }
         }
       },
+      {
+        path: 'liquidaciones',
+        data: {
+          menu: {
+            title: 'Liquidaciones',
+            icon: 'ion-social-buffer',
+            selected: false,
+            expanded: false,
+            order: 0
+          }
+        }
+      },
       // {
       //   path: 'admin',
       //   data: {

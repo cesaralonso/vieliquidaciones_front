@@ -1,12 +1,9 @@
-import { UploadModalComponent } from './../../../../shared/components/upload-modal/upload-modal.component';
-import { FilesUploadModalComponent } from './../../../../shared/components/files-upload-modal/files-upload-modal.component';
 import { DialogService } from 'ng2-bootstrap-modal';
 import { ToastrService } from 'ngx-toastr';
 import { LiquidacionesInterface } from './liquidaciones.interface';
 import { LiquidacionesResponseInterface } from './liquidaciones-response.interface';
 import { Component, OnInit } from '@angular/core';
 import { LiquidacionesService } from './liquidaciones.service';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { LiquidacionesAddModalComponent } from './liquidaciones-add-modal/liquidaciones-add-modal.component';
 import { LiquidacionesEditModalComponent } from './liquidaciones-edit-modal/liquidaciones-edit-modal.component';
 
@@ -25,85 +22,55 @@ export class LiquidacionesTableComponent implements OnInit {
     sortOrder = 'asc';
 
     constructor(
-      private service: LiquidacionesService, 
-      private modalService: NgbModal, 
+      private liquidacionesService: LiquidacionesService, 
       private toastrService: ToastrService, 
-      private dialogService: DialogService) {
-    }
-
-    toInt(num: string) {
-        return +num;
+      private dialogService: DialogService
+    ) {
     }
 
     addLiquidacionesModalShow() {
-      const disposable = this.dialogService.addDialog(LiquidacionesAddModalComponent)
-      .subscribe( data => {
-        if (data) {
-          this.showToast(data);
-        }
-      })
+      this.dialogService.addDialog(LiquidacionesAddModalComponent)
+        .subscribe( data => data ? this.showToast(data) : null)
     }
 
     editLiquidacionesModalShow(liquidaciones: LiquidacionesInterface) {
-      const disposable = this.dialogService.addDialog(LiquidacionesEditModalComponent, liquidaciones)
-      .subscribe( data => {
-        if (data) {
-          this.showToast(data);
-        }
-      },
-      error => console.log(error),
-      () => console.log('Modified complete'));
-  }
-
-    uploadModalShow(id: number, descripcion: string) {
-      const activeModal = this.modalService.open(UploadModalComponent, { size: 'lg' });
-      activeModal.componentInstance.modalHeader = 'Agregar Archivo a Liquidacion';
-      activeModal.componentInstance.id = id;
-      activeModal.componentInstance.descripcion = descripcion;
-      activeModal.componentInstance.referencia = 'Liquidacion';
-    }
-
-    filesModalShow(id: number) {
-      const activeModal = this.modalService.open(FilesUploadModalComponent, { size: 'lg' });
-      activeModal.componentInstance.modalHeader = 'Ver Archivos de Liquidacion';
-      activeModal.componentInstance.id = id;
-      activeModal.componentInstance.referencia = 'Liquidacion';
+      this.dialogService.addDialog(LiquidacionesEditModalComponent, liquidaciones)
+        .subscribe( data =>
+          data ? this.showToast(data) : null,
+          error => console.log(error),
+          () => console.log('Modified complete'));
     }
 
     onDeleteConfirm(event, id): void {
       if (window.confirm('¿Estas seguro de querer eliminar este registro?')) {
-        this.service.cancelarLiquidacion(id)
+        this.liquidacionesService.remove(id)
           .subscribe(
-            (data) => this.showToast(data),
+            data => this.showToast(data),
             error => console.log(error),
-            () => console.log('Delete completed')
-          );
+            () => console.log('Delete completed'));
       } else {
         console.log('item.id cancelando', id);
       }
     }
 
     showToast(data) {
-      if (data.idRespuesta === 0) {
-        this.toastrService.success(data.mensajeRespuesta);
+      if ( data.success ) {
+        this.toastrService.success(data.message);
         this.getAllLiquidaciones();
       } else {
-        this.toastrService.error(data.mensajeRespuesta);
+        this.toastrService.error(data.message);
       }
     }
 
     ngOnInit() {
-        this.getAllLiquidaciones();
+      this.getAllLiquidaciones();
     }
     
     private getAllLiquidaciones(): void {
-      this.service
-          .getAllLiquidaciones()
-          .subscribe(
-              (data: LiquidacionesInterface[]) =>  {
-                this.data = data;
-              },
-              error => console.log(error),
-              () => console.log('Get all Items complete'))
+      this.liquidacionesService
+        .all().subscribe( (data: LiquidacionesResponseInterface) =>
+            this.data = data.result,
+            error => console.log(error),
+            () => console.log('Get all Items complete'))
     } 
 }

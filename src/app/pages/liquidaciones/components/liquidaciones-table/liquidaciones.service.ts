@@ -6,8 +6,6 @@ import { LiquidacionesInterface } from './liquidaciones.interface';
 import { Injectable } from '@angular/core';
 import { Http, Response, Headers } from '@angular/http';
 import { Configuration } from '../../../../app.constants';
-
-
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 
@@ -23,26 +21,38 @@ export class LiquidacionesService {
         private authLocalstorage: AuthLocalstorage ) {
         this.headers = new Headers();
         this.headers.append('Content-Type', 'application/json; charset=UTF-8');
-        this.endPoint = `${this._configuration.ServerWithApiUrl}chofer`;        
+        this.endPoint = `${this._configuration.ServerWithApiUrl}liquidacion`;        
     }
 
     all = () : Observable<LiquidacionesResponseInterface> => {
-           return this._http.get(this.endPoint)
-               .map((response: Response) => response.json())
-               .catch(this.handleError);
-       }
+        return this._http.get(this.endPoint)
+            .map((response: Response) => response.json())
+            .catch(this.handleError);
+    }
 
-     findById = ( id ) : Observable<LiquidacionesResponseInterface> => {
-           return this._http.get(`${this.endPoint}/${id}`)
-               .map((response: Response) => response.json())
-               .catch(this.handleError);
-       }
+    findById = ( id ) : Observable<LiquidacionesResponseInterface> => {
+        return this._http.get(`${this.endPoint}/${id}`)
+            .map((response: Response) => response.json())
+            .catch(this.handleError);
+    }
 
-      create = ( liquidacion: LiquidacionesInterface ) : Observable<LiquidacionesResponseInterface> => {
-           return this._http.post(this.endPoint, liquidacion, { headers: this.headers })
-               .map((response: Response) => response.json())
-               .catch(this.handleError);
-       }
+    create = ( liquidacion: LiquidacionesInterface ) : Observable<LiquidacionesResponseInterface> => {
+        return this._http.post(this.endPoint, liquidacion, { headers: this.headers })
+            .map((response: Response) => response.json())
+            .catch(this.handleError);
+    }
+    
+    remove = ( choferId ): Observable<LiquidacionesResponseInterface> => {
+        return this._http.delete(`${this.endPoint}/${choferId}`, { headers: this.headers })
+            .map((response: Response) => response.json())
+            .catch(this.handleError);
+    }
+
+    edit = (vehiculo: LiquidacionesInterface): Observable<LiquidacionesResponseInterface> =>  {
+        return this._http.patch(this.endPoint, vehiculo, { headers: this.headers })
+            .map((response: Response) => response.json())
+            .catch(this.handleError);
+    }
 
     addLiquidaciones = (liquidaciones: LiquidacionesInterface): Observable<LiquidacionesResponseInterface> =>  {
         this.actionUrl = `${this._configuration.ServerWithApiUrl}agregarLiquidacion`;

@@ -1,17 +1,20 @@
+import { ChoferesService } from './../../../../choferes/components/choferes-table/choferes.service';
 import { DialogComponent, DialogService } from 'ng2-bootstrap-modal';
 import { AuthLocalstorage } from './../../../../../shared/auth-localstorage.service';
 import { LiquidacionesService } from './../liquidaciones.service';
-import { Modals } from './../../../../ui/components/modals/modals.component';
 import { LiquidacionesInterface } from './../liquidaciones.interface';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, AbstractControl, FormBuilder, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
-
+import { ChoferesInterface } from 'app/pages/choferes/components/choferes-table/choferes.interface';
 
 @Component({
   selector: 'add-service-modal',
   styleUrls: [('./liquidaciones-add-modal.component.scss')],
-  templateUrl: './liquidaciones-add-modal.component.html'
+  templateUrl: './liquidaciones-add-modal.component.html',
+  providers: [
+    ChoferesService
+  ]
 })
 
 export class LiquidacionesAddModalComponent extends DialogComponent<LiquidacionesInterface, any> implements OnInit {
@@ -19,82 +22,72 @@ export class LiquidacionesAddModalComponent extends DialogComponent<Liquidacione
   modalHeader: string;
   data: any;
   form: FormGroup;
-  submitted: boolean = false;
 
-
-  cantidadRecibidaAC: AbstractControl;
-  cambioAC: AbstractControl;
-  folioAC: AbstractControl;
-  kilometrajeAC: AbstractControl;
-  fechaAC: AbstractControl;
-  notaAC: AbstractControl;
-  cantPagadaAC: AbstractControl;
-  cantDeudaAC: AbstractControl;
-  statusAC: AbstractControl;
-  bonificadoAC: AbstractControl;
-  chofer_idchoferAC: AbstractControl;
-
-
+  public cantidadRecibida: AbstractControl;
+  public cambio: AbstractControl;
+  public folio: AbstractControl;
+  public kilometraje: AbstractControl;
+  public fecha: AbstractControl;
+  public nota: AbstractControl;
+  public cantPagada: AbstractControl;
+  public cantDeuda: AbstractControl;
+  public status: AbstractControl;
+  public bonificado: AbstractControl;
+  public chofer_idchofer: AbstractControl;
+  
+  public choferes: ChoferesInterface[];
   constructor(
     private service: LiquidacionesService,
     fb: FormBuilder,
     private toastrService: ToastrService,
     private authLocalstorage: AuthLocalstorage,
+    private choferesService: ChoferesService,
     dialogService: DialogService
   ) {
     super(dialogService);
-
-
     this.form = fb.group({
-
-
-      'cantidadRecibidaAC' : ['', Validators.compose([Validators.required, Validators.minLength(1)])],
-      'cambioAC' : ['', Validators.compose([Validators.required, Validators.minLength(1)])],
-      'folioAC' : ['', Validators.compose([Validators.required, Validators.minLength(1)])],
-      'kilometrajeAC' : ['', Validators.compose([Validators.required, Validators.minLength(1)])],
-      'fechaAC' : ['', Validators.compose([Validators.required, Validators.minLength(1)])],
-      'notaAC' : ['', Validators.compose([Validators.required, Validators.minLength(1)])],
-      'cantPagadaAC' : ['', Validators.compose([Validators.required, Validators.minLength(1)])],
-      'cantDeudaAC' : ['', Validators.compose([Validators.required, Validators.minLength(1)])],
-      'statusAC' : ['', Validators.compose([Validators.required, Validators.minLength(1)])],
-      'bonificadoAC' : ['', Validators.compose([Validators.required, Validators.minLength(1)])],
-      'chofer_idchoferAC' : ['', Validators.compose([Validators.required, Validators.minLength(1)])],
-
+      'cantidadRecibida' : ['', Validators.compose([Validators.required, Validators.minLength(1)])],
+      'cambio' : ['', Validators.compose([Validators.required, Validators.minLength(1)])],
+      'folio' : ['', Validators.compose([Validators.required, Validators.minLength(1)])],
+      'kilometraje' : ['', Validators.compose([Validators.required, Validators.minLength(1)])],
+      'fecha' : ['', Validators.compose([Validators.required, Validators.minLength(1)])],
+      'nota' : ['', Validators.compose([Validators.required, Validators.minLength(1)])],
+      'cantPagada' : ['', Validators.compose([Validators.required, Validators.minLength(1)])],
+      'cantDeuda' : ['', Validators.compose([Validators.required, Validators.minLength(1)])],
+      'status' : ['', Validators.compose([Validators.required, Validators.minLength(1)])],
+      'bonificado' : ['', Validators.compose([Validators.required, Validators.minLength(1)])],
+      'chofer_idchofer' : ['', Validators.compose([Validators.required, Validators.minLength(1)])],
     });
-
-
-    
-        this.cantidadRecibidaAC = this.form.controls['cantidadRecibidaAC'];
-        this.cambioAC = this.form.controls['cambioAC'];
-        this.folioAC = this.form.controls['folioAC'];
-        this.kilometrajeAC = this.form.controls['kilometrajeAC'];
-        this.fechaAC = this.form.controls['fechaAC'];
-        this.notaAC = this.form.controls['notaAC'];
-        this.cantPagadaAC = this.form.controls['cantPagadaAC'];
-        this.cantDeudaAC = this.form.controls['cantDeudaAC'];
-        this.statusAC = this.form.controls['statusAC'];
-        this.bonificadoAC = this.form.controls['bonificadoAC'];
-        this.chofer_idchoferAC = this.form.controls['chofer_idchoferAC'];
+    this.cantidadRecibida = this.form.controls['cantidadRecibida'];
+    this.cambio = this.form.controls['cambio'];
+    this.folio = this.form.controls['folio'];
+    this.kilometraje = this.form.controls['kilometraje'];
+    this.fecha = this.form.controls['fecha'];
+    this.nota = this.form.controls['nota'];
+    this.cantPagada = this.form.controls['cantPagada'];
+    this.cantDeuda = this.form.controls['cantDeuda'];
+    this.status = this.form.controls['status'];
+    this.bonificado = this.form.controls['bonificado'];
+    this.chofer_idchofer = this.form.controls['chofer_idchofer'];
   }
-
 
   ngOnInit() {
-
+    this.getAllChoferes()
   }
+
   confirm() {
     this.result = this.data;
     this.close();
   }
-  onSubmit(values: LiquidacionesInterface): void {
-    this.submitted = true;
-    if (this.form.valid) {
-      this.service
-        .addLiquidaciones(values)
-        .subscribe(
-            (data: any) => {
-              this.data = data;
-              this.confirm();
-            });
-    }
+  getAllChoferes() {
+    this.choferesService.all()
+      .subscribe( res => this.choferes = res.success ? res.result : null)
   }
+  onSubmit(values: LiquidacionesInterface): void {
+      this.service.create(values)
+        .subscribe( data => {
+          this.data = data;
+          this.confirm();
+        });
+    }
 }
