@@ -23,26 +23,38 @@ export class ModulosService {
         private authLocalstorage: AuthLocalstorage ) {
         this.headers = new Headers();
         this.headers.append('Content-Type', 'application/json; charset=UTF-8');
-        this.endPoint = `${this._configuration.ServerWithApiUrl}chofer`;        
+        this.endPoint = `${this._configuration.ServerWithApiUrl}modulo`;        
     }
 
     all = () : Observable<ModulosResponseInterface> => {
-           return this._http.get(this.endPoint)
-               .map((response: Response) => response.json())
-               .catch(this.handleError);
-       }
+        return this._http.get(this.endPoint)
+            .map((response: Response) => response.json())
+            .catch(this.handleError);
+    }
 
-     findById = ( id ) : Observable<ModulosResponseInterface> => {
-           return this._http.get(`${this.endPoint}/${id}`)
-               .map((response: Response) => response.json())
-               .catch(this.handleError);
-       }
+    findById = ( id ) : Observable<ModulosResponseInterface> => {
+        return this._http.get(`${this.endPoint}/${id}`)
+            .map((response: Response) => response.json())
+            .catch(this.handleError);
+    }
 
-      create = ( modulo: ModulosInterface ) : Observable<ModulosResponseInterface> => {
-           return this._http.post(this.endPoint, modulo, { headers: this.headers })
-               .map((response: Response) => response.json())
-               .catch(this.handleError);
-       }
+    create = ( modulo: ModulosInterface ) : Observable<ModulosResponseInterface> => {
+        return this._http.post(this.endPoint, modulo, { headers: this.headers })
+            .map((response: Response) => response.json())
+            .catch(this.handleError);
+    }
+
+    remove = ( choferId ): Observable<ModulosResponseInterface> => {
+        return this._http.delete(`${this.endPoint}/${choferId}`, { headers: this.headers })
+            .map((response: Response) => response.json())
+            .catch(this.handleError);
+    }
+
+    edit = (vehiculo: ModulosInterface): Observable<ModulosResponseInterface> =>  {
+        return this._http.patch(this.endPoint, vehiculo, { headers: this.headers })
+            .map((response: Response) => response.json())
+            .catch(this.handleError);
+    }
 
     addModulos = (modulos: ModulosInterface): Observable<ModulosResponseInterface> =>  {
         this.actionUrl = `${this._configuration.ServerWithApiUrl}agregarModulo`;

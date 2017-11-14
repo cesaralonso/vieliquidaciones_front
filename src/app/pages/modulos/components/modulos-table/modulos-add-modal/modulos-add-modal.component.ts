@@ -19,9 +19,8 @@ export class ModulosAddModalComponent extends DialogComponent<ModulosInterface, 
   modalHeader: string;
   data: any;
   form: FormGroup;
-  submitted: boolean = false;
-
-  nombreAC: AbstractControl;
+  
+  public nombre: AbstractControl;
 
   constructor(
     private service: ModulosService,
@@ -33,32 +32,24 @@ export class ModulosAddModalComponent extends DialogComponent<ModulosInterface, 
     super(dialogService);
 
     this.form = fb.group({
-
-    'nombreAC' : ['', Validators.compose([Validators.required, Validators.minLength(1)])],
-
+      'nombre' : ['', Validators.compose([Validators.required, Validators.minLength(1)])],
     });
-
-    this.nombreAC = this.form.controls['nombreAC'];
+    this.nombre = this.form.controls['nombre'];
   }
-
 
   ngOnInit() {
-
   }
+
   confirm() {
     this.result = this.data;
     this.close();
   }
+
   onSubmit(values: ModulosInterface): void {
-    this.submitted = true;
-    if (this.form.valid) {
-      this.service
-        .addModulos(values)
-        .subscribe(
-            (data: any) => {
-              this.data = data;
-              this.confirm();
-            });
-    }
+    this.service.create( values )
+      .subscribe( data => {
+        this.data = data;
+        this.confirm();
+      });
   }
 }

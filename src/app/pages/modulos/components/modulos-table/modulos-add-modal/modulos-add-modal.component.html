@@ -12,13 +12,12 @@
         <div class="modal-body" style="height: 65vh; overflow-y: auto;">
           <ba-card cardTitle="Información de la Modulo">
 
-            <div class="form-group row" [ngClass]="{'has-error': (!nombreAC.valid && nombreAC.touched), 'has-success': (nombreAC.valid && nombreAC.touched)}">
-              <label for="inputnombreAC" class="col-sm-2 form-control-label">Nombre</label>
+            <div class="form-group row" [ngClass]="{'has-error': (!nombre.valid && nombre.touched), 'has-success': (nombre.valid && nombre.touched)}">
+              <label for="inputnombre" class="col-sm-2 form-control-label">Nombre</label>
               <div class="col-sm-10">
-                <input [(ngModel)]="nombre" [formControl]="nombreAC" type="text" class="form-control" id="inputnombreAC" placeholder="Nombre" >
+                <input [formControl]="nombre" type="text" class="form-control" id="inputnombre" placeholder="Nombre" >
               </div>
             </div>
-
 
           </ba-card>
         </div>

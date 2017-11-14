@@ -23,18 +23,11 @@ export class ModulosEditModalComponent extends DialogComponent<ModulosInterface,
   id: number;
   data: any;
   form: FormGroup;
-  submitted: boolean = false;
 
-  modulo: ModulosInterface = {
-    idmodulo: 0,
-    nombre: '',
-  };
-
-  idmoduloAC: AbstractControl;
-  nombreAC: AbstractControl;
+  public nombreAC: AbstractControl;
 
   constructor(
-    private service: ModulosService,
+    private modulosService: ModulosService,
     fb: FormBuilder,
     private toastrService: ToastrService,
     private authLocalstorage: AuthLocalstorage,
@@ -43,19 +36,12 @@ export class ModulosEditModalComponent extends DialogComponent<ModulosInterface,
     super(dialogService);
 
     this.form = fb.group({
-
-      'idmoduloAC' : this.id,
       'nombreAC' : ['', Validators.compose([Validators.required, Validators.minLength(1)])],
-
     });
-
-    this.idmoduloAC = this.form.controls['idmoduloAC'];
     this.nombreAC = this.form.controls['nombreAC'];
-
   }
 
   ngOnInit() {
-
   }
 
   confirm() {
@@ -64,30 +50,12 @@ export class ModulosEditModalComponent extends DialogComponent<ModulosInterface,
   }
 
   onSubmit(values: ModulosInterface): void {
-    this.submitted = true;
-    if (this.form.valid) {
-      this.service
-        .editModulos({
-
+      this.modulosService.edit({
           idmodulo: this.idmodulo,
           nombre: this.nombre,
-
-        })
-        .subscribe(
-            (data: any) => {
-              this.data = data;
-              this.confirm();
-            });
-    }
+        }).subscribe( data => {
+          this.data = data;
+          this.confirm();
+        });
   }
-
-  private getModulos(): void {
-    this.service.getModulos(this.id)
-        .subscribe( data => {
-          this.modulo = data[1];
-        },
-        error => console.log(error),
-        () => console.log('Get modulo complete'));
-  }
-
 }

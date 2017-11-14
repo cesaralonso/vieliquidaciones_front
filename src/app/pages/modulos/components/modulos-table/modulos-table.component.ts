@@ -1,12 +1,9 @@
-import { UploadModalComponent } from './../../../../shared/components/upload-modal/upload-modal.component';
-import { FilesUploadModalComponent } from './../../../../shared/components/files-upload-modal/files-upload-modal.component';
 import { DialogService } from 'ng2-bootstrap-modal';
 import { ToastrService } from 'ngx-toastr';
 import { ModulosInterface } from './modulos.interface';
 import { ModulosResponseInterface } from './modulos-response.interface';
 import { Component, OnInit } from '@angular/core';
 import { ModulosService } from './modulos.service';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ModulosAddModalComponent } from './modulos-add-modal/modulos-add-modal.component';
 import { ModulosEditModalComponent } from './modulos-edit-modal/modulos-edit-modal.component';
 
@@ -26,55 +23,28 @@ export class ModulosTableComponent implements OnInit {
 
     constructor(
       private service: ModulosService, 
-      private modalService: NgbModal, 
       private toastrService: ToastrService, 
       private dialogService: DialogService) {
     }
 
-    toInt(num: string) {
-        return +num;
-    }
-
     addModulosModalShow() {
-      const disposable = this.dialogService.addDialog(ModulosAddModalComponent)
-      .subscribe( data => {
-        if (data) {
-          this.showToast(data);
-        }
-      })
+      this.dialogService.addDialog(ModulosAddModalComponent)
+      .subscribe( data => data ? this.showToast(data) : null )
     }
 
     editModulosModalShow(modulos: ModulosInterface) {
-      const disposable = this.dialogService.addDialog(ModulosEditModalComponent, modulos)
-      .subscribe( data => {
-        if (data) {
-          this.showToast(data);
-        }
-      },
-      error => console.log(error),
-      () => console.log('Modified complete'));
-  }
-
-    uploadModalShow(id: number, descripcion: string) {
-      const activeModal = this.modalService.open(UploadModalComponent, { size: 'lg' });
-      activeModal.componentInstance.modalHeader = 'Agregar Archivo a Modulo';
-      activeModal.componentInstance.id = id;
-      activeModal.componentInstance.descripcion = descripcion;
-      activeModal.componentInstance.referencia = 'Modulo';
-    }
-
-    filesModalShow(id: number) {
-      const activeModal = this.modalService.open(FilesUploadModalComponent, { size: 'lg' });
-      activeModal.componentInstance.modalHeader = 'Ver Archivos de Modulo';
-      activeModal.componentInstance.id = id;
-      activeModal.componentInstance.referencia = 'Modulo';
+      this.dialogService.addDialog(ModulosEditModalComponent, modulos)
+        .subscribe( data =>
+          data ? this.showToast(data) : null,
+          error => console.log(error),
+          () => console.log('Modified complete'));
     }
 
     onDeleteConfirm(event, id): void {
       if (window.confirm('¿Estas seguro de querer eliminar este registro?')) {
-        this.service.cancelarModulo(id)
+        this.service.remove(id)
           .subscribe(
-            (data) => this.showToast(data),
+            data => this.showToast(data),
             error => console.log(error),
             () => console.log('Delete completed')
           );
@@ -84,26 +54,23 @@ export class ModulosTableComponent implements OnInit {
     }
 
     showToast(data) {
-      if (data.idRespuesta === 0) {
-        this.toastrService.success(data.mensajeRespuesta);
+      if (data.success) {
+        this.toastrService.success(data.message);
         this.getAllModulos();
       } else {
-        this.toastrService.error(data.mensajeRespuesta);
+        this.toastrService.error(data.message);
       }
     }
 
     ngOnInit() {
-        this.getAllModulos();
+      this.getAllModulos();
     }
     
     private getAllModulos(): void {
-      this.service
-          .getAllModulos()
-          .subscribe(
-              (data: ModulosInterface[]) =>  {
-                this.data = data;
-              },
-              error => console.log(error),
-              () => console.log('Get all Items complete'))
+      this.service.all()
+        .subscribe( (data:ModulosResponseInterface) =>
+            this.data = data.result,
+            error => console.log(error),
+            () => console.log('Get all Items complete'))
     } 
 }
