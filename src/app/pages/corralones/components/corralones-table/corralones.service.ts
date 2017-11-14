@@ -23,14 +23,14 @@ export class CorralonesService {
         private authLocalstorage: AuthLocalstorage ) {
         this.headers = new Headers();
         this.headers.append('Content-Type', 'application/json; charset=UTF-8');
-        this.endPoint = `${this._configuration.ServerWithApiUrl}chofer`;
+        this.endPoint = `${this._configuration.ServerWithApiUrl}corralon`;
     }
 
     all = () : Observable<CorralonesResponseInterface> => {
-           return this._http.get(this.endPoint)
-               .map((response: Response) => response.json())
-               .catch(this.handleError);
-       }
+        return this._http.get(this.endPoint)
+            .map((response: Response) => response.json())
+            .catch(this.handleError);
+    }
 
     findById = ( id ) : Observable<CorralonesResponseInterface> => {
         return this._http.get(`${this.endPoint}/${id}`)
@@ -44,6 +44,18 @@ export class CorralonesService {
             .catch(this.handleError);
     }
 
+    remove = ( choferId ): Observable<CorralonesResponseInterface> => {
+        return this._http.delete(`${this.endPoint}/${choferId}`, { headers: this.headers })
+            .map((response: Response) => response.json())
+            .catch(this.handleError);
+    }
+
+    edit = (vehiculo: CorralonesInterface): Observable<CorralonesResponseInterface> =>  {
+        return this._http.patch(this.endPoint, vehiculo, { headers: this.headers })
+            .map((response: Response) => response.json())
+            .catch(this.handleError);
+    }
+    
     addCorralones = (corralones: CorralonesInterface): Observable<CorralonesResponseInterface> =>  {
         this.actionUrl = `${this._configuration.ServerWithApiUrl}agregarCorralon`;
         const toAdd = JSON.stringify(corralones);

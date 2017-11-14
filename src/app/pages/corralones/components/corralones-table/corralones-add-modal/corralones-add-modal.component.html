@@ -12,45 +12,49 @@
         <div class="modal-body" style="height: 65vh; overflow-y: auto;">
           <ba-card cardTitle="Información de la Corralon">
 
-            <div class="form-group row" [ngClass]="{'has-error': (!infraccionNumeroAC.valid && infraccionNumeroAC.touched), 'has-success': (infraccionNumeroAC.valid && infraccionNumeroAC.touched)}">
-              <label for="inputinfraccionNumeroAC" class="col-sm-2 form-control-label">Infraccion Numero</label>
+            <div class="form-group row" [ngClass]="{'has-error': (!infraccionNumero.valid && infraccionNumero.touched), 'has-success': (infraccionNumero.valid && infraccionNumero.touched)}">
+              <label for="inputinfraccionNumero" class="col-sm-2 form-control-label">Infraccion Numero</label>
               <div class="col-sm-10">
-                <input [(ngModel)]="infraccionNumero" [formControl]="infraccionNumeroAC" type="text" class="form-control" id="inputinfraccionNumeroAC" placeholder="Infraccion Numero" >
+                <input [formControl]="infraccionNumero" type="text" class="form-control" id="inputinfraccionNumero" placeholder="Infraccion Numero" >
               </div>
             </div>
 
-            <div class="form-group row" [ngClass]="{'has-error': (!statusAC.valid && statusAC.touched), 'has-success': (statusAC.valid && statusAC.touched)}">
-              <label for="inputstatusAC" class="col-sm-2 form-control-label">Status</label>
+            <div class="form-group row" [ngClass]="{'has-error': (!status.valid && status.touched), 'has-success': (status.valid && status.touched)}">
+              <label for="inputstatus" class="col-sm-2 form-control-label">Status</label>
               <div class="col-sm-10">
-                <input [(ngModel)]="status" [formControl]="statusAC" type="text" class="form-control" id="inputstatusAC" placeholder="Status" >
+                <input [formControl]="status" type="text" class="form-control" id="inputstatus" placeholder="Status" >
               </div>
             </div>
 
-            <div class="form-group row" [ngClass]="{'has-error': (!corralonNombreAC.valid && corralonNombreAC.touched), 'has-success': (corralonNombreAC.valid && corralonNombreAC.touched)}">
-              <label for="inputcorralonNombreAC" class="col-sm-2 form-control-label">Corralon</label>
+            <div class="form-group row" [ngClass]="{'has-error': (!corralonNombre.valid && corralonNombre.touched), 'has-success': (corralonNombre.valid && corralonNombre.touched)}">
+              <label for="inputcorralonNombre" class="col-sm-2 form-control-label">Corralon</label>
               <div class="col-sm-10">
-                <input [(ngModel)]="corralonNombre" [formControl]="corralonNombreAC" type="text" class="form-control" id="inputcorralonNombreAC" placeholder="Corralon" >
+                <input [formControl]="corralonNombre" type="text" class="form-control" id="inputcorralonNombre" placeholder="Corralon" >
               </div>
             </div>
 
-            <div class="form-group row" [ngClass]="{'has-error': (!motivoAC.valid && motivoAC.touched), 'has-success': (motivoAC.valid && motivoAC.touched)}">
-              <label for="inputmotivoAC" class="col-sm-2 form-control-label">Motivo</label>
+            <div class="form-group row" [ngClass]="{'has-error': (!motivo.valid && motivo.touched), 'has-success': (motivo.valid && motivo.touched)}">
+              <label for="inputmotivo" class="col-sm-2 form-control-label">Motivo</label>
               <div class="col-sm-10">
-                <input [(ngModel)]="motivo" [formControl]="motivoAC" type="text" class="form-control" id="inputmotivoAC" placeholder="Motivo" >
+                <input [formControl]="motivo" type="text" class="form-control" id="inputmotivo" placeholder="Motivo" >
               </div>
             </div>
 
-            <div class="form-group row" [ngClass]="{'has-error': (!permisotaxiasignado_idpermisotaxiasignadoAC.valid && permisotaxiasignado_idpermisotaxiasignadoAC.touched), 'has-success': (permisotaxiasignado_idpermisotaxiasignadoAC.valid && permisotaxiasignado_idpermisotaxiasignadoAC.touched)}">
-              <label for="inputpermisotaxiasignado_idpermisotaxiasignadoAC" class="col-sm-2 form-control-label">Permiso Taxi Asignado</label>
+            <div class="form-group row" [ngClass]="{'has-error': (!permisotaxiasignado_idpermisotaxiasignado.valid && permisotaxiasignado_idpermisotaxiasignado.touched), 'has-success': (permisotaxiasignado_idpermisotaxiasignado.valid && permisotaxiasignado_idpermisotaxiasignado.touched)}">
+              <label for="inputpermisotaxiasignado_idpermisotaxiasignado" class="col-sm-2 form-control-label">Permiso Taxi Asignado</label>
               <div class="col-sm-10">
-                <input [(ngModel)]="permisotaxiasignado_idpermisotaxiasignado" [formControl]="permisotaxiasignado_idpermisotaxiasignadoAC" type="text" class="form-control" id="inputpermisotaxiasignado_idpermisotaxiasignadoAC" placeholder="Permiso Taxi Asignado" >
+                <select [formControl]="permisotaxiasignado_idpermisotaxiasignado" name="permisotaxiasignado_idpermisotaxiasignado" class="form-control">
+                  <option *ngFor="let permiso of permisos" [value]="permiso.idpermisotaxiasignado">
+                    {{ permiso.idpermisotaxiasignado }}
+                  </option>
+                </select>
               </div>
             </div>
 
-            <div class="form-group row" [ngClass]="{'has-error': (!fechaAC.valid && fechaAC.touched), 'has-success': (fechaAC.valid && fechaAC.touched)}">
-              <label for="inputfechaAC" class="col-sm-2 form-control-label">Fecha</label>
+            <div class="form-group row" [ngClass]="{'has-error': (!fecha.valid && fecha.touched), 'has-success': (fecha.valid && fecha.touched)}">
+              <label for="inputfecha" class="col-sm-2 form-control-label">Fecha</label>
               <div class="col-sm-10">
-                <input [(ngModel)]="fecha" [formControl]="fechaAC" type="text" class="form-control" id="inputfechaAC" placeholder="Fecha" >
+                <input [formControl]="fecha" type="date" class="form-control" id="inputfecha" placeholder="Fecha" >
               </div>
             </div>
 

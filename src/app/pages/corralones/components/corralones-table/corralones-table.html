@@ -7,7 +7,7 @@
                 <table class="table table-striped" [mfData]="data | dataFilter : filterQuery" #mf="mfDataTable" [mfRowsOnPage]="rowsOnPage" [(mfSortBy)]="sortBy" [(mfSortOrder)]="sortOrder">
                     <thead>
                         <tr>
-                            <th style="width: 40%"></th>
+                            <th style="width: 10%"></th>
                             <th style="width: 10%">
                                 <mfDefaultSorter by="fecha">Fecha</mfDefaultSorter>
                             </th>
@@ -37,10 +37,8 @@
                             <td>
                                 <button (click)="editCorralonesModalShow(item)" class="btn btn-sm btn-info"><i class="fa fa-edit"></i></button>
                                 <button (click)="onDeleteConfirm($event, item.idcorralon)" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></button>
-                                <button (click)="uploadModalShow(item.idcorralon, item.fecha)" class="btn btn-sm btn-success"><i class="fa fa-file"></i></button>
-                                <button (click)="filesModalShow(item.idcorralon)" class="btn btn-sm btn-warning"><i class="fa fa-eye"></i></button>
                             </td>
-                            <td>{{ item.fecha }}</td>
+                            <td>{{ item.fecha | date }}</td>
                             <td>{{ item.infraccionNumero }}</td>
                             <td>{{ item.corralonNombre }}</td>
                             <td>{{ item.motivo }}</td>
