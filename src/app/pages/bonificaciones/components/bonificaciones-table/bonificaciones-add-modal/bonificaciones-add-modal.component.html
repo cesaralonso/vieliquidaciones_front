@@ -12,39 +12,43 @@
         <div class="modal-body" style="height: 65vh; overflow-y: auto;">
           <ba-card cardTitle="Información de la Bonificacion">
 
-            <div class="form-group row" [ngClass]="{'has-error': (!cantidadAC.valid && cantidadAC.touched), 'has-success': (cantidadAC.valid && cantidadAC.touched)}">
-              <label for="inputcantidadAC" class="col-sm-2 form-control-label">Cantidad</label>
+            <div class="form-group row" [ngClass]="{'has-error': (!cantidad.valid && cantidad.touched), 'has-success': (cantidad.valid && cantidad.touched)}">
+              <label for="inputcantidad" class="col-sm-2 form-control-label">Cantidad</label>
               <div class="col-sm-10">
-                <input [(ngModel)]="cantidad" [formControl]="cantidadAC" type="text" class="form-control" id="inputcantidadAC" placeholder="Cantidad" >
+                <input [formControl]="cantidad" type="text" class="form-control" id="inputcantidad" placeholder="Cantidad" >
               </div>
             </div>
 
-            <div class="form-group row" [ngClass]="{'has-error': (!validadoAC.valid && validadoAC.touched), 'has-success': (validadoAC.valid && validadoAC.touched)}">
-              <label for="inputvalidadoAC" class="col-sm-2 form-control-label">Validado</label>
+            <div class="form-group row" [ngClass]="{'has-error': (!validado.valid && validado.touched), 'has-success': (validado.valid && validado.touched)}">
+              <label for="inputvalidado" class="col-sm-2 form-control-label">Validado</label>
               <div class="col-sm-10">
-                <input [(ngModel)]="validado" [formControl]="validado" type="text" class="form-control" id="inputvalidadoAC" placeholder="Validado" >
+                <input [formControl]="validado" type="checkbox" name="validado" class="form-control">
               </div>
             </div>
 
 
-            <div class="form-group row" [ngClass]="{'has-error': (!statusAC.valid && statusAC.touched), 'has-success': (statusAC.valid && statusAC.touched)}">
-              <label for="inputstatusAC" class="col-sm-2 form-control-label">Status</label>
+            <div class="form-group row" [ngClass]="{'has-error': (!status.valid && status.touched), 'has-success': (status.valid && status.touched)}">
+              <label for="inputstatus" class="col-sm-2 form-control-label">Status</label>
               <div class="col-sm-10">
-                <input [(ngModel)]="status" [formControl]="statusAC" type="text" class="form-control" id="inputstatusAC" placeholder="Status" >
+                <input [formControl]="status" type="text" class="form-control" id="inputstatus" placeholder="Status" >
               </div>
             </div>
 
-            <div class="form-group row" [ngClass]="{'has-error': (!conceptoAC.valid && conceptoAC.touched), 'has-success': (conceptoAC.valid && conceptoAC.touched)}">
-              <label for="inputconceptoAC" class="col-sm-2 form-control-label">Concepto</label>
+            <div class="form-group row" [ngClass]="{'has-error': (!concepto.valid && concepto.touched), 'has-success': (concepto.valid && concepto.touched)}">
+              <label for="inputconcepto" class="col-sm-2 form-control-label">Concepto</label>
               <div class="col-sm-10">
-                <input [(ngModel)]="concepto" [formControl]="conceptoAC" type="text" class="form-control" id="inputconceptoAC" placeholder="Concepto" >
+                <input [formControl]="concepto" type="text" class="form-control" id="inputconcepto" placeholder="Concepto" >
               </div>
             </div>
 
-            <div class="form-group row" [ngClass]="{'has-error': (!chofer_idchoferAC.valid && chofer_idchoferAC.touched), 'has-success': (chofer_idchoferAC.valid && chofer_idchoferAC.touched)}">
-              <label for="inputchofer_idchoferAC" class="col-sm-2 form-control-label">Chofer</label>
+            <div class="form-group row" [ngClass]="{'has-error': (!chofer_idchofer.valid && chofer_idchofer.touched), 'has-success': (chofer_idchofer.valid && chofer_idchofer.touched)}">
+              <label for="inputchofer_idchofer" class="col-sm-2 form-control-label">Chofer</label>
               <div class="col-sm-10">
-                <input [(ngModel)]="chofer_idchofer" [formControl]="chofer_idchoferAC" type="text" class="form-control" id="inputchofer_idchoferAC" placeholder="Chofer" >
+                <select [formControl]="chofer_idchofer" name="chofer_idchofer" class="form-control">
+                  <option *ngFor="let chofer of choferes" [value]="chofer.idchofer">
+                    {{ chofer.idchofer }}
+                  </option>
+                </select>
               </div>
             </div>
 

@@ -1,3 +1,5 @@
+import { ChoferesInterface } from './../../../../choferes/components/choferes-table/choferes.interface';
+import { ChoferesService } from './../../../../choferes/components/choferes-table/choferes.service';
 import { DialogComponent, DialogService } from 'ng2-bootstrap-modal';
 import { AuthLocalstorage } from './../../../../../shared/auth-localstorage.service';
 import { BonificacionesService } from './../bonificaciones.service';
@@ -11,7 +13,10 @@ import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'add-service-modal',
   styleUrls: [('./bonificaciones-add-modal.component.scss')],
-  templateUrl: './bonificaciones-add-modal.component.html'
+  templateUrl: './bonificaciones-add-modal.component.html',
+  providers: [
+    ChoferesService
+  ]
 })
 
 export class BonificacionesAddModalComponent extends DialogComponent<BonificacionesInterface, any> implements OnInit {
@@ -21,61 +26,57 @@ export class BonificacionesAddModalComponent extends DialogComponent<Bonificacio
   form: FormGroup;
   submitted: boolean = false;
 
+  public validado: AbstractControl;
+  public status: AbstractControl;
+  public cantidad: AbstractControl;
+  public concepto: AbstractControl;
+  public chofer_idchofer: AbstractControl;
 
-  validadoAC: AbstractControl;
-  statusAC: AbstractControl;
-  cantidadAC: AbstractControl;
-  conceptoAC: AbstractControl;
-  chofer_idchoferAC: AbstractControl;
-
-
+  public choferes: ChoferesInterface[];
 
   constructor(
-    private service: BonificacionesService,
+    private bonificacionesService: BonificacionesService,
     fb: FormBuilder,
     private toastrService: ToastrService,
     private authLocalstorage: AuthLocalstorage,
+    private choferesService: ChoferesService,
     dialogService: DialogService
   ) {
     super(dialogService);
-
-
     this.form = fb.group({
-
-
-            'validadoAC' : ['', Validators.compose([Validators.required, Validators.minLength(1)])],
-            'statusAC' : ['', Validators.compose([Validators.required, Validators.minLength(1)])],
-            'cantidadAC' : ['', Validators.compose([Validators.required, Validators.minLength(1)])],
-            'conceptoAC' : ['', Validators.compose([Validators.required, Validators.minLength(1)])],
-            'chofer_idchoferAC' : ['', Validators.compose([Validators.required, Validators.minLength(1)])],
-
+      'validado' : ['',],
+      'status' : ['', Validators.compose([Validators.required, Validators.minLength(1)])],
+      'cantidad' : ['', Validators.compose([Validators.required, Validators.minLength(1)])],
+      'concepto' : ['', Validators.compose([Validators.required, Validators.minLength(1)])],
+      'chofer_idchofer' : ['', Validators.compose([Validators.required, Validators.minLength(1)])],
     });
-
-    this.validadoAC = this.form.controls['validadoAC'];
-    this.statusAC = this.form.controls['statusAC'];
-    this.cantidadAC = this.form.controls['cantidadAC'];
-    this.conceptoAC = this.form.controls['conceptoAC'];
-    this.chofer_idchoferAC = this.form.controls['chofer_idchoferAC'];
+    this.validado = this.form.controls['validado'];
+    this.status = this.form.controls['status'];
+    this.cantidad = this.form.controls['cantidad'];
+    this.concepto = this.form.controls['concepto'];
+    this.chofer_idchofer = this.form.controls['chofer_idchofer'];
   }
 
 
   ngOnInit() {
-
+    this.getAllChoferes()
   }
+
   confirm() {
     this.result = this.data;
     this.close();
   }
+  
+  getAllChoferes() {
+    this.choferesService.all()
+      .subscribe( res => res.success ? this.choferes = res.result : null)
+  }
+
   onSubmit(values: BonificacionesInterface): void {
-    this.submitted = true;
-    if (this.form.valid) {
-      this.service
-        .addBonificaciones(values)
-        .subscribe(
-            (data: any) => {
-              this.data = data;
-              this.confirm();
-            });
-    }
+    this.bonificacionesService.create( values )
+      .subscribe( data => {
+        this.data = data;
+        this.confirm();
+      });
   }
 }

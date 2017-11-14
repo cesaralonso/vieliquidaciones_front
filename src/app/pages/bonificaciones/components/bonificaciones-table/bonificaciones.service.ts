@@ -23,7 +23,7 @@ export class BonificacionesService {
         private authLocalstorage: AuthLocalstorage ) {
         this.headers = new Headers();
         this.headers.append('Content-Type', 'application/json; charset=UTF-8');
-        this.endPoint = `${this._configuration.ServerWithApiUrl}chofer`;
+        this.endPoint = `${this._configuration.ServerWithApiUrl}bonificacion`;
         
     }
 
@@ -31,19 +31,31 @@ export class BonificacionesService {
        return this._http.get(this.endPoint)
            .map((response: Response) => response.json())
            .catch(this.handleError);
-   }
+    }
 
     findById = ( id ) : Observable<BonificacionesResponseInterface> => {
        return this._http.get(`${this.endPoint}/${id}`)
            .map((response: Response) => response.json())
            .catch(this.handleError);
-   }
+    }
 
-  create = ( bonificacion: BonificacionesInterface ) : Observable<BonificacionesResponseInterface> => {
+    create = ( bonificacion: BonificacionesInterface ) : Observable<BonificacionesResponseInterface> => {
        return this._http.post(this.endPoint, bonificacion, { headers: this.headers })
            .map((response: Response) => response.json())
            .catch(this.handleError);
-   }
+    }
+
+   remove = ( choferId ): Observable<BonificacionesResponseInterface> => {
+        return this._http.delete(`${this.endPoint}/${choferId}`, { headers: this.headers })
+            .map((response: Response) => response.json())
+            .catch(this.handleError);
+    }
+    
+    edit = (vehiculo: BonificacionesInterface): Observable<BonificacionesResponseInterface> =>  {
+        return this._http.patch(this.endPoint, vehiculo, { headers: this.headers })
+            .map((response: Response) => response.json())
+            .catch(this.handleError);
+    }
 
     addBonificaciones = (bonificaciones: BonificacionesInterface): Observable<BonificacionesResponseInterface> =>  {
         this.actionUrl = `${this._configuration.ServerWithApiUrl}agregarBonificacion`;
