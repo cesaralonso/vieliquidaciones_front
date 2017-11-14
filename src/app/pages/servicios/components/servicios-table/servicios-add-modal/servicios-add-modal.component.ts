@@ -1,3 +1,5 @@
+import { TalleresService } from './../../../../talleres/components/talleres-table/talleres.service';
+import { TalleresInterface } from './../../../../talleres/components/talleres-table/talleres.interface';
 import { DialogComponent, DialogService } from 'ng2-bootstrap-modal';
 import { AuthLocalstorage } from './../../../../../shared/auth-localstorage.service';
 import { ServiciosService } from './../servicios.service';
@@ -14,7 +16,7 @@ import { ServiciosResponseInterface } from 'app/pages/servicios/components/servi
   styleUrls: [('./servicios-add-modal.component.scss')],
   templateUrl: './servicios-add-modal.component.html',
   providers: [
-    ServiciosService
+    TalleresService
   ]
 })
 
@@ -24,58 +26,54 @@ export class ServiciosAddModalComponent extends DialogComponent<ServiciosInterfa
   data: any;
   public form: FormGroup;
 
-  nombreAC: AbstractControl;
-  precioAC: AbstractControl;
-  ivaAC: AbstractControl;
-
-  public avales: ServiciosInterface[];
-
+  public nombre: AbstractControl;
+  public precio: AbstractControl;
+  public iva: AbstractControl;
+  public taller_idtaller: AbstractControl;
+  public talleres: TalleresInterface[];
   constructor(
-    private service: ServiciosService,
+    private serviciosService: ServiciosService,
     fb: FormBuilder,
     private toastrService: ToastrService,
     private authLocalstorage: AuthLocalstorage,
-    private serviciosService: ServiciosService,
+    private talleresService: TalleresService,    
     dialogService: DialogService
   ) {
     super(dialogService);
 
 
     this.form = fb.group({
-
-      'nombreAC' : ['', Validators.compose([Validators.required, Validators.minLength(1)])],
-      'precioAC' : ['', Validators.compose([Validators.required, Validators.minLength(1)])],
-      'ivaAC' : ['', Validators.compose([Validators.required, Validators.minLength(1)])],
-      
+      'taller_idtaller' : ['', Validators.compose([Validators.required, Validators.minLength(1)])],
+      'nombre' : ['', Validators.compose([Validators.required, Validators.minLength(1)])],
+      'precio' : ['', Validators.compose([Validators.required, Validators.minLength(1)])],
+      'iva' : ['', Validators.compose([Validators.required, Validators.minLength(1)])],
     });
-
-    this.nombreAC = this.form.controls['nombreAC'];
-    this.precioAC = this.form.controls['precioAC'];
-    this.ivaAC = this.form.controls['ivaAC'];
-
-
+    this.taller_idtaller = this.form.controls['taller_idtaller'];
+    this.nombre = this.form.controls['nombre'];
+    this.precio = this.form.controls['precio'];
+    this.iva = this.form.controls['iva'];
   }
-
 
   ngOnInit() {
-    this.getServicios()
+    this.getAllTalleres()
   }
+
   confirm() {
     this.result = this.data;
     this.close();
   }
+  
+  getAllTalleres() {
+    this.talleresService.all()
+      .subscribe( res => this.talleres = res.success ? res.result : null)
+  }
+
   onSubmit(values: ServiciosInterface): void {
     console.log(values);
-      this.service.add(values)
+      this.serviciosService.add(values)
         .subscribe((data: ServiciosResponseInterface) => {
             this.data = data;
             this.confirm();
         });
-  }
-
-  getServicios() {
-    this.serviciosService.all()
-      .subscribe( (res: ServiciosResponseInterface) =>
-        res.success ? this.avales = res.result : null)
   }
 }

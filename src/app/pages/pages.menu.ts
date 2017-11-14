@@ -194,6 +194,18 @@ export const PAGES_MENU = [
           }
         }
       },
+      {
+        path: 'servicios',
+        data: {
+          menu: {
+            title: 'Servicios',
+            icon: 'ion-social-buffer',
+            selected: false,
+            expanded: false,
+            order: 0
+          }
+        }
+      },
       // {
       //   path: 'admin',
       //   data: {

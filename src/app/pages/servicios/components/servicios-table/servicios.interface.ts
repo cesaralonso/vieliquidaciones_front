@@ -3,4 +3,5 @@ export interface ServiciosInterface {
   nombre: string;
   precio: number;
   iva: number;
+  taller_idtaller: number;
 }

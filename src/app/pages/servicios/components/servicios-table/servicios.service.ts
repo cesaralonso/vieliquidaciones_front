@@ -24,7 +24,7 @@ export class ServiciosService {
         private authLocalstorage: AuthLocalstorage ) {
         this.headers = new Headers();
         this.headers.append('Content-Type', 'application/json; charset=UTF-8');
-        this.endPoint = `${this._configuration.ServerWithApiUrl}servicio/`;
+        this.endPoint = `${this._configuration.ServerWithApiUrl}servicio`;
     }
 
     all = (): Observable<ServiciosResponseInterface> => {
@@ -34,19 +34,30 @@ export class ServiciosService {
     }
 
 
-     findById = ( id ) : Observable<ServiciosResponseInterface> => {
-           return this._http.get(`${this.endPoint}/${id}`)
-               .map((response: Response) => response.json())
-               .catch(this.handleError);
+    findById = ( id ) : Observable<ServiciosResponseInterface> => {
+        return this._http.get(`${this.endPoint}/${id}`)
+            .map((response: Response) => response.json())
+            .catch(this.handleError);
     }
 
 
-      create = ( servicio: ServiciosInterface ) : Observable<ServiciosResponseInterface> => {
-           return this._http.post(this.endPoint, servicio, { headers: this.headers })
-               .map((response: Response) => response.json())
-               .catch(this.handleError);
+    create = ( servicio: ServiciosInterface ) : Observable<ServiciosResponseInterface> => {
+        return this._http.post(this.endPoint, servicio, { headers: this.headers })
+            .map((response: Response) => response.json())
+            .catch(this.handleError);
+    }
+    
+    remove = ( choferId ): Observable<ServiciosResponseInterface> => {
+        return this._http.delete(`${this.endPoint}/${choferId}`, { headers: this.headers })
+            .map((response: Response) => response.json())
+            .catch(this.handleError);
     }
 
+    edit = (vehiculo: ServiciosInterface): Observable<ServiciosResponseInterface> =>  {
+        return this._http.patch(this.endPoint, vehiculo, { headers: this.headers })
+            .map((response: Response) => response.json())
+            .catch(this.handleError);
+    }
 
     add = ( servicios: ServiciosInterface ): Observable<ServiciosResponseInterface> =>  {
         return this._http.post(this.endPoint, servicios, { headers: this.headers })

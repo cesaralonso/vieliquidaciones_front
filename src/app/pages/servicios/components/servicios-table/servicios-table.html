@@ -7,15 +7,18 @@
                 <table class="table table-striped" [mfData]="data | dataFilter : filterQuery" #mf="mfDataTable" [mfRowsOnPage]="rowsOnPage" [(mfSortBy)]="sortBy" [(mfSortOrder)]="sortOrder">
                     <thead>
                         <tr>
-                            <th style="width: 40%"></th>
-                            <th style="width: 20%">
+                            <th style="width: 12%"></th>
+                            <th style="width: 22%">
                                 <mfDefaultSorter by="nombre">Nombre</mfDefaultSorter>
                             </th>
-                            <th style="width: 20%">
+                            <th style="width: 22%">
                                 <mfDefaultSorter by="precio">Precio</mfDefaultSorter>
                             </th>
-                            <th style="width: 20%">
+                            <th style="width: 22%">
                                 <mfDefaultSorter by="iva">Iva</mfDefaultSorter>
+                            </th>
+                            <th style="width: 22%">
+                                <mfDefaultSorter by="taller_idtaller">Taller</mfDefaultSorter>
                             </th>
 
                         </tr>
@@ -25,12 +28,11 @@
                             <td>
                                 <button (click)="editServiciosModalShow(item)" class="btn btn-sm btn-info"><i class="fa fa-edit"></i></button>
                                 <button (click)="onDeleteConfirm($event, item.idservicio)" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></button>
-                                <button (click)="uploadModalShow(item.idservicio, item.nombre)" class="btn btn-sm btn-success"><i class="fa fa-file"></i></button>
-                                <button (click)="filesModalShow(item.idservicio)" class="btn btn-sm btn-warning"><i class="fa fa-eye"></i></button>
                             </td>
                             <td>{{ item.nombre }}</td>
                             <td>{{ item.precio }}</td>
                             <td>{{ item.iva }}</td>
+                            <td>{{ item.taller_idtaller }}</td>
                         </tr>
                     </tbody>
                     <tfoot>

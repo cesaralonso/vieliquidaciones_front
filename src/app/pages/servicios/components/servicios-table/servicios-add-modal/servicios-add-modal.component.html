@@ -12,27 +12,37 @@
         <div class="modal-body" style="height: 65vh; overflow-y: auto;">
           <ba-card cardTitle="Información de la Servicio">
 
-            <div class="form-group row" [ngClass]="{'has-error': (!nombreAC.valid && nombreAC.touched), 'has-success': (nombreAC.valid && nombreAC.touched)}">
-              <label for="inputnombreAC" class="col-sm-2 form-control-label">Nombre</label>
+            <div class="form-group row" [ngClass]="{'has-error': (!nombre.valid && nombre.touched), 'has-success': (nombre.valid && nombre.touched)}">
+              <label for="inputnombre" class="col-sm-2 form-control-label">Nombre</label>
               <div class="col-sm-10">
-                <input [(ngModel)]="nombre" [formControl]="nombreAC" type="text" class="form-control" id="inputnombreAC" placeholder="Nombre" >
+                <input [formControl]="nombre" type="text" class="form-control" id="inputnombre" placeholder="Nombre" >
               </div>
             </div>
 
-            <div class="form-group row" [ngClass]="{'has-error': (!precioAC.valid && precioAC.touched), 'has-success': (precioAC.valid && precioAC.touched)}">
-              <label for="inputprecioAC" class="col-sm-2 form-control-label">Precio</label>
+            <div class="form-group row" [ngClass]="{'has-error': (!precio.valid && precio.touched), 'has-success': (precio.valid && precio.touched)}">
+              <label for="inputprecio" class="col-sm-2 form-control-label">Precio</label>
               <div class="col-sm-10">
-                <input [(ngModel)]="precio" [formControl]="precioAC" type="text" class="form-control" id="inputprecioAC" placeholder="Precio" >
+                <input [formControl]="precio" type="text" class="form-control" id="inputprecio" placeholder="Precio" >
               </div>
             </div>
 
-            <div class="form-group row" [ngClass]="{'has-error': (!ivaAC.valid && ivaAC.touched), 'has-success': (ivaAC.valid && ivaAC.touched)}">
-              <label for="inputivaAC" class="col-sm-2 form-control-label">Iva</label>
+            <div class="form-group row" [ngClass]="{'has-error': (!iva.valid && iva.touched), 'has-success': (iva.valid && iva.touched)}">
+              <label for="inputiva" class="col-sm-2 form-control-label">Iva</label>
               <div class="col-sm-10">
-                <input [(ngModel)]="iva" [formControl]="ivaAC" type="text" class="form-control" id="inputivaAC" placeholder="Iva" >
+                <input [formControl]="iva" type="text" class="form-control" id="inputiva" placeholder="Iva" >
               </div>
             </div>
 
+            <div class="form-group row" [ngClass]="{'has-error': (!taller_idtaller.valid && taller_idtaller.touched), 'has-success': (taller_idtaller.valid && taller_idtaller.touched)}">
+                <label for="inputtaller_idtaller" class="col-sm-2 form-control-label">Taller</label>
+                <div class="col-sm-10">
+                  <select [formControl]="taller_idtaller" name="taller_idtaller" class="form-control">
+                    <option *ngFor="let taller of talleres" [value]="taller.idtaller">
+                      {{ taller.nombre }}
+                    </option>
+                  </select>
+                </div>
+            </div>
 
           </ba-card>
         </div>
