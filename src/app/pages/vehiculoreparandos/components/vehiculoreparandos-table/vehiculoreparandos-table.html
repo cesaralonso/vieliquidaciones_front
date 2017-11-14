@@ -50,12 +50,10 @@
                             <td>
                                 <button (click)="editVehiculoreparandosModalShow(item)" class="btn btn-sm btn-info"><i class="fa fa-edit"></i></button>
                                 <button (click)="onDeleteConfirm($event, item.idvehiculoreparando)" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></button>
-                                <button (click)="uploadModalShow(item.idvehiculoreparando, item.fechaIngresa)" class="btn btn-sm btn-success"><i class="fa fa-file"></i></button>
-                                <button (click)="filesModalShow(item.idvehiculoreparando)" class="btn btn-sm btn-warning"><i class="fa fa-eye"></i></button>
                             </td>
-                            <td>{{ item.fechaIngresa }}</td>
-                            <td>{{ item.fechaSalida }}</td>
-                            <td>{{ item.fechaEstimada }}</td>
+                            <td>{{ item.fechaIngresa | date }}</td>
+                            <td>{{ item.fechaSalida | date }}</td>
+                            <td>{{ item.fechaEstimada |date }}</td>
                             <td>{{ item.inventario }}</td>
                             <td>{{ item.motivo }}</td>
                             <td>{{ item.status }}</td>

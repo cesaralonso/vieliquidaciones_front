@@ -206,6 +206,18 @@ export const PAGES_MENU = [
           }
         }
       },
+      {
+        path: 'vehiculoreparandos',
+        data: {
+          menu: {
+            title: 'Vehiculo reparandose',
+            icon: 'ion-social-buffer',
+            selected: false,
+            expanded: false,
+            order: 0
+          }
+        }
+      },
       // {
       //   path: 'admin',
       //   data: {

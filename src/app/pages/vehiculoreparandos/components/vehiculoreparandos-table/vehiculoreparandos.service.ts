@@ -23,26 +23,38 @@ export class VehiculoreparandosService {
         private authLocalstorage: AuthLocalstorage ) {
         this.headers = new Headers();
         this.headers.append('Content-Type', 'application/json; charset=UTF-8');
-        this.endPoint = `${this._configuration.ServerWithApiUrl}chofer`;        
+        this.endPoint = `${this._configuration.ServerWithApiUrl}vehiculoreparando`;        
     }
 
     all = () : Observable<VehiculoreparandosResponseInterface> => {
-           return this._http.get(this.endPoint)
-               .map((response: Response) => response.json())
-               .catch(this.handleError);
-       }
+        return this._http.get(this.endPoint)
+            .map((response: Response) => response.json())
+            .catch(this.handleError);
+    }
 
-     findById = ( id ) : Observable<VehiculoreparandosResponseInterface> => {
-           return this._http.get(`${this.endPoint}/${id}`)
-               .map((response: Response) => response.json())
-               .catch(this.handleError);
-       }
+    findById = ( id ) : Observable<VehiculoreparandosResponseInterface> => {
+        return this._http.get(`${this.endPoint}/${id}`)
+            .map((response: Response) => response.json())
+            .catch(this.handleError);
+    }
 
-      create = ( vehiculoreparando: VehiculoreparandosInterface ) : Observable<VehiculoreparandosResponseInterface> => {
-           return this._http.post(this.endPoint, vehiculoreparando, { headers: this.headers })
-               .map((response: Response) => response.json())
-               .catch(this.handleError);
-       }
+    create = ( vehiculoreparando: VehiculoreparandosInterface ) : Observable<VehiculoreparandosResponseInterface> => {
+        return this._http.post(this.endPoint, vehiculoreparando, { headers: this.headers })
+            .map((response: Response) => response.json())
+            .catch(this.handleError);
+    }
+
+    remove = ( choferId ): Observable<VehiculoreparandosResponseInterface> => {
+        return this._http.delete(`${this.endPoint}/${choferId}`, { headers: this.headers })
+            .map((response: Response) => response.json())
+            .catch(this.handleError);
+    }
+
+    edit = ( vehiculo: VehiculoreparandosInterface ): Observable<VehiculoreparandosResponseInterface> =>  {
+        return this._http.patch(this.endPoint, vehiculo, { headers: this.headers })
+            .map((response: Response) => response.json())
+            .catch(this.handleError);
+    }
 
     addVehiculoreparandos = (vehiculoreparandos: VehiculoreparandosInterface): Observable<VehiculoreparandosResponseInterface> =>  {
         this.actionUrl = `${this._configuration.ServerWithApiUrl}agregarVehiculoreparando`;
