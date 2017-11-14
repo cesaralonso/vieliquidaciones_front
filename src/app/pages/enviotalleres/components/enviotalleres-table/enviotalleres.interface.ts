@@ -1,7 +1,7 @@
 export interface EnviotalleresInterface {
   idenviotaller: number;
   taller_idtaller: number;
-  enviotaller_idenviotaller: number;
+  permisotaxiasignado_idpermisotaxiasignado: number;
   fecha: string;
-  status: string;
+  motivo: string;
 }
