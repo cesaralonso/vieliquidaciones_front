@@ -15,21 +15,21 @@
             <div class="form-group row" [ngClass]="{'has-error': (!fechaIngresaAC.valid && fechaIngresaAC.touched), 'has-success': (fechaIngresaAC.valid && fechaIngresaAC.touched)}">
               <label for="inputfechaIngresaAC" class="col-sm-2 form-control-label">Fecha Ingresa</label>
               <div class="col-sm-10">
-                <input [(ngModel)]="fechaIngresa" [formControl]="fechaIngresaAC" type="text" class="form-control" id="inputfechaIngresaAC" placeholder="Fecha Ingresa" >
+                <input [value]="fechaIngresa | date:'yyyy-MM-dd'" (input)="fechaIngresa=parseDate($event.target.value)" [formControl]="fechaIngresaAC" type="date" class="form-control" id="inputfechaIngresaAC" placeholder="Fecha Ingresa" >
               </div>
             </div>
-
+            
             <div class="form-group row" [ngClass]="{'has-error': (!fechaSalidaAC.valid && fechaSalidaAC.touched), 'has-success': (fechaSalidaAC.valid && fechaSalidaAC.touched)}">
               <label for="inputfechaSalidaAC" class="col-sm-2 form-control-label">Fecha Salida</label>
               <div class="col-sm-10">
-                <input [(ngModel)]="fechaSalida" [formControl]="fechaSalidaAC" type="text" class="form-control" id="inputfechaSalidaAC" placeholder="Fecha Salida" >
+                <input [value]="fechaSalida | date:'yyyy-MM-dd'" (input)="fechaSalida=parseDate($event.target.value)" [formControl]="fechaSalidaAC" type="date" class="form-control" id="inputfechaSalidaAC" placeholder="Fecha Salida" >
               </div>
             </div>
-
+            
             <div class="form-group row" [ngClass]="{'has-error': (!fechaEstimadaAC.valid && fechaEstimadaAC.touched), 'has-success': (fechaEstimadaAC.valid && fechaEstimadaAC.touched)}">
               <label for="inputfechaEstimadaAC" class="col-sm-2 form-control-label">Fecha Estimada</label>
               <div class="col-sm-10">
-                <input [(ngModel)]="fechaEstimada" [formControl]="fechaEstimadaAC" type="text" class="form-control" id="inputfechaEstimadaAC" placeholder="Fecha Estimada" >
+                <input [value]="fechaEstimada | date:'yyyy-MM-dd'" (input)="fechaEstimada=parseDate($event.target.value)" [formControl]="fechaEstimadaAC" type="date" class="form-control" id="inputfechaEstimadaAC" placeholder="Fecha Estimada" >
               </div>
             </div>
 
@@ -40,10 +40,10 @@
               </div>
             </div>
 
-            <div class="form-group row" [ngClass]="{'has-error': (!motivo.valid && motivo.touched), 'has-success': (motivo.valid && motivo.touched)}">
+            <div class="form-group row" [ngClass]="{'has-error': (!motivoAC.valid && motivoAC.touched), 'has-success': (motivoAC.valid && motivoAC.touched)}">
               <label for="inputmotivo" class="col-sm-2 form-control-label">Motivo</label>
               <div class="col-sm-10">
-                <input [(ngModel)]="motivo" [formControl]="motivo" type="text" class="form-control" id="inputmotivo" placeholder="Motivo" >
+                <input [(ngModel)]="motivo" [formControl]="motivoAC" type="text" class="form-control" id="inputmotivo" placeholder="Motivo" >
               </div>
             </div>
 
@@ -64,28 +64,44 @@
             <div class="form-group row" [ngClass]="{'has-error': (!enviotaller_idenviotallerAC.valid && enviotaller_idenviotallerAC.touched), 'has-success': (enviotaller_idenviotallerAC.valid && enviotaller_idenviotallerAC.touched)}">
               <label for="inputenviotaller_idenviotallerAC" class="col-sm-2 form-control-label">Envio Taller</label>
               <div class="col-sm-10">
-                <input [(ngModel)]="enviotaller_idenviotaller" [formControl]="enviotaller_idenviotallerAC" type="text" class="form-control" id="inputenviotaller_idenviotallerAC" placeholder="Envio Taller" >
+                <select [(ngModel)]="enviotaller_idenviotaller" [formControl]="enviotaller_idenviotallerAC" name="enviotaller_idenviotallerAC" class="form-control">
+                  <option *ngFor="let enviotaller of enviotalleres" [value]="enviotaller.idenviotaller">
+                    {{ enviotaller.idenviotaller }}
+                  </option>
+                </select>
               </div>
             </div>
 
             <div class="form-group row" [ngClass]="{'has-error': (!taller_idtallerAC.valid && taller_idtallerAC.touched), 'has-success': (taller_idtallerAC.valid && taller_idtallerAC.touched)}">
               <label for="inputtaller_idtallerAC" class="col-sm-2 form-control-label">Taller</label>
               <div class="col-sm-10">
-                <input [(ngModel)]="taller_idtaller" [formControl]="taller_idtallerAC" type="text" class="form-control" id="inputtaller_idtallerAC" placeholder="Taller" >
+                <select [(ngModel)]="taller_idtaller" [formControl]="taller_idtallerAC" name="taller_idtallerAC" class="form-control">
+                  <option *ngFor="let taller of talleres" [value]="taller.idtaller">
+                    {{ taller.idtaller }}
+                  </option>
+                </select>
               </div>
             </div>
 
             <div class="form-group row" [ngClass]="{'has-error': (!mecanico_idmecanicoAC.valid && mecanico_idmecanicoAC.touched), 'has-success': (mecanico_idmecanicoAC.valid && mecanico_idmecanicoAC.touched)}">
               <label for="inputmecanico_idmecanicoAC" class="col-sm-2 form-control-label">Mecanico</label>
               <div class="col-sm-10">
-                <input [(ngModel)]="mecanico_idmecanico" [formControl]="mecanico_idmecanicoAC" type="text" class="form-control" id="inputmecanico_idmecanicoAC" placeholder="Mecanico" >
+                <select [(ngModel)]="mecanico_idmecanico" [formControl]="mecanico_idmecanicoAC" name="mecanico_idmecanicoAC" class="form-control">
+                  <option *ngFor="let mecanico of mecanicos" [value]="mecanico.idmecanico">
+                    {{ mecanico.idmecanico }}
+                  </option>
+                </select>
               </div>
             </div>
 
             <div class="form-group row" [ngClass]="{'has-error': (!permisotaxiasignado_idpermisotaxiasignadoAC.valid && permisotaxiasignado_idpermisotaxiasignadoAC.touched), 'has-success': (permisotaxiasignado_idpermisotaxiasignadoAC.valid && permisotaxiasignado_idpermisotaxiasignadoAC.touched)}">
               <label for="inputpermisotaxiasignado_idpermisotaxiasignadoAC" class="col-sm-2 form-control-label">Permiso Taxi Asignado</label>
               <div class="col-sm-10">
-                <input [(ngModel)]="permisotaxiasignado_idpermisotaxiasignado" [formControl]="permisotaxiasignado_idpermisotaxiasignadoAC" type="text" class="form-control" id="inputpermisotaxiasignado_idpermisotaxiasignadoAC" placeholder="Permiso Taxi Asignado" >
+                <select [(ngModel)]="permisotaxiasignado_idpermisotaxiasignado" [formControl]="permisotaxiasignado_idpermisotaxiasignadoAC" name="permisotaxiasignado_idpermisotaxiasignadoAC" class="form-control">
+                  <option *ngFor="let permiso of permisos" [value]="permiso.idpermisotaxiasignado">
+                    {{ permiso.idpermisotaxiasignado }}
+                  </option>
+                </select>
               </div>
             </div>
 
