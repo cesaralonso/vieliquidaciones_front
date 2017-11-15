@@ -1,3 +1,4 @@
+import { RolService } from './shared/rol.service';
 import { UploadModalComponent } from './shared/components/upload-modal/upload-modal.component';
 import { UploadModalService } from './shared/components/upload-modal/upload-modal.service';
 import { FilesUploadModalComponent } from './shared/components/files-upload-modal/files-upload-modal.component';
@@ -87,6 +88,7 @@ export type StoreType = {
     AuthLocalstorage,
     FilesUploadModalService,
     UploadModalService,
+    RolService,
     { provide: LOCALE_ID, useValue: "es-MX" },
   ]
 })

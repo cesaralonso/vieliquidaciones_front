@@ -7,17 +7,16 @@
                 <table class="table table-striped" [mfData]="data | dataFilter : filterQuery" #mf="mfDataTable" [mfRowsOnPage]="rowsOnPage" [(mfSortBy)]="sortBy" [(mfSortOrder)]="sortOrder">
                     <thead>
                         <tr>
-                            <th style="width: 25%"></th>
-                            <th style="width: 25%">
+                            <th style="width: 15%"></th>
+                            <th style="width: 28%">
                                 <mfDefaultSorter by="acceso">Acceso</mfDefaultSorter>
                             </th>
-                            <th style="width: 25%">
+                            <th style="width: 28%">
                                 <mfDefaultSorter by="rol_idrol">Rol</mfDefaultSorter>
                             </th>
-                            <th style="width: 25%">
+                            <th style="width: 29%">
                                 <mfDefaultSorter by="modulo_idmodulo">Modulo</mfDefaultSorter>
                             </th>
-
                         </tr>
                     </thead>
                     <tbody>
@@ -25,13 +24,10 @@
                             <td>
                                 <button (click)="editPermisosModalShow(item)" class="btn btn-sm btn-info"><i class="fa fa-edit"></i></button>
                                 <button (click)="onDeleteConfirm($event, item.idpermiso)" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></button>
-                                <button (click)="uploadModalShow(item.idpermiso, item.acceso)" class="btn btn-sm btn-success"><i class="fa fa-file"></i></button>
-                                <button (click)="filesModalShow(item.idpermiso)" class="btn btn-sm btn-warning"><i class="fa fa-eye"></i></button>
                             </td>
                             <td>{{ item.acceso }}</td>
                             <td>{{ item.rol_idrol }}</td>
                             <td>{{ item.modulo_idmodulo }}</td>
-
                         </tr>
                     </tbody>
                     <tfoot>

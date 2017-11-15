@@ -12,24 +12,32 @@
         <div class="modal-body" style="height: 65vh; overflow-y: auto;">
           <ba-card cardTitle="Información de la Permiso">
 
-            <div class="form-group row" [ngClass]="{'has-error': (!accesoAC.valid && accesoAC.touched), 'has-success': (accesoAC.valid && accesoAC.touched)}">
-              <label for="inputaccesoAC" class="col-sm-2 form-control-label">Acceso</label>
+            <div class="form-group row" [ngClass]="{'has-error': (!acceso.valid && acceso.touched), 'has-success': (acceso.valid && acceso.touched)}">
+              <label for="inputacceso" class="col-sm-2 form-control-label">Acceso</label>
               <div class="col-sm-10">
-                <input [(ngModel)]="acceso" [formControl]="accesoAC" type="text" class="form-control" id="inputaccesoAC" placeholder="Acceso" >
+                <input [formControl]="acceso" type="checkbox" class="form-control" id="inputacceso" placeholder="Acceso" >
               </div>
             </div>
 
-            <div class="form-group row" [ngClass]="{'has-error': (!rol_idrolAC.valid && rol_idrolAC.touched), 'has-success': (rol_idrolAC.valid && rol_idrolAC.touched)}">
-              <label for="inputrol_idrolAC" class="col-sm-2 form-control-label">Rol</label>
+            <div class="form-group row" [ngClass]="{'has-error': (!rol_idrol.valid && rol_idrol.touched), 'has-success': (rol_idrol.valid && rol_idrol.touched)}">
+              <label for="inputrol_idrol" class="col-sm-2 form-control-label">Rol</label>
               <div class="col-sm-10">
-                <input [(ngModel)]="rol_idrol" [formControl]="rol_idrolAC" type="text" class="form-control" id="inputrol_idrolAC" placeholder="Rol" >
+                <select [formControl]="rol_idrol" name="rol_idrol" class="form-control">
+                  <option *ngFor="let rol of roles" [value]="rol.idrol">
+                    {{ rol.nombre }}
+                  </option>
+                </select>
               </div>
             </div>
 
-            <div class="form-group row" [ngClass]="{'has-error': (!modulo_idmoduloAC.valid && modulo_idmoduloAC.touched), 'has-success': (modulo_idmoduloAC.valid && modulo_idmoduloAC.touched)}">
-              <label for="inputmodulo_idmoduloAC" class="col-sm-2 form-control-label">Modulo</label>
+            <div class="form-group row" [ngClass]="{'has-error': (!modulo_idmodulo.valid && modulo_idmodulo.touched), 'has-success': (modulo_idmodulo.valid && modulo_idmodulo.touched)}">
+              <label for="inputmodulo_idmodulo" class="col-sm-2 form-control-label">Modulo</label>
               <div class="col-sm-10">
-                <input [(ngModel)]="modulo_idmodulo" [formControl]="modulo_idmoduloAC" type="text" class="form-control" id="inputmodulo_idmoduloAC" placeholder="Modulo" >
+                <select [formControl]="modulo_idmodulo" name="modulo_idmodulo" class="form-control">
+                  <option *ngFor="let modulo of modulos" [value]="modulo.idmodulo">
+                    {{ modulo.nombre }}
+                  </option>
+                </select>
               </div>
             </div>
 

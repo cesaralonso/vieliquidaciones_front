@@ -218,6 +218,18 @@ export const PAGES_MENU = [
           }
         }
       },
+      {
+        path: 'permisos',
+        data: {
+          menu: {
+            title: 'Asignar permisos',
+            icon: 'ion-social-buffer',
+            selected: false,
+            expanded: false,
+            order: 0
+          }
+        }
+      },
       // {
       //   path: 'admin',
       //   data: {

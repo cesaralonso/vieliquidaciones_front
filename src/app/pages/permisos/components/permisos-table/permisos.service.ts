@@ -23,7 +23,7 @@ export class PermisosService {
         private authLocalstorage: AuthLocalstorage ) {
         this.headers = new Headers();
         this.headers.append('Content-Type', 'application/json; charset=UTF-8');
-        this.endPoint = `${this._configuration.ServerWithApiUrl}chofer`;        
+        this.endPoint = `${this._configuration.ServerWithApiUrl}permiso`;        
     }
 
     all = () : Observable<PermisosResponseInterface> => {
@@ -32,11 +32,11 @@ export class PermisosService {
            .catch(this.handleError);
    }
 
- findById = ( id ) : Observable<PermisosResponseInterface> => {
+    findById = ( id ) : Observable<PermisosResponseInterface> => {
        return this._http.get(`${this.endPoint}/${id}`)
            .map((response: Response) => response.json())
            .catch(this.handleError);
-   }
+    }
 
   create = ( permiso: PermisosInterface ) : Observable<PermisosResponseInterface> => {
        return this._http.post(this.endPoint, permiso, { headers: this.headers })
@@ -44,6 +44,17 @@ export class PermisosService {
            .catch(this.handleError);
    }
 
+   remove = ( choferId ): Observable<PermisosResponseInterface> => {
+        return this._http.delete(`${this.endPoint}/${choferId}`, { headers: this.headers })
+            .map((response: Response) => response.json())
+            .catch(this.handleError);
+    }
+    
+    edit = (vehiculo: PermisosInterface): Observable<PermisosResponseInterface> =>  {
+        return this._http.patch(this.endPoint, vehiculo, { headers: this.headers })
+            .map((response: Response) => response.json())
+            .catch(this.handleError);
+    }
     addPermisos = (permisos: PermisosInterface): Observable<PermisosResponseInterface> =>  {
         this.actionUrl = `${this._configuration.ServerWithApiUrl}agregarPermiso`;
         const toAdd = JSON.stringify(permisos);
