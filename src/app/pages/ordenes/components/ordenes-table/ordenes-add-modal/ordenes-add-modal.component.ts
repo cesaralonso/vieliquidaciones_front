@@ -75,7 +75,7 @@ export class OrdenesAddModalComponent extends DialogComponent<OrdenesInterface, 
   }
   onSubmit(values: OrdenesInterface): void {
     console.log(values);
-      this.service.add(values)
+      this.service.create(values)
         .subscribe((data: OrdenesResponseInterface) => {
             this.data = data;
             this.confirm();

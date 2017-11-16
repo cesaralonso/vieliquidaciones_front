@@ -53,6 +53,7 @@ export const routes: Routes = [
       { path: 'talleres', loadChildren: './talleres/talleres.module#TalleresModule' },
       { path: 'vehiculoreparandos', loadChildren: './vehiculoreparandos/vehiculoreparandos.module#VehiculoreparandosModule' },
       { path: 'vehiculos', loadChildren: './vehiculos/vehiculos.module#VehiculosModule' },
+      { path: 'ordenes', loadChildren: './ordenes/ordenes.module#OrdenesModule' },
       // { path: 'dashboard', loadChildren: './dashboard/dashboard.module#DashboardModule',
       //   canActivateChild: [AuthGuard] },
     ]

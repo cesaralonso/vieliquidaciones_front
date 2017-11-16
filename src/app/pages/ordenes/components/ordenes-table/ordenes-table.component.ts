@@ -1,12 +1,9 @@
-import { UploadModalComponent } from './../../../../shared/components/upload-modal/upload-modal.component';
-import { FilesUploadModalComponent } from './../../../../shared/components/files-upload-modal/files-upload-modal.component';
 import { DialogService } from 'ng2-bootstrap-modal';
 import { ToastrService } from 'ngx-toastr';
 import { OrdenesInterface } from './ordenes.interface';
 import { OrdenesResponseInterface } from './ordenes-response.interface';
 import { Component, OnInit } from '@angular/core';
 import { OrdenesService } from './ordenes.service';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { OrdenesAddModalComponent } from './ordenes-add-modal/ordenes-add-modal.component';
 import { OrdenesEditModalComponent } from './ordenes-edit-modal/ordenes-edit-modal.component';
 
@@ -25,70 +22,42 @@ export class OrdenesTableComponent implements OnInit {
     sortOrder = 'asc';
 
     constructor(
-      private service: OrdenesService, 
-      private modalService: NgbModal, 
+      private ordenesService: OrdenesService, 
       private toastrService: ToastrService, 
       private dialogService: DialogService) {
     }
 
-    toInt(num: string) {
-        return +num;
-    }
-
     addOrdenesModalShow() {
-      const disposable = this.dialogService.addDialog(OrdenesAddModalComponent)
-      .subscribe( data => {
-        if (data) {
-          this.showToast(data);
-        }
-      })
+      this.dialogService.addDialog(OrdenesAddModalComponent)
+        .subscribe( data => data ? this.showToast(data) : null)
     }
 
     editOrdenesModalShow(ordenes: OrdenesInterface) {
-      const disposable = this.dialogService.addDialog(OrdenesEditModalComponent, ordenes)
-      .subscribe( data => {
-        if (data) {
-          this.showToast(data);
-        }
-      },
-      error => console.log(error),
-      () => console.log('Modified complete'));
-  }
-
-    uploadModalShow(id: number, descripcion: string) {
-      const activeModal = this.modalService.open(UploadModalComponent, { size: 'lg' });
-      activeModal.componentInstance.modalHeader = 'Agregar Archivo a Orden';
-      activeModal.componentInstance.id = id;
-      activeModal.componentInstance.descripcion = descripcion;
-      activeModal.componentInstance.referencia = 'Orden';
-    }
-
-    filesModalShow(id: number) {
-      const activeModal = this.modalService.open(FilesUploadModalComponent, { size: 'lg' });
-      activeModal.componentInstance.modalHeader = 'Ver Archivos de Orden';
-      activeModal.componentInstance.id = id;
-      activeModal.componentInstance.referencia = 'Orden';
+      this.dialogService.addDialog(OrdenesEditModalComponent, ordenes)
+        .subscribe( data =>
+          data ? this.showToast(data) : null,
+          error => console.log(error),
+          () => console.log('Modified complete'));
     }
 
     onDeleteConfirm(event, id): void {
       if (window.confirm('¿Estas seguro de querer eliminar este registro?')) {
-        this.service.cancelarOrden(id)
+        this.ordenesService.remove(id)
           .subscribe(
-            (data) => this.showToast(data),
+            data => this.showToast(data),
             error => console.log(error),
-            () => console.log('Delete completed')
-          );
+            () => console.log('Delete completed'));
       } else {
         console.log('item.id cancelando', id);
       }
     }
 
-    showToast(data) {
+    showToast( data ) {
       if ( data.success ) {
-        this.toastrService.success('Orden registrado');
+        this.toastrService.success(data.message);
         this.getAllOrdenes();
       } else {
-        this.toastrService.error('Hubo un problema. Por favor, vuelva a intentarlo');
+        this.toastrService.error(data.message);
       }
     }
 
@@ -97,11 +66,10 @@ export class OrdenesTableComponent implements OnInit {
     }
     
     private getAllOrdenes(): void {
-      this.service.all() 
-        .subscribe( (data: OrdenesResponseInterface) => {
-          data.success ? this.data = data.result : null
-        },
-        error => console.log(error),
-        () => console.log('Get all Items complete'))
+      this.ordenesService.all() 
+        .subscribe( (data: OrdenesResponseInterface) =>
+          data.success ? this.data = data.result : null,
+          error => console.log(error),
+          () => console.log('Get all Items complete'))
     } 
 }

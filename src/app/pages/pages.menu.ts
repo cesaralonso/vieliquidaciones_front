@@ -230,6 +230,26 @@ export const PAGES_MENU = [
           }
         }
       },
+      {
+        path: `ordenes`,
+        data: {
+          menu: {
+            title: 'Generar orden',
+            icon: 'ion-social-buffer',
+            selected: false,
+            expanded: false,
+            order: 0
+          }
+        },
+        // children: [
+        //   {
+        //     path: 'all',
+        //     data: {
+        //       menu:
+        //     }
+        //   }
+        // ]
+      },
       // {
       //   path: 'admin',
       //   data: {
@@ -307,3 +327,4 @@ export const PAGES_MENU = [
     ]
   }
 ];
+

@@ -7,4 +7,6 @@ export interface OrdenesInterface {
   total: number;
   anticipo: number;
   vehiculoreparando_idvehiculoreparando: number;
+  refacciones?: any;
+  servicios?: any;
 }
