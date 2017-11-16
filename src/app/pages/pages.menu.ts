@@ -12,7 +12,33 @@ export const PAGES_MENU = [
             expanded: false,
             order: 0
           }
-        }
+        },
+        children: [
+          {
+            path: 'create',
+            data: {
+              menu: {
+                title: 'Registrar',
+                icon: 'ion-person-stalker',
+                selected: false,
+                expanded: false,
+                order: 0
+              }
+            }
+          },
+          {
+            path: 'all',
+            data: {
+              menu: {
+                title: 'Ver todos',
+                icon: 'ion-person-stalker',
+                selected: false,
+                expanded: false,
+                order: 0
+              }
+            }
+          }
+        ]
       },
       {
         path: 'personas',

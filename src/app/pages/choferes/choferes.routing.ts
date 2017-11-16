@@ -3,6 +3,7 @@ import { ModuleWithProviders } from '@angular/core';
 
 import { ChoferesComponent } from './choferes.component';
 import { ChoferesTableComponent } from './components/choferes-table/choferes-table.component';
+import { ChoferesCreateComponent } from 'app/pages/choferes/components/choferes-create/choferes-create.component';
 
 // noinspection TypeScriptValidateTypes
 export const routes: Routes = [
@@ -10,7 +11,8 @@ export const routes: Routes = [
     path: '',
     component: ChoferesComponent,
     children: [
-      { path: 'choferes-table', component: ChoferesTableComponent }
+      { path: 'all', component: ChoferesTableComponent },
+      { path: 'create', component: ChoferesCreateComponent }
     ]
   }
 ];

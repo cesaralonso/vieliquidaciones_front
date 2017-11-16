@@ -18,6 +18,7 @@ import { ChoferesService } from './components/choferes-table/choferes.service';
 
 import { ChoferesTableComponent } from './components/choferes-table/choferes-table.component';
 import { DataFilterPipe } from './components/choferes-table/data-filter.pipe';
+import { ChoferesCreateComponent } from './components/choferes-create/choferes-create.component';
 
 @NgModule({
   imports: [
@@ -39,6 +40,7 @@ import { DataFilterPipe } from './components/choferes-table/data-filter.pipe';
     DataFilterPipe,
     ChoferesAddModalComponent,
     ChoferesEditModalComponent,
+    ChoferesCreateComponent,
   ],
   entryComponents: [
     ChoferesAddModalComponent,
