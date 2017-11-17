@@ -3,6 +3,7 @@ import { ModuleWithProviders } from '@angular/core';
 
 import { OrdenesComponent } from './ordenes.component';
 import { OrdenesTableComponent } from './components/ordenes-table/ordenes-table.component';
+import { OrdenesCreateComponent } from 'app/pages/ordenes/components/ordenes-create/ordenes-create.component';
 
 // noinspection TypeScriptValidateTypes
 export const routes: Routes = [
@@ -11,7 +12,7 @@ export const routes: Routes = [
     component: OrdenesComponent,
     children: [
       { path: 'all', component: OrdenesTableComponent },
-      { path: 'create', component: OrdenesTableComponent }
+      { path: 'create', component: OrdenesCreateComponent }
     ]
   }
 ];

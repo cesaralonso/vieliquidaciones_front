@@ -56,7 +56,7 @@ export const PAGES_MENU = [
             path: 'create',
             data: {
               menu: {
-                title: 'Registrar',
+                title: 'Registrar orden',
                 icon: 'ion-person-stalker',
                 selected: false,
                 expanded: false,

@@ -1,0 +1,145 @@
+<div class="widgets">
+  <div class="container">
+    <form #formOrden="ngForm">
+      <h2>Registro de la nueva orden</h2>
+      <hr>
+      <div class="row">
+        <div class="col-md-4">
+          <div class="form-group">
+            <label for="registrar-datos">ID del vehiculo reparado</label><br>
+            <select [(ngModel)]="orden.vehiculoreparando_idvehiculoreparando" #idvehiculoreparandomodel="ngModel" name="vehiculoreparando_idvehiculoreparando" class="form-control">
+              <option *ngFor="let vehiculo of vehiculos" value="vehiculo.idvehiculoreparando">
+                {{ vehiculo.idvehiculoreparando }}
+              </option>
+            </select>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="form-group">
+            <label for="status">Status</label>
+            <input [(ngModel)]="orden.status" #statusmodel="ngModel" name="status" type="text" class="form-control">
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="form-group">
+            <label for="fecha">Fecha</label>
+            <input [(ngModel)]="orden.fecha" #fechamodel="ngModel" name="fecha" type="date" class="form-control">
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-4">
+            <div class="form-group">
+              <label for="registrar-datos">Refacción utilizada</label><br>
+              <button class="btn btn-outline-primary btn-block">Seleccionar refacción</button>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="form-group">
+              <label for="idrefaccion">ID Refacción</label>
+              <input name="idrefaccion" type="text" class="form-control" readonly>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="form-group">
+              <label for="cantidadrefaccion">Cantidad</label>
+              <input name="cantidadrefaccion" type="number" class="form-control" placeholder="0.00">
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+              <label for="preciorefaccion">Precio</label>
+              <input name="preciorefaccion" type="number" class="form-control" placeholder="0.00" readonly>
+            </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-8"></div>
+        <div class="col-md-4">
+          <div class="form-group">
+            <button class="btn btn-primary btn-block">Agregara a lista</button>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <table class="table">
+            <thead>
+              <th>ID Refacción</th>
+              <th>Nombre</th>
+              <th>Precio Unit.</th>
+              <th>Cantidad</th>
+              <th>Importe</th>
+            </thead>
+            <tbody>
+              <tr>
+                <td>1</td>
+                <td>Llanta</td>
+                <td>$200.00</td>
+                <td>4</td>
+                <td>$800.00</td>
+              </tr>
+              <tr>
+                <td>2</td>
+                <td>Espejo lateral</td>
+                <td>$150.00</td>
+                <td>1</td>
+                <td>$150.00</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+            <label for="descripcion">Descripción</label>
+            <textarea [(ngModel)]="orden.descripcion" #descripcionmodel="ngModel" name="descripcion" type="text" class="form-control" placeholder="Descripción..."></textarea>
+        </div>
+        <div class="col-md-6">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group row">
+                  <label for="subtotal" class="col-sm-2 col-form-label">Subtotal</label>
+                  <div class="col-sm-10">
+                    <input [(ngModel)]="orden.subtotal" #subtotalmodel="ngModel" name="subtotal" type="number" class="form-control" placeholder="0.00" readonly>
+                  </div>
+              </div>
+            </div>
+            <div class="col-md-12">
+              <div class="form-group row">
+                  <label for="manoobra" class="col-sm-2 col-form-label">Mano de obra</label>
+                  <div class="col-sm-10">
+                    <input [(ngModel)]="orden.manoObra" #manoobramodel="ngModel" name="manoobra" type="number" class="form-control" placeholder="0.00" readonly>
+                  </div>
+              </div>
+            </div>
+            <div class="col-md-12">
+              <div class="form-group row">
+                  <label for="anticipo" class="col-sm-2 col-form-label">Anticipo</label>
+                  <div class="col-sm-10">
+                    <input [(ngModel)]="orden.anticipo" #anticipomodel="ngModel" name="anticipo" type="number" class="form-control" placeholder="0.00">
+                  </div>
+              </div>
+            </div>
+            <div class="col-md-12">
+              <div class="form-group row">
+                  <label for="total" class="col-sm-2 col-form-label">Total</label>
+                  <div class="col-sm-10">
+                    <input [(ngModel)]="orden.total" #totalmodel="ngModel" name="total" type="number" class="form-control" placeholder="0.00" readonly>
+                  </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6"></div>
+        <div class="col-md-6 text-right">
+          <div class="form-group row">
+              <button style="font-size: 1.2em" type="submit" class="btn btn-primary btn-block">Registrar orden</button>
+            </div>
+          </div>
+      </div>
+    </form>
+  </div>
+</div>

@@ -6,7 +6,7 @@ export interface OrdenesInterface {
   subtotal: number;
   total: number;
   anticipo: number;
+  descripcion: string;
   vehiculoreparando_idvehiculoreparando: number;
   refacciones?: any;
-  servicios?: any;
 }

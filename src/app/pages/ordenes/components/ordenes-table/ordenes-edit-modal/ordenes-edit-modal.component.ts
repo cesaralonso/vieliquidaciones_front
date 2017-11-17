@@ -24,6 +24,7 @@ export class OrdenesEditModalComponent extends DialogComponent<OrdenesInterface,
   subtotal: number;
   total: number;
   anticipo: number;
+  descripcion: string;
   vehiculoreparando_idvehiculoreparando: number;
 
   modalHeader: string;
@@ -31,17 +32,6 @@ export class OrdenesEditModalComponent extends DialogComponent<OrdenesInterface,
   data: any;
   form: FormGroup;
   submitted: boolean = false;
-
-  ordenI: OrdenesInterface = {
-    idorden: 0,
-    fecha: '',
-    status: '',
-    manoObra: 0,
-    subtotal: 0,
-    total: 0,
-    anticipo: 0,
-    vehiculoreparando_idvehiculoreparando: 0,
-  };
 
   idordenAC: AbstractControl;
   fechaAC: AbstractControl;
@@ -110,6 +100,7 @@ export class OrdenesEditModalComponent extends DialogComponent<OrdenesInterface,
           manoObra: this.manoObra,
           subtotal: this.subtotal,
           total: this.total,
+          descripcion: this.descripcion,
           anticipo: this.anticipo,
           vehiculoreparando_idvehiculoreparando: this.vehiculoreparando_idvehiculoreparando,
 
@@ -121,15 +112,6 @@ export class OrdenesEditModalComponent extends DialogComponent<OrdenesInterface,
               this.confirm();
             });
     }
-  }
-
-  private getOrdenes(): void {
-    this.service.getOrdenes(this.id)
-        .subscribe( data => {
-          this.ordenI = data[1];
-        },
-        error => console.log(error),
-        () => console.log('Get orden complete'));
   }
 
 }

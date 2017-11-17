@@ -2,7 +2,7 @@
 import { BootstrapModalModule } from 'ng2-bootstrap-modal';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule as AngularFormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule as AngularFormsModule, ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { AppTranslationModule } from '../../app.translation.module';
 import { NgaModule } from '../../theme/nga.module';
 import { NgbRatingModule } from '@ng-bootstrap/ng-bootstrap';
@@ -18,6 +18,7 @@ import { OrdenesService } from './components/ordenes-table/ordenes.service';
 
 import { OrdenesTableComponent } from './components/ordenes-table/ordenes-table.component';
 import { DataFilterPipe } from './components/ordenes-table/data-filter.pipe';
+import { OrdenesCreateComponent } from './components/ordenes-create/ordenes-create.component';
 
 @NgModule({
   imports: [
@@ -25,6 +26,7 @@ import { DataFilterPipe } from './components/ordenes-table/data-filter.pipe';
     AngularFormsModule,
     AppTranslationModule,
     ReactiveFormsModule,
+    FormsModule,
     NgaModule,
     NgbRatingModule,
     routing,
@@ -39,6 +41,7 @@ import { DataFilterPipe } from './components/ordenes-table/data-filter.pipe';
     DataFilterPipe,
     OrdenesAddModalComponent,
     OrdenesEditModalComponent,
+    OrdenesCreateComponent,
   ],
   entryComponents: [
     OrdenesAddModalComponent,
