@@ -38,7 +38,8 @@
                     <tbody>
                         <tr *ngFor="let item of mf.data;  let i = index">
                             <td>
-                                <button (click)="editChoferesModalShow(item)" class="btn btn-sm btn-info"><i class="fa fa-edit"></i></button>
+                                <!-- <button (click)="editChoferesModalShow(item)" class="btn btn-sm btn-info"><i class="fa fa-edit"></i></button> -->
+                                <button [routerLink]="['/pages/choferes/edit', item.idchofer]" class="btn btn-sm btn-info"><i class="fa fa-edit"></i></button>
                                 <button (click)="onDeleteConfirm($event, item.idchofer)" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></button>
                             </td>
                             <td>{{ item.licencia }}</td>
@@ -65,7 +66,7 @@
     </div>
     <div class="row">
         <div class="col-sm-6">
-            <button (click)="addChoferesModalShow()" class="btn btn-success"><i class="fa fa-plus"></i> Agregar</button>
+            <button [routerLink]="['/pages/choferes/create']" class="btn btn-success"><i class="fa fa-plus"></i> Agregar</button>
         </div>
     </div>
 

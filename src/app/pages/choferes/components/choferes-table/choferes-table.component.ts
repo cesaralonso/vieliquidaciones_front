@@ -44,21 +44,6 @@ export class ChoferesTableComponent implements OnInit {
       () => console.log('Modified complete'));
   }
 
-    uploadModalShow(id: number, descripcion: string) {
-      const activeModal = this.modalService.open(UploadModalComponent, { size: 'lg' });
-      activeModal.componentInstance.modalHeader = 'Agregar Archivo a Chofer';
-      activeModal.componentInstance.id = id;
-      activeModal.componentInstance.descripcion = descripcion;
-      activeModal.componentInstance.referencia = 'Chofer';
-    }
-
-    filesModalShow(id: number) {
-      const activeModal = this.modalService.open(FilesUploadModalComponent, { size: 'lg' });
-      activeModal.componentInstance.modalHeader = 'Ver Archivos de Chofer';
-      activeModal.componentInstance.id = id;
-      activeModal.componentInstance.referencia = 'Chofer';
-    }
-
     onDeleteConfirm(event, id): void {
       if (window.confirm('¿Estas seguro de querer eliminar este registro?')) {
         this.choferesService.remove(id)

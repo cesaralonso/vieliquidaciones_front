@@ -10,7 +10,8 @@ export const routes: Routes = [
     path: '',
     component: OrdenesComponent,
     children: [
-      { path: '', component: OrdenesTableComponent }
+      { path: 'all', component: OrdenesTableComponent },
+      { path: 'create', component: OrdenesTableComponent }
     ]
   }
 ];

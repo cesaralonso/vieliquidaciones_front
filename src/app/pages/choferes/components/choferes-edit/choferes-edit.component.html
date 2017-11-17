@@ -1,0 +1,110 @@
+<div class="widgets">
+  <div class="container">
+    <form #formChofer="ngForm" (ngSubmit)="onSubmitChofer(formChofer.value)">
+      <h2>Editar datos del chofer</h2>
+      <hr>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="registrar-datos">Datos principales</label><br>
+              <button (click)="editPersonasModalShow(chofer.chofer)" type="button" class="btn btn-outline-primary">Editar datos del chofer</button>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="chofer">ID Chofer</label>
+            <input [(ngModel)]="chofer.chofer" #chofermodel="ngModel" name="chofer" type="text" class="form-control disable-text" readonly required>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-4">
+            <div class="form-group">
+              <label for="licencia">Licencia</label>
+              <input [(ngModel)]="chofer.licencia" #licenciamodel="ngModel" name="licencia" type="text" class="form-control" placeholder="Licencia">
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+              <label for="fianza">Fianza</label>
+              <input [(ngModel)]="chofer.fianza" #fianzamodel="ngModel" name="fianza" type="number" class="form-control" placeholder="0.00">
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+              <label for="status">Status</label>
+              <input [(ngModel)]="chofer.status" #statusmodel="ngModel" name="status" type="text" class="form-control" placeholder="Status">
+            </div>
+        </div>
+      </div>
+      <!-- Avales -->
+      <div class="row">
+        <div class="col-md-12">
+          <h3>Avales</h3>
+        </div>
+        <div class="col-md-6">
+          <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="aval1">Aval 1</label><br>
+                    <button (click)="editPersonasModalShow(chofer.aval1)" type="button" class="btn btn-outline-primary">Editar aval</button>
+                </div>
+            </div>
+            <div class="col-md-6">
+              <label for="aval1">ID Aval 1</label>
+              <input [(ngModel)]="chofer.aval1" #aval1model="ngModel" name="aval1" type="text" class="form-control disable-text"readonly required>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="aval2">Aval 2</label><br>
+                    <button (click)="editPersonasModalShow(chofer.aval2)" type="button" class="btn btn-outline-primary">Editar aval</button>
+                </div>
+            </div>
+            <div class="col-md-6">
+              <label for="aval2">ID Aval 2</label>
+              <input [(ngModel)]="chofer.aval2" #aval2model="ngModel" name="aval2" type="text" class="form-control disable-text" readonly required>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="aval3">Aval 3</label><br>
+                    <button (click)="editPersonasModalShow(chofer.aval3)" type="button" class="btn btn-outline-primary">Editar aval</button>
+                </div>
+            </div>
+            <div class="col-md-6">
+              <label for="aval3">ID Aval 3</label>
+              <input [(ngModel)]="chofer.aval3" #aval3model="ngModel" name="aval3" type="text" class="form-control disable-text" readonly required>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="aval4">Aval 4</label><br>
+                    <button (click)="editPersonasModalShow(chofer.aval4)" type="button" class="btn btn-outline-primary">Editar aval</button>
+                </div>
+            </div>
+            <div class="col-md-6">
+              <label for="aval4">ID Aval 4</label>
+              <input [(ngModel)]="chofer.aval4" #aval4model="ngModel" name="aval4" type="text" class="form-control disable-text" readonly required>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6"></div>
+        <div class="col-md-6 text-right">
+          <button [disabled]="formChofer.invalid" type="submit" class="btn btn-primary btn-block">Editar chofer</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
