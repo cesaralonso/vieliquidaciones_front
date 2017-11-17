@@ -41,16 +41,42 @@ export const PAGES_MENU = [
         ]
       },
       {
-        path: 'personas',
+        path: 'ordenes',
         data: {
           menu: {
-            title: 'Personas',
+            title: 'Orden',
             icon: 'ion-social-buffer',
             selected: false,
             expanded: false,
             order: 0
-          }
-        }
+          },
+        },
+        children: [
+          {
+            path: 'create',
+            data: {
+              menu: {
+                title: 'Registrar',
+                icon: 'ion-person-stalker',
+                selected: false,
+                expanded: false,
+                order: 0
+              }
+            }
+          },
+          {
+            path: 'all',
+            data: {
+              menu: {
+                title: 'Ver todas',
+                icon: 'ion-person-stalker',
+                selected: false,
+                expanded: false,
+                order: 0
+              }
+            }
+          },
+        ]
       },
       {
         path: 'conceptos',
@@ -221,18 +247,6 @@ export const PAGES_MENU = [
         }
       },
       {
-        path: 'servicios',
-        data: {
-          menu: {
-            title: 'Servicios',
-            icon: 'ion-social-buffer',
-            selected: false,
-            expanded: false,
-            order: 0
-          }
-        }
-      },
-      {
         path: 'vehiculoreparandos',
         data: {
           menu: {
@@ -256,17 +270,6 @@ export const PAGES_MENU = [
           }
         }
       },
-      {
-        path: `ordenes`,
-        data: {
-          menu: {
-            title: 'Generar orden',
-            icon: 'ion-social-buffer',
-            selected: false,
-            expanded: false,
-            order: 0
-          }
-        },
         // children: [
         //   {
         //     path: 'all',
@@ -275,7 +278,6 @@ export const PAGES_MENU = [
         //     }
         //   }
         // ]
-      },
       // {
       //   path: 'admin',
       //   data: {

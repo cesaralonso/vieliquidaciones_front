@@ -12,8 +12,6 @@ import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 import { routing } from './personas.routing';
 import { PersonasComponent } from './personas.component';
 
-import { PersonasAddModalComponent } from './components/personas-table/personas-add-modal/personas-add-modal.component';
-import { PersonasEditModalComponent } from './components/personas-table/personas-edit-modal/personas-edit-modal.component';
 import { PersonasService } from './components/personas-table/personas.service';
 
 import { PersonasTableComponent } from './components/personas-table/personas-table.component';
@@ -36,16 +34,10 @@ import { DataFilterPipe } from './components/personas-table/data-filter.pipe';
   declarations: [
     PersonasComponent,
     PersonasTableComponent,
-    DataFilterPipe,
-    PersonasAddModalComponent,
-    PersonasEditModalComponent,
-  ],
-  entryComponents: [
-    PersonasAddModalComponent,
-    PersonasEditModalComponent,
+    DataFilterPipe
   ],
   providers: [
-    PersonasService,
+    PersonasService
   ]
 })
 export class PersonasModule {
