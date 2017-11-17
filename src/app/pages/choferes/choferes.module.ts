@@ -1,8 +1,9 @@
+import { BrowserModule } from '@angular/platform-browser';
 
 import { BootstrapModalModule } from 'ng2-bootstrap-modal';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule as AngularFormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule as AngularFormsModule, ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { AppTranslationModule } from '../../app.translation.module';
 import { NgaModule } from '../../theme/nga.module';
 import { NgbRatingModule } from '@ng-bootstrap/ng-bootstrap';
@@ -19,6 +20,8 @@ import { ChoferesService } from './components/choferes-table/choferes.service';
 import { ChoferesTableComponent } from './components/choferes-table/choferes-table.component';
 import { DataFilterPipe } from './components/choferes-table/data-filter.pipe';
 import { ChoferesCreateComponent } from './components/choferes-create/choferes-create.component';
+import { PersonasAddModalComponent } from 'app/pages/personas/components/personas-table/personas-add-modal/personas-add-modal.component';
+import { ChoferesEditComponent } from './components/choferes-edit/choferes-edit.component';
 
 @NgModule({
   imports: [
@@ -28,6 +31,7 @@ import { ChoferesCreateComponent } from './components/choferes-create/choferes-c
     ReactiveFormsModule,
     NgaModule,
     NgbRatingModule,
+    FormsModule,
     routing,
     DataTableModule,
     NgbModalModule,
@@ -41,6 +45,7 @@ import { ChoferesCreateComponent } from './components/choferes-create/choferes-c
     ChoferesAddModalComponent,
     ChoferesEditModalComponent,
     ChoferesCreateComponent,
+    ChoferesEditComponent,
   ],
   entryComponents: [
     ChoferesAddModalComponent,

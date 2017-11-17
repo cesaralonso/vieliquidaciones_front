@@ -11,7 +11,10 @@ import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'add-service-modal',
   styleUrls: [('./personas-add-modal.component.scss')],
-  templateUrl: './personas-add-modal.component.html'
+  templateUrl: './personas-add-modal.component.html',
+  providers: [
+    PersonasService
+  ]
 })
 
 export class PersonasAddModalComponent extends DialogComponent<PersonasInterface, any> implements OnInit {

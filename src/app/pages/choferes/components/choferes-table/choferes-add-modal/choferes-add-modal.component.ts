@@ -46,11 +46,7 @@ export class ChoferesAddModalComponent extends DialogComponent<ChoferesInterface
     dialogService: DialogService
   ) {
     super(dialogService);
-
-
     this.form = fb.group({
-
-
       'licencia' : ['', Validators.compose([Validators.required, Validators.minLength(1)])],
       'status' : ['', Validators.compose([Validators.required, Validators.minLength(1)])],
       'chofer' : ['', Validators.compose([Validators.required, Validators.minLength(1)])],
@@ -59,9 +55,7 @@ export class ChoferesAddModalComponent extends DialogComponent<ChoferesInterface
       'aval2' : ['', Validators.compose([Validators.required, Validators.minLength(1)])],
       'aval3' : ['', Validators.compose([Validators.required, Validators.minLength(1)])],
       'aval4' : ['', Validators.compose([Validators.required, Validators.minLength(1)])],
-
     });
-
     this.licencia = this.form.controls['licencia'];
     this.status = this.form.controls['status'];
     this.chofer = this.form.controls['chofer'];
