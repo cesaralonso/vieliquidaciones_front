@@ -19,6 +19,7 @@ import { OrdenesService } from './components/ordenes-table/ordenes.service';
 import { OrdenesTableComponent } from './components/ordenes-table/ordenes-table.component';
 import { DataFilterPipe } from './components/ordenes-table/data-filter.pipe';
 import { OrdenesCreateComponent } from './components/ordenes-create/ordenes-create.component';
+import { RefaccionesModalComponent } from './components/refacciones-modal/refacciones-modal.component';
 
 @NgModule({
   imports: [
@@ -42,10 +43,12 @@ import { OrdenesCreateComponent } from './components/ordenes-create/ordenes-crea
     OrdenesAddModalComponent,
     OrdenesEditModalComponent,
     OrdenesCreateComponent,
+    RefaccionesModalComponent,
   ],
   entryComponents: [
     OrdenesAddModalComponent,
     OrdenesEditModalComponent,
+    RefaccionesModalComponent
   ],
   providers: [
     OrdenesService,

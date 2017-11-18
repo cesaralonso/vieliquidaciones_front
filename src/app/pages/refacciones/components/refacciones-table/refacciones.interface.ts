@@ -3,6 +3,6 @@ export interface RefaccionesInterface {
   nombre: string;
   precioCompra: number;
   precioVenta: number;
-  precioVentaIva: number;
+  precioVentaIva?: number;
   taller_idtaller: number;
 }
