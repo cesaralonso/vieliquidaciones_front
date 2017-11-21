@@ -1,0 +1,102 @@
+<div class="widgets">
+  <div class="container">
+    <form>
+      <h2>Orden</h2>
+      <hr>
+      <div class="row">
+        <div class="col-md-4">
+          <div class="form-group">
+            <label for="registrar-datos">ID del vehiculo reparado</label><br>
+            <input [(ngModel)]="orden.vehiculoreparando_idvehiculoreparando" name="vehiculoreparando_idvehiculoreparando" type="text" class="form-control disable-text" readonly>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="form-group">
+            <label for="status">Status</label>
+            <input [(ngModel)]="orden.status" name="status" type="text" class="form-control disable-text" readonly>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="form-group">
+            <label for="fecha">Fecha</label>
+            <input [value]="orden.fecha | date" name="fecha" type="text" class="form-control disable-text" readonly>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <!-- <table class="table">
+            <thead>
+              <th>ID Refacción</th>
+              <th>Nombre</th>
+              <th>Precio Unit.</th>
+              <th>Cantidad</th>
+              <th>Importe</th>
+            </thead>
+            <tbody>
+              <ng-container *ngFor="let refaccion of refacciones">
+                <tr>
+                  <td>{{ refaccion.idrefaccion }}</td>
+                  <td>{{ refaccion.nombre }}</td>
+                  <td>{{ refaccion.precioVenta }} </td>
+                  <td>{{ refaccion.cantidad }}</td>
+                  <td>{{ refaccion.precioVenta * refaccion.cantidad }}</td>
+                </tr>
+              </ng-container>
+            </tbody>
+          </table> -->
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+            <label for="descripcion">Descripción</label>
+            <textarea [(ngModel)]="orden.descripcion" name="descripcion" type="text" class="form-control disable-text" placeholder="Descripción..." readonly></textarea>
+        </div>
+        <div class="col-md-6">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group row">
+                  <label for="subtotal" class="col-sm-2 col-form-label">Subtotal</label>
+                  <div class="col-sm-10">
+                    <input [(ngModel)]="orden.subtotal" name="subtotal" type="number" class="form-control disable-text" placeholder="0.00" readonly>
+                  </div>
+              </div>
+            </div>
+            <div class="col-md-12">
+              <div class="form-group row">
+                  <label for="manoobra" class="col-sm-2 col-form-label">Mano de obra</label>
+                  <div class="col-sm-10">
+                    <input [(ngModel)]="orden.manoObra" name="manoobra" type="number" class="form-control disable-text" placeholder="0.00" readonly>
+                  </div>
+              </div>
+            </div>
+            <div class="col-md-12">
+              <div class="form-group row">
+                  <label for="anticipo" class="col-sm-2 col-form-label">Anticipo</label>
+                  <div class="col-sm-10">
+                    <input [(ngModel)]="orden.anticipo" name="anticipo" type="number" class="form-control disable-text" placeholder="0.00" readonly>
+                  </div>
+              </div>
+            </div>
+            <div class="col-md-12">
+              <div class="form-group row">
+                  <label for="total" class="col-sm-2 col-form-label">Total</label>
+                  <div class="col-sm-10">
+                    <input [(ngModel)]="orden.total" name="total" type="number" class="form-control disable-text" placeholder="0.00" readonly>
+                  </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6"></div>
+        <div class="col-md-6 text-right">
+          <div class="form-group row">
+              <button style="font-size: 1.2em" type="submit" class="btn btn-primary btn-block">Aceptar</button>
+            </div>
+          </div>
+      </div>
+    </form>
+  </div>
+</div>

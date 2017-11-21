@@ -1,3 +1,4 @@
+import { OrdenesService } from './../ordenes-table/ordenes.service';
 import { VehiculoreparandosInterface } from './../../../vehiculoreparandos/components/vehiculoreparandos-table/vehiculoreparandos.interface';
 import { VehiculoreparandosService } from './../../../vehiculoreparandos/components/vehiculoreparandos-table/vehiculoreparandos.service';
 import { OrdenesInterface } from './../ordenes-table/ordenes.interface';
@@ -11,7 +12,8 @@ import { RefaccionesInterface } from 'app/pages/refacciones/components/refaccion
   templateUrl: './ordenes-create.component.html',
   styleUrls: ['./ordenes-create.component.scss'],
   providers: [
-    VehiculoreparandosService
+    VehiculoreparandosService,
+    OrdenesService
   ]
 })
 export class OrdenesCreateComponent implements OnInit {
@@ -36,9 +38,10 @@ export class OrdenesCreateComponent implements OnInit {
   }
   public cantidad = 1;
   public precio = 0;
-  public refacciones = [ ]
+  public refacciones = []
   constructor(
     private vehiculoReparandosService: VehiculoreparandosService,
+    private ordenesService: OrdenesService,
     private dialogService: DialogService
   ) { }
 
@@ -99,4 +102,16 @@ export class OrdenesCreateComponent implements OnInit {
     this.orden.total += cantidad
   }
 
+  calculateTotal() {
+    this.orden.total = 0;
+    this.orden.total += this.orden.subtotal;
+    this.orden.total += this.orden.manoObra;
+    this.orden.total += this.orden.anticipo * -1;
+  }
+  
+  onSubmitOrden( values ) {
+    this.orden.refacciones = this.refacciones;
+    this.ordenesService.create( this.orden )
+      .subscribe( res => console.log(res))
+  }
 }

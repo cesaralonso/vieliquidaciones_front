@@ -1,6 +1,6 @@
 <div class="widgets">
   <div class="container">
-    <form #formOrden="ngForm">
+    <form #formOrden="ngForm" (ngSubmit)="onSubmitOrden(formOrden.value)">
       <h2>Registro de la nueva orden</h2>
       <hr>
       <div class="row">
@@ -8,7 +8,7 @@
           <div class="form-group">
             <label for="registrar-datos">ID del vehiculo reparado</label><br>
             <select [(ngModel)]="orden.vehiculoreparando_idvehiculoreparando" #idvehiculoreparandomodel="ngModel" name="vehiculoreparando_idvehiculoreparando" class="form-control">
-              <option *ngFor="let vehiculo of vehiculos" value="vehiculo.idvehiculoreparando">
+              <option *ngFor="let vehiculo of vehiculos" [value]="vehiculo.idvehiculoreparando">
                 {{ vehiculo.idvehiculoreparando }}
               </option>
             </select>
@@ -31,7 +31,7 @@
         <div class="col-md-4">
             <div class="form-group">
               <label for="registrar-datos">Refacción utilizada</label><br>
-              <button (click)="showRefaccionesModal()" class="btn btn-outline-primary btn-block">Seleccionar refacción</button>
+              <button (click)="showRefaccionesModal()" type="button" class="btn btn-outline-primary btn-block">Seleccionar refacción</button>
             </div>
         </div>
         <div class="col-md-2">
@@ -57,7 +57,7 @@
         <div class="col-md-8"></div>
         <div class="col-md-4">
           <div class="form-group">
-            <button (click)="addToList()" class="btn btn-primary btn-block">Agregara a lista</button>
+            <button (click)="addToList()" type="button" class="btn btn-primary btn-block">Agregara a lista</button>
           </div>
         </div>
       </div>
@@ -104,7 +104,7 @@
               <div class="form-group row">
                   <label for="manoobra" class="col-sm-2 col-form-label">Mano de obra</label>
                   <div class="col-sm-10">
-                    <input (change)="addToTotal(orden.manoObra)" [(ngModel)]="orden.manoObra" #manoobramodel="ngModel" name="manoobra" type="number" class="form-control disable-text" placeholder="0.00">
+                    <input (change)="calculateTotal()" [(ngModel)]="orden.manoObra" #manoobramodel="ngModel" name="manoobra" type="number" class="form-control disable-text" placeholder="0.00">
                   </div>
               </div>
             </div>
@@ -112,7 +112,7 @@
               <div class="form-group row">
                   <label for="anticipo" class="col-sm-2 col-form-label">Anticipo</label>
                   <div class="col-sm-10">
-                    <input (change)="addToTotal(orden.anticipo * -1)" [(ngModel)]="orden.anticipo" #anticipomodel="ngModel" name="anticipo" type="number" class="form-control disable-text" placeholder="0.00">
+                    <input (change)="calculateTotal()" [(ngModel)]="orden.anticipo" #anticipomodel="ngModel" name="anticipo" type="number" class="form-control disable-text" placeholder="0.00">
                   </div>
               </div>
             </div>

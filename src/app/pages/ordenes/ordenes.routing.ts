@@ -1,3 +1,4 @@
+import { OrdenesShowComponent } from './components/ordenes-show/ordenes-show.component';
 import { Routes, RouterModule } from '@angular/router';
 import { ModuleWithProviders } from '@angular/core';
 
@@ -12,7 +13,8 @@ export const routes: Routes = [
     component: OrdenesComponent,
     children: [
       { path: 'all', component: OrdenesTableComponent },
-      { path: 'create', component: OrdenesCreateComponent }
+      { path: 'create', component: OrdenesCreateComponent },
+      { path: 'show/:id', component: OrdenesShowComponent }
     ]
   }
 ];

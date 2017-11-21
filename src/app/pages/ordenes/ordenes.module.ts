@@ -20,6 +20,7 @@ import { OrdenesTableComponent } from './components/ordenes-table/ordenes-table.
 import { DataFilterPipe } from './components/ordenes-table/data-filter.pipe';
 import { OrdenesCreateComponent } from './components/ordenes-create/ordenes-create.component';
 import { RefaccionesModalComponent } from './components/refacciones-modal/refacciones-modal.component';
+import { OrdenesShowComponent } from './components/ordenes-show/ordenes-show.component';
 
 @NgModule({
   imports: [
@@ -44,6 +45,7 @@ import { RefaccionesModalComponent } from './components/refacciones-modal/refacc
     OrdenesEditModalComponent,
     OrdenesCreateComponent,
     RefaccionesModalComponent,
+    OrdenesShowComponent,
   ],
   entryComponents: [
     OrdenesAddModalComponent,

@@ -6,6 +6,7 @@ import { Component, OnInit } from '@angular/core';
 import { OrdenesService } from './ordenes.service';
 import { OrdenesAddModalComponent } from './ordenes-add-modal/ordenes-add-modal.component';
 import { OrdenesEditModalComponent } from './ordenes-edit-modal/ordenes-edit-modal.component';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -24,7 +25,9 @@ export class OrdenesTableComponent implements OnInit {
     constructor(
       private ordenesService: OrdenesService, 
       private toastrService: ToastrService, 
-      private dialogService: DialogService) {
+      private dialogService: DialogService,
+      private router: Router,
+    ) {
     }
 
     addOrdenesModalShow() {
@@ -72,4 +75,8 @@ export class OrdenesTableComponent implements OnInit {
           error => console.log(error),
           () => console.log('Get all Items complete'))
     } 
+
+    seeOrden( idorden ) {
+      this.router.navigate(['pages/ordenes/show', idorden]);
+    }
 }
